@@ -1,0 +1,34 @@
+#root{
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+    display: flex;
+}
+.container{
+    min-width: 880px;
+    min-height: 500px;
+    display: flex;
+    border: 1px solid white;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1em;
+}
+.user,
+.password{
+    display: flex;
+    border: 1px solid white;
+    padding: 2em;
+    gap: 1.5em;
+    width: 60%;
+    flex-direction: column;
+    
+}
+
+.user input,
+.password input{
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
