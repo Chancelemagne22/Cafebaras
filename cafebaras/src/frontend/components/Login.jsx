@@ -45,7 +45,7 @@ function LoginPage() {
                         type="text"
                         value={userId} 
                         onChange={(e) => setUserId(e.target.value)}  
-                        placeholder='ID'/>
+                        placeholder=''/>
                 </div>
                 <div className="user">
                     <label htmlFor="">Username</label>
@@ -53,7 +53,7 @@ function LoginPage() {
                         type="text"
                         value={username} 
                         onChange={(e) => setUsername(e.target.value)}  
-                        placeholder='Username'/>
+                        placeholder=''/>
                 </div>
                 <div className="password">
                     <label htmlFor="">Password</label>
@@ -61,12 +61,12 @@ function LoginPage() {
                         type="password"
                         value={password} 
                         onChange={(e) => setPassword(e.target.value)}
-                        placeholder='Password' />
+                        placeholder='' />
                 </div>
                 <button onClick={handleLogin}>Login</button>
             </div>
             
-            {error && <p className="error" style={{ color: '#EECA84' }}>{error}</p>}
+            {error && <p className="error" style={{ color: '#4E2603' }}>{error}</p>}
             <div className="newAccountBtn">
                 <p>Still no account?</p>
                 <button onClick={createAccount}>Create an account</button>

@@ -1,32 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
 #root{
     max-width: 1280px;
     margin: 0 auto;
     padding: 2rem;
     display: flex;
 }
-.container{
-    min-width: 880px;
+.containerS{
+    min-width: 800px;
     min-height: 500px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     gap: 1em;
+    background-color: #4E2603;
+    font-family: "Open Sans", serif;
+    text-transform: uppercase;
+    font-weight: 800;
+    box-shadow: inset 0px 0px 15px 8px rgba(40,21,6,0.9); 
+
+
 }
-.user,
-.password{
+.userS,
+.passwordS{
     display: flex;
-    padding: 2em;
-    gap: 1.5em;
+    padding: 1em;
     width: 60%;
     flex-direction: column;
     
 }
+.userS label,
+.passwordS label{
+    font-size: 1.5em;
+}
 
-.user input,
-.password input{
+.userS input,
+.passwordS input{
+    font-size: 1.5em;
     width: 90%;
-    padding: 10px;
-    margin-bottom: 10px;
+    padding-left: 1em;
     border-radius: 10px;
+    background-color: #EFCB85;
+    height: 3em;
+    box-shadow: 0px 3px 3px 3px rgba(0,0,0,0.9);
+    border: none;
+    color: #4E2603;
+    font-weight: 500;
+}
+.containerS button{
+    width: 10em;
+    height: 2em;
+    padding: 0;
+    text-transform: uppercase;
+    background-color: #E68D21; 
+    color: #4E2603;
+    font-weight: 800;
+    font-size: 1.4em;
+    transition: transform 0.7s ease, box-shadow 0.7s ease;
+    box-shadow: 0px 3px 3px 3px rgba(0,0,0,0.25);
+}
+
+.containerS button:hover{
+    transform: translateY(-.1em);
+    box-shadow: 0px 6px 3px 3px rgba(0,0,0,0.50);
+}
+
+.error{
+    position: absolute;
+    height: 2em;
+    bottom: 0%;
 }

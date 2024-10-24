@@ -6,7 +6,7 @@ import '../designs/SignUp.css';
 function SignUpPage() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
+    const [error, setError] = useState(' ');
     const  navigate = useNavigate(); 
 
     const isValidInput = (input) => {
@@ -39,26 +39,26 @@ function SignUpPage() {
     };
 
     return (
-        <div className='container'>
-            <div className="user">
+        <div className='containerS'>
+            <div className="userS">
                 <label htmlFor="">Username</label>
                 <input 
                 type="text"
                 value={username} 
                 onChange={(e) => setUsername(e.target.value)}  
-                placeholder='Username'/>
+                placeholder=''/>
             </div>
-            <div className="password">
+            <div className="passwordS">
                 <label htmlFor="">Password</label>
                 <input
                 type="password"
                 value={password} 
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder='Password' />
+                placeholder='' />
             </div>
 
             <button onClick={handleSignup}>Create Account</button>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+            {error && <p className="error" style={{ color: '#4E2603' }}>{error}</p>}
         </div>
      
     );
