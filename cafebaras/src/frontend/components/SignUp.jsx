@@ -9,8 +9,17 @@ function SignUpPage() {
     const [error, setError] = useState('');
     const  navigate = useNavigate(); 
 
+    const isValidInput = (input) => {
+        return input && input.trim().length > 0;
+    };
+
     const handleSignup = async (e) => {
         e.preventDefault();
+        if (!isValidInput(username) || !isValidInput(password)) {
+            setError('Username and password cannot be empty or just spaces.');
+            return;
+        }
+
         try {
             const response = await axios.post('http://localhost:3001/api/signup', {
                 username: username,

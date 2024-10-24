@@ -1,35 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
 #root{
     max-width: 1280px;
     margin: 0 auto;
     padding: 2rem;
     display: flex;
+    font-family: "Open Sans", serif;
 }
+
 .container{
     min-width: 880px;
     min-height: 500px;
     display: flex;
-    border: 1px solid white;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 1em;
+    font-weight: 800;
+    background-color: #4E2603;
+    box-shadow: inset 0px 0px 15px 8px rgba(40,21,6,0.9); 
+    text-transform: uppercase;
+
+}
+.lts{
+    position: absolute;
+    padding: 0;
+    z-index: 10;
+    top: 2%;
+    left: 5%;
+    color: #4E2603;
+}
+.form{
+    position: relative;
+    min-width: 580px;
+    min-height: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FCB025;
+    flex-direction: column;
+    gap: .5em;
+    color: #4E2603;
+    box-shadow: 0px 0px 10px 10px rgba(40,21,6,.8);
+    border-radius: 5px;
+
+}
+/* .form label{
+
+} */
+.form button{
+    width: 10em;
+    height: 2em;
+    padding: 0;
+    text-transform: uppercase;
+    background-color: #E68D21; 
+    color: #4E2603;
+    font-weight: 800;
+    font-size: 1.4em;
+    transition: transform 0.7s ease, box-shadow 0.7s ease;
+    box-shadow: 0px 3px 3px 3px rgba(0,0,0,0.25);
+
+
+
+}
+.form label{
+    width: 5em;
+    font-size: 1em;
+    transform: translateY(-.5em);
+
+
+}
+.form button:hover{
+    
+    transform: translateY(-.1em);
+    box-shadow: 0px 6px 3px 3px rgba(0,0,0,0.50);
+
 }
 .userID,
 .user,
 .password{
     display: flex;
-    border: 1px solid white;
+    align-items: center;
     padding: 1em;
-    gap: 1em;
-    width: 60%;
-    flex-direction: column;
+    width: 80%;
+    flex-direction: row;
+    gap: 1.6em;
+    transform: translateY(1em);
+
     
 }
 .userID input,
 .user input,
 .password input{
-    width: 90%;
+    width: 24em;
+    height: 1.6em;
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 10px;
+    background-color: #EECA84;
+    border: none;
+    box-shadow: 0px 3px 3px 3px rgba(0,0,0,0.25);
+}
+.userID input{
+    border-radius:  10px 10px 0 0;
+
+}
+.user input{
+    border-radius: 0 ;
+
+}
+
+.password input{
+    border-radius: 0 0 10px 10px;
+
+}
+
+.newAccountBtn{
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    font-weight: 300;
+    font-size: .9rem;
+    position: absolute;
+    left: 85%;
+    bottom: 10%;
+}
+.newAccountBtn p{
+    font-weight: 300;
+    z-index: 1;
+    transition: transform 0.3s ease;
+
+}
+.newAccountBtn button{
+    z-index: 2;
+    background-color: #4E2603;
+    box-shadow: inset 0px 0px 15px 8px rgba(40,21,6,0.9); 
+    transition: all  0.3s ease;
+}
+.newAccountBtn:hover button{
+    z-index: 2;
+    background-color: #5e2e04;
+    box-shadow: 0px 0px 2px 2px rgba(40,21,6,0.4); 
+}
+
+.newAccountBtn:hover p {
+    transform: translateY(3em);
+}
+.error{
+    position: absolute;
+    height: 2em;
+    bottom: 0%;
 }

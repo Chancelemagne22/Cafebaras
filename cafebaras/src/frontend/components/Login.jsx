@@ -4,17 +4,23 @@ import { useNavigate } from 'react-router-dom';
 import '../designs/Login.css';
 
 function LoginPage() {
-    const [userId, setUserId] = useState(''); // Optional if you decide to remove it
+    const [userId, setUserId] = useState(''); 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
-    const navigate = useNavigate(); 
+    const [error, setError] = useState(' ');
+    const navigate = useNavigate();
+    const accNavigate = useNavigate(); 
+
+
+    const createAccount = async (e)=>{
+        accNavigate('/signup');
+    }
 
     const handleLogin = async (e) => {
         e.preventDefault();
         setError(''); // Clear previous error message
         try {
-            const response = await axios.post('http://localhost:3001/api/login', { username, password });
+            const response = await axios.post('http://localhost:3001/api/login', { userId, username, password });
 
             if (response.data.success) {
                 localStorage.setItem('userId', response.data.userId); // Storing user ID
@@ -30,32 +36,41 @@ function LoginPage() {
 
     return (
         <div className='container'>
-            <div className="userID">
-                <label htmlFor="">User ID</label>
-                <input 
-                    type="text"
-                    value={userId} 
-                    onChange={(e) => setUserId(e.target.value)}  
-                    placeholder='ID'/>
+            <p className='welcome'>WELCOME TO CAFEBARA'S</p>
+            <div className="form">
+                <p className='lts'>Login to system</p>
+                <div className="userID">
+                    <label htmlFor="">User ID</label>
+                    <input 
+                        type="text"
+                        value={userId} 
+                        onChange={(e) => setUserId(e.target.value)}  
+                        placeholder='ID'/>
+                </div>
+                <div className="user">
+                    <label htmlFor="">Username</label>
+                    <input
+                        type="text"
+                        value={username} 
+                        onChange={(e) => setUsername(e.target.value)}  
+                        placeholder='Username'/>
+                </div>
+                <div className="password">
+                    <label htmlFor="">Password</label>
+                    <input
+                        type="password"
+                        value={password} 
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder='Password' />
+                </div>
+                <button onClick={handleLogin}>Login</button>
             </div>
-            <div className="user">
-                <label htmlFor="">Username</label>
-                <input 
-                    type="text"
-                    value={username} 
-                    onChange={(e) => setUsername(e.target.value)}  
-                    placeholder='Username'/>
+            
+            {error && <p className="error" style={{ color: '#EECA84' }}>{error}</p>}
+            <div className="newAccountBtn">
+                <p>Still no account?</p>
+                <button onClick={createAccount}>Create an account</button>
             </div>
-            <div className="password">
-                <label htmlFor="">Password</label>
-                <input
-                    type="password"
-                    value={password} 
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder='Password' />
-            </div>
-            <button onClick={handleLogin}>Login</button>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
         </div>
     );
 }

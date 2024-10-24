@@ -8,7 +8,6 @@
     min-width: 880px;
     min-height: 500px;
     display: flex;
-    border: 1px solid white;
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -17,7 +16,6 @@
 .user,
 .password{
     display: flex;
-    border: 1px solid white;
     padding: 2em;
     gap: 1.5em;
     width: 60%;
