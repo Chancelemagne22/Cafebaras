@@ -3,14 +3,13 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; 
 import '../designs/Login.css';
 
-function LoginPage() {
+function LoginPage({setID}) {
     const [userId, setUserId] = useState(''); 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(' ');
     const navigate = useNavigate();
     const accNavigate = useNavigate(); 
-
 
     const createAccount = async (e)=>{
         accNavigate('/signup');
@@ -19,6 +18,7 @@ function LoginPage() {
     const handleLogin = async (e) => {
         e.preventDefault();
         setError(''); // Clear previous error message
+        setID(userId);
         try {
             const response = await axios.post('http://localhost:3001/api/login', { userId, username, password });
 
@@ -36,7 +36,7 @@ function LoginPage() {
 
     return (
         <div className='container'>
-            <p className='welcome'>WELCOME TO CAFEBARA'S</p>
+            <p className='welcome'>WELCOME TO CAFEBARAS</p>
             <div className="form">
                 <p className='lts'>Login to system</p>
                 <div className="userID">
