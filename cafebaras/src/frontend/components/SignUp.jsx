@@ -6,12 +6,10 @@ import '../designs/SignUp.css';
 function SignUpPage() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState(' ');
-    const  navigate = useNavigate(); 
+    const [error, setError] = useState('');
+    const navigate = useNavigate(); 
 
-    const isValidInput = (input) => {
-        return input && input.trim().length > 0;
-    };
+    const isValidInput = (input) => input && input.trim().length > 0;
 
     const handleSignup = async (e) => {
         e.preventDefault();
@@ -21,16 +19,11 @@ function SignUpPage() {
         }
 
         try {
-            const response = await axios.post('http://localhost:3001/api/signup', {
-                username: username,
-                password: password 
-            });
-            console.log("Response from server:", response.data);
-            
-
+            const response = await axios.post('http://localhost:3001/api/signup', { username, password });
             if (response.data.success) {
-
-                navigate('/login');
+                navigate('/');
+            } else {
+                setError('Account creation failed. Please try again.');
             }
         } catch (err) {
             console.error("Error during signup:", err.response ? err.response.data : err.message);
@@ -41,26 +34,27 @@ function SignUpPage() {
     return (
         <div className='containerS'>
             <div className="userS">
-                <label htmlFor="">Username</label>
+                <label htmlFor="username">Username</label>
                 <input 
-                type="text"
-                value={username} 
-                onChange={(e) => setUsername(e.target.value)}  
-                placeholder=''/>
+                    id="username"
+                    type="text"
+                    value={username} 
+                    onChange={(e) => setUsername(e.target.value)}  
+                />
             </div>
             <div className="passwordS">
-                <label htmlFor="">Password</label>
+                <label htmlFor="password">Password</label>
                 <input
-                type="password"
-                value={password} 
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder='' />
+                    id="password"
+                    type="password"
+                    value={password} 
+                    onChange={(e) => setPassword(e.target.value)}
+                />
             </div>
 
             <button onClick={handleSignup}>Create Account</button>
             {error && <p className="error" style={{ color: '#4E2603' }}>{error}</p>}
         </div>
-     
     );
 }
 

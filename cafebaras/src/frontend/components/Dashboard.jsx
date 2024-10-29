@@ -1,10 +1,10 @@
 import React, { useState } from "react"
 import '../designs/Dashboard.css';
 import Logo from '../assets/Cafelogo.png'
+import Details from "./dashboardComponents/sidebars/details";
+
 
 function Dashboard({id}){
-
-    
 
     return(
         
@@ -13,22 +13,11 @@ function Dashboard({id}){
                 <div className="logo">
                     <img src={Logo} alt="cafebara logo" />
                 </div>
-                <div className="info">
-                    <p>CASHIER ID :</p>
-                    <p>{id}</p>
-                </div>
-                <div className="submods">
-                    <div className="about">ABOUT</div>
-                    <div className="settings">SETTINGS</div>
-                    <div className="logout">LOGOUT</div>
-                </div>
-                
+                <Details setId={id}/>
 
             </div>
             <div className="content">
-                <div className="header">
-                    <p>CAFEBARAS</p>
-                </div>
+               
                 <div className="main-content">
                     <div className="modules"></div>
                     <div className="modules"></div>

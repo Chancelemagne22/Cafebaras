@@ -9,22 +9,24 @@ function LoginPage({setID}) {
     const [password, setPassword] = useState('');
     const [error, setError] = useState(' ');
     const navigate = useNavigate();
-    const accNavigate = useNavigate(); 
+
 
     const createAccount = async (e)=>{
-        accNavigate('/signup');
+        navigate('/signup');
     }
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        setError(''); // Clear previous error message
+        setError('');
         setID(userId);
+    
         try {
             const response = await axios.post('http://localhost:3001/api/login', { userId, username, password });
-
+            
             if (response.data.success) {
-                localStorage.setItem('userId', response.data.userId); // Storing user ID
-                navigate('/dashboard'); // Redirect to dashboard after successful login
+                localStorage.setItem('userId', response.data.userId); // Store user ID
+                localStorage.setItem('isAuthenticated', 'true'); // Mark user as authenticated
+                navigate('/dashboard')
             } else {
                 setError('Login failed. Please check your credentials.');
             }
@@ -33,12 +35,13 @@ function LoginPage({setID}) {
             setError('Login failed. Please check your credentials.');
         }
     };
-
+    
     return (
         <div className='container'>
             <p className='welcome'>WELCOME TO CAFEBARAS</p>
             <div className="form">
                 <p className='lts'>Login to system</p>
+
                 <div className="userID">
                     <label htmlFor="">User ID</label>
                     <input 
