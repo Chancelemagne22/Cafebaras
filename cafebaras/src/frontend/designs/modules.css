@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+.modules{
+    display: flex;
+    font-family: "Noto Sans", sans-serif;
+    font-weight: bold;
+    
+}
+.modules p{
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
