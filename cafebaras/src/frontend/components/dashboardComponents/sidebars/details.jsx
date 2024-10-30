@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom'; 
 
-function Details ({setId}){
+function Details ({setId, setLogo}){
 
 
 
@@ -14,6 +14,9 @@ function Details ({setId}){
     };
     return (
         <>
+            <div className="logo">
+                <img src={setLogo} alt="cafebara logo" />
+            </div>
             <div className="info">
                 <p>CASHIER ID :</p>
                 <p>{setId}</p>
