@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import '../designs/Dashboard.css';
-import Logo from '../assets/Cafelogo.png'
+import '../designs/details.css';
+import Logo from '../assets/Cafelogo.png';
 import Details from "./dashboardComponents/sidebars/details";
 import Module from "./dashboardComponents/mainContents/module";
 
