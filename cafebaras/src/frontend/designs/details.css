@@ -1,0 +1,43 @@
+.logout{
+    background-color: #EB4109;
+    transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.logout:hover{
+    transform: translateY(-.5em);
+    box-shadow: 0px 4px 4px 0px rgba(40,21,6,0.9); 
+    
+}
+.about{
+    transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.about:hover{
+    transform: translateY(-.5em);
+    box-shadow: 0px 4px 4px 0px rgba(40,21,6,0.9); 
+    
+}
+.settings{
+    transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.settings:hover{
+    transform: translateY(-.5em);
+    box-shadow: 0px 4px 4px 0px rgba(40,21,6,0.9); 
+    
+}
+
+.logout:active{
+    transform: translateY(.1em);
+    box-shadow: inset 0px 4px 4px 0px rgba(40,21,6,0.9); 
+    
+}
+
+.about:active{
+    transform: translateY(.1em);
+    box-shadow: inset 0px 4px 4px 0px rgba(40,21,6,0.9); 
+    
+}
+
+.settings:active{
+    transform: translateY(.1em);
+    box-shadow: inset 0px 4px 4px 0px rgba(40,21,6,0.9); 
+    
+}
