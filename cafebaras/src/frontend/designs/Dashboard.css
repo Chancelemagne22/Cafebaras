@@ -37,10 +37,15 @@ body{
 }
 .logo{
     height: 10em;
-    width: 100%m;
+    width: 100%;
     overflow: hidden;
+    margin: 0 auto;
     
 
+}
+.logo *{
+    width: 100%;
+    object-fit: contain;
 }
 .info{
     display: flex;
