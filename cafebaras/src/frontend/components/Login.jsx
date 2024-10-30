@@ -24,7 +24,7 @@ function LoginPage({setID}) {
             const response = await axios.post('http://localhost:3001/api/login', { userId, username, password });
             
             if (response.data.success) {
-                localStorage.setItem('userId', response.data.userId); // Store user ID
+                localStorage.setItem('userId', userId);
                 localStorage.setItem('isAuthenticated', 'true'); // Mark user as authenticated
                 navigate('/dashboard')
             } else {

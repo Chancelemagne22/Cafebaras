@@ -1,10 +1,22 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import '../designs/Dashboard.css';
 import Logo from '../assets/Cafelogo.png'
 import Details from "./dashboardComponents/sidebars/details";
+import Module from "./dashboardComponents/mainContents/module";
 
 
 function Dashboard({id}){
+    const [userId, setUserId] = useState(localStorage.getItem('userId') || '');
+
+
+    useEffect(() => {
+        const storedId = localStorage.getItem('userId');
+        if (!storedId) {
+            navigate('/');
+        } else {
+            setUserId(storedId);
+        }
+    }, []);
 
     return(
         
@@ -13,17 +25,11 @@ function Dashboard({id}){
                 <div className="logo">
                     <img src={Logo} alt="cafebara logo" />
                 </div>
-                <Details setId={id}/>
+                <Details setId={userId}/>
 
             </div>
             <div className="content">
-               
-                <div className="main-content">
-                    <div className="modules"></div>
-                    <div className="modules"></div>
-                    <div className="modules"></div>
-                    <div className="modules"></div>
-                </div>
+                <Module />
             </div>
         </div>
     )
