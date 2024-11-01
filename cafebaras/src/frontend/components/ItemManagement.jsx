@@ -38,8 +38,6 @@ function ItemManagement({id}){
     // );
     return(
         <div className="itemmanagement">
-    
-
             <div className="dropdown-container">
                 <button className="dropdown-button">Inventory ▽</button>
                     <div className="dropdown-content">
