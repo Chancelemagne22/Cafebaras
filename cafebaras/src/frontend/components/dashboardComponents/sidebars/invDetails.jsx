@@ -7,10 +7,6 @@ function InvDetails ({setId, setToHome}){
 
     return (
         <>
-            <div className = "homebtn">
-                <p>Home (Logo)</p>
-            </div>
-
             <div className="submods">
                 <div className="itemmng">
                     <p>Item Management</p>

@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SignUp from './components/SignUp';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
-import ItemManagement from './components/ItemManagement';
 import NotFound from './components/NotFound';
 import ProtectedRoute from './components/loginComponents/protectedRoute';
 
