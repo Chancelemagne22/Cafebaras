@@ -3,9 +3,9 @@ import React, { useState } from "react";
 
 
 
-function ReportButton(setLogo, setToHome){
+function ReportButton({setLogo, setToHome, setColor}){
 
-    return (
+    return (    
         <>
             <div className="logo">
                 <img src={setLogo} alt="cafebara logo" />
@@ -22,7 +22,7 @@ function ReportButton(setLogo, setToHome){
             <div className="inventoryReport">
                 <p>Inventory Report</p>
             </div>
-            <div className="back" onClick={() => setToHome("module") }>Back</div>
+            <div className="back" onClick={() => [setToHome("module"), setColor("sidebar")]}>Back</div>
         </>
     );
 }
