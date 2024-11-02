@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react"
 import '../designs/Dashboard.css';
 import '../designs/details.css';
 import '../designs/modules.css';
+import '../designs/itemManagement.css';
 import '../designs/salesreport.css';
 import Module from "./dashboardComponents/mainContents/module";
-import ItemManagement from "./ItemManagement";
 import Logo from '../assets/Cafelogo.png';
 import Details from "./dashboardComponents/sidebars/details";
 import InvDetails from "./dashboardComponents/sidebars/invDetails";
+import ItemManagement from "./dashboardComponents/mainContents/itemManagement";
 import SalesReport from "./dashboardComponents/mainContents/reportSales";
 import ReportButton from "./dashboardComponents/sidebars/reportButtons";
 
