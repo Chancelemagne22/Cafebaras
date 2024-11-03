@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react";
 import '../designs/Dashboard.css';
 import '../designs/details.css';
 import '../designs/modules.css';
@@ -9,17 +9,14 @@ import Logo from '../assets/Cafelogo.png';
 import Details from "./dashboardComponents/sidebars/details";
 import InvDetails from "./dashboardComponents/sidebars/invDetails";
 import ItemManagement from "./dashboardComponents/mainContents/itemManagement";
-import SalesReport from "./dashboardComponents/mainContents/reportSales";
-import ReportButton from "./dashboardComponents/sidebars/reportButtons";
+import ReportButton from "./dashboardComponents/sidebars/ReportSB/reportButtons";
+import ReportAnalysis from "./dashboardComponents/mainContents/ReportContent/ReportAnalysis";
 
-
-
-
-function Dashboard({id}){
+function Dashboard({ id }) {
     const [userId, setUserId] = useState(localStorage.getItem('userId') || '');
     const [activeModule, setActiveModule] = useState('module');
     const [sidebarName, setSidebarName] = useState("sidebar");
-
+    const [activeReport, setActiveReport] = useState("salesReport"); 
 
     useEffect(() => {
         const storedId = localStorage.getItem('userId');
@@ -30,35 +27,39 @@ function Dashboard({id}){
         }
     }, []);
 
-
-    return(
-        
+    return (
         <div className="dashboard">
-            <div className={sidebarName} >
+            {/* Sidebar Section */}
+            <div className={sidebarName}>
                 {activeModule === "module" && (
                     <Details  
                         setId={userId}
                         setLogo={Logo}
                     />
                 )}
-                {activeModule === "inventory" && <InvDetails setId={userId} setToHome={setActiveModule}/>}
-                {activeModule === "report" && <ReportButton setLogo={Logo} setId={userId} setToHome={setActiveModule} setColor={setSidebarName}/>}
-                
-                      
-            </div>
-            <div className="content" >
-                {activeModule === "module" && (
-                    <Module
-                        selectedModule={setActiveModule} 
+                {activeModule === "inventory" && <InvDetails setId={userId} setToHome={setActiveModule} />}
+                {activeModule === "report" && (
+                    <ReportButton 
+                        logo={Logo}
+                        setToHome={setActiveModule}
+                        setColor={setSidebarName}
+                        setActiveReport={setActiveReport} // Pass setActiveReport to change report
                     />
                 )}
-                {activeModule === "inventory" && <ItemManagement id={userId}/>}
-                {/* {activeModule === "salesManagement" && <SalesManagement id={userId} />} */}
-                {/* {activeModule === "employees" && <Employees id={userId} />} */}
-                {activeModule === "report" && <SalesReport  setId={userId}   />}
+            </div>
+
+            {/* Content Section */}
+            <div className="content">
+                {activeModule === "module" && (
+                    <Module selectedModule={setActiveModule} />
+                )}
+                {activeModule === "inventory" && <ItemManagement id={userId} />}
+                {activeModule === "report" && (
+                    <ReportAnalysis activeReport={activeReport} />
+                )}
             </div>
         </div>
-    )
+    );
 }
 
-export default Dashboard
+export default Dashboard;

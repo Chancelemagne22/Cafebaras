@@ -6,26 +6,30 @@ import Dashboard from './components/Dashboard';
 import NotFound from './components/NotFound';
 import ProtectedRoute from './components/loginComponents/protectedRoute';
 
+import { PrimeReactProvider, PrimeReactContext } from 'primereact/api';
+
 function App() {
     const [id, setID] = useState('');
 
     return (
-        <Router>
-            <Routes>
-                <Route path="/" element={<Login setID={setID} />} />
-                <Route 
-                    path="/dashboard" 
-                    element={
-                        <ProtectedRoute>
-                            <Dashboard id={id} />
-                        </ProtectedRoute>
-                    } 
-                />
-                <Route path="/signup" element={<SignUp />} />
-                <Route path="/items" element={<ItemManagement />} />
-                <Route path="*" element={<NotFound />} />
-            </Routes>
-        </Router>
+        <PrimeReactProvider>
+            <Router>
+                <Routes>
+                    <Route path="/" element={<Login setID={setID} />} />
+                    <Route 
+                        path="/dashboard" 
+                        element={
+                            <ProtectedRoute>
+                                <Dashboard id={id} />
+                            </ProtectedRoute>
+                        } 
+                    />
+                    <Route path="/signup" element={<SignUp />} />
+                    <Route path="*" element={<NotFound />} />
+                </Routes>
+            </Router>
+        </PrimeReactProvider>
+        
     );
 }
 
