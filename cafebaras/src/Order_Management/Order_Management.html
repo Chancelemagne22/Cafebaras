@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Order_Management.css">
+    <title>Order Management</title>
+</head>
+<body>
+    <div class = "Product_Selection" id = "Options">
+        <div class = "search">
+            <h3>Product Search</h3>
+            <form action="">
+                <input type="text" placeholder="Search here">
+                <button type="submit">search</button>
+            </form>
+        </div>
+    
+        <div class = "container">
+            <button onclick = "togglePopup()" class = "circle" id = "circle1">Product</button>
+            <button onclick = "togglePopup()" class = "circle" id = "circle1">Product</button>
+            <button onclick = "togglePopup()" class = "circle" id = "circle1">Product</button>
+            <button onclick = "togglePopup()" class = "circle" id = "circle1">Product</button>
+            <button onclick = "togglePopup()" class = "circle" id = "circle1">Product</button>
+            <button onclick = "togglePopup()" class = "circle" id = "circle1">Product</button>
+            <button onclick = "togglePopup()" class = "circle" id = "circle1">Product</button>
+            <button onclick = "togglePopup()" class = "circle" id = "circle1">Product</button>
+            <button onclick = "togglePopup()" class = "circle" id = "circle1">Product</button>
+            <button onclick = "togglePopup()" class = "circle" id = "circle1">Product</button>
+            <button onclick = "togglePopup()" class = "circle" id = "circle1">Product</button>
+            <button onclick = "togglePopup()" class = "circle" id = "circle1">Product</button>
+            <button onclick = "togglePopup()" class = "circle" id = "circle1">Product</button>
+            <button onclick = "togglePopup()" class = "circle" id = "circle1">Product</button>
+            <button onclick = "togglePopup()" class = "circle" id = "circle1">Product</button>
+            <button onclick = "togglePopup()" class = "circle" id = "circle1">Product</button>
+            <button onclick = "togglePopup()" class = "circle" id = "circle1">Product</button>
+            <button onclick = "togglePopup()" class = "circle" id = "circle1">Product</button>
+        </div>
+    </div>
+    <div class = "Order" id = "OrderPop">
+        <div class = "content" id = "rec3">
+            <h1 id = "order_text">Order Modifications</h1>
+            <div class = "Selected" id = "circle2">Product</div>
+            <div class = "rec" id = "rec2">
+                <div class = "size">
+                    <h3 id = "size_text">BOTTLE SIZE</h3>
+                    <label for="30oz" class = "radio_inline"><input type = "radio" name = "size_choices" id = "30oz">30oz</label>
+                    <label for="20oz" class = "radio_inline"><input type = "radio" name = "size_choices" id = "20oz">20oz</label>
+                    <label for="10oz" class = "radio_inline"><input type = "radio" name = "size_choices" id = "10oz">10oz</label>
+                </div>
+                <div class = "sugar">
+                    <h3 id = "sugar_text">SUGAR CONTENT</h3>
+                    <label for="50%" class = "radio_inline"><input type = "radio" name = "sugar_choices" id = "50%">50%</label>
+                    <label for="75%" class = "radio_inline"><input type = "radio" name = "sugar_choices" id = "75%">75%</label>
+                    <label for="100%" class = "radio_inline"><input type = "radio" name = "sugar_choices" id = "100%">100%</label>
+                </div>
+                <div class = "add_on">
+                    <h3 id = "add_on_text">SINKERS</h3>
+                    <label for="tapioca" class = "radio_inline"><input type = "radio" name = "add_on_choices" id = "tapioca">tapioca</label>
+                    <label for="ewan" class = "radio_inline"><input type = "radio" name = "add_on_choices" id = "ewan">ewan</label>
+                    <label for="ano" class = "radio_inline"><input type = "radio" name = "add_on_choices" id = "ano">ano</label>
+                </div>
+            </div>
+            <button class = "purchase_button" id = "p_now">Purchase Now</button>    
+            <button class = "purchase_button" id = "add">Add to Cart</button>
+            <button class = "close_btn" onclick = "togglePopup()">&times;</button>
+
+        </div>
+    </div>
+    <div>
+        <div class = "rec" id = "rec1"></div>
+    </div>
+<script src = "Order_Management.js"></script>
+</body>
+</html>
