@@ -1,0 +1,39 @@
+.profitLossContainer{
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    margin: 2em;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    gap: 1em;
+
+}
+.visualInventory{
+    padding: 1em;
+    height: 100%;
+    width: 80%;
+    background-color: #C67529;
+    border-radius: 10px;
+
+    
+}
+
+.numberProf{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    height: 55%;
+    width: 100%;
+    gap: 10em;
+}
+.rev{
+    border-radius: 10px;
+    height: 100%;
+    background-color: aqua;
+}
+.pie{
+    border-radius: 10px;
+
+    height: 100%;
+    background-color: yellowgreen;
+}
