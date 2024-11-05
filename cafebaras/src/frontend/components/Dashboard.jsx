@@ -8,6 +8,7 @@ import '../designs/supplierManagement.css';
 import '../designs/salesreport.css';
 import '../designs/transactionhistory.css'
 import '../designs/profitloss.css'
+import '../designs/Order.css';
 import Module from "./dashboardComponents/mainContents/module";
 import Logo from '../assets/Cafelogo.png';
 import Details from "./dashboardComponents/sidebars/details";
@@ -15,6 +16,8 @@ import InvDetails from "./dashboardComponents/sidebars/invDetails";
 import InventoryManagement from "./dashboardComponents/mainContents/InventoryManagement/inventoryManagement";
 import ReportButton from "./dashboardComponents/sidebars/ReportSB/reportButtons";
 import ReportAnalysis from "./dashboardComponents/mainContents/ReportContent/ReportAnalysis";
+import SalesSideBar from "./dashboardComponents/sidebars/SalesSB/SalesSideBar";
+import SalesManagment from "./dashboardComponents/mainContents/SalesManagment/SalesManagement";
 
 
 function Dashboard({ id }) {
@@ -57,6 +60,12 @@ function Dashboard({ id }) {
                         setActiveReport={setActiveReport} // Pass setActiveReport to change report
                     />
                 )}
+                {activeModule === "sales" && (
+                    <SalesSideBar
+                        setToHome={setActiveModule}
+                        
+                    />
+                )}
             </div>
 
             {/* Content Section */}
@@ -70,6 +79,9 @@ function Dashboard({ id }) {
                 )}
                 {activeModule === "report" && (
                     <ReportAnalysis activeReport={activeReport} />
+                )}
+                {activeModule === "sales" && (
+                    <SalesManagment/>
                 )}
             </div>
         </div>
