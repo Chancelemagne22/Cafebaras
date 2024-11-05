@@ -4,19 +4,23 @@ import '../designs/details.css';
 import '../designs/modules.css';
 import '../designs/itemManagement.css';
 import '../designs/salesreport.css';
+import '../designs/transactionhistory.css'
+import '../designs/profitloss.css'
 import Module from "./dashboardComponents/mainContents/module";
 import Logo from '../assets/Cafelogo.png';
 import Details from "./dashboardComponents/sidebars/details";
 import InvDetails from "./dashboardComponents/sidebars/invDetails";
-import ItemManagement from "./dashboardComponents/mainContents/itemManagement";
+import InventoryManagement from "./dashboardComponents/mainContents/InventoryManagement/inventoryManagement";
 import ReportButton from "./dashboardComponents/sidebars/ReportSB/reportButtons";
 import ReportAnalysis from "./dashboardComponents/mainContents/ReportContent/ReportAnalysis";
+
 
 function Dashboard({ id }) {
     const [userId, setUserId] = useState(localStorage.getItem('userId') || '');
     const [activeModule, setActiveModule] = useState('module');
     const [sidebarName, setSidebarName] = useState("sidebar");
     const [activeReport, setActiveReport] = useState("salesReport"); 
+    const [activeInventory, setActiveInventory] = useState("itemManagement"); 
 
     useEffect(() => {
         const storedId = localStorage.getItem('userId');
@@ -37,7 +41,12 @@ function Dashboard({ id }) {
                         setLogo={Logo}
                     />
                 )}
-                {activeModule === "inventory" && <InvDetails setId={userId} setToHome={setActiveModule} />}
+                {activeModule === "inventory" && (
+                    <InvDetails
+                        setToHome={setActiveModule}
+                        setColor={setSidebarName}
+                        setActiveInventory={setActiveInventory} />
+                    )}
                 {activeModule === "report" && (
                     <ReportButton 
                         logo={Logo}
@@ -53,7 +62,10 @@ function Dashboard({ id }) {
                 {activeModule === "module" && (
                     <Module selectedModule={setActiveModule} />
                 )}
-                {activeModule === "inventory" && <ItemManagement id={userId} />}
+                {activeModule === "inventory" && (
+                    <InventoryManagement 
+                        activeInventory={activeInventory} />
+                )}
                 {activeModule === "report" && (
                     <ReportAnalysis activeReport={activeReport} />
                 )}
