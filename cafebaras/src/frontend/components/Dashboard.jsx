@@ -3,6 +3,8 @@ import '../designs/Dashboard.css';
 import '../designs/details.css';
 import '../designs/modules.css';
 import '../designs/itemManagement.css';
+import '../designs/stockManagement.css';
+import '../designs/supplierManagement.css';
 import '../designs/salesreport.css';
 import '../designs/transactionhistory.css'
 import '../designs/profitloss.css'

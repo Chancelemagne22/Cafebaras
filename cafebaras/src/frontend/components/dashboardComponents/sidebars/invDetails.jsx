@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 function InvDetails ({setToHome, setColor, setActiveInventory}){
-    const [activeButton, setActiveButton] = useState('salesReport'); 
+    const [activeButton, setActiveButton] = useState('itemManagement'); 
 
     const colorButton = (buttonName) => {
         setActiveButton(buttonName);
