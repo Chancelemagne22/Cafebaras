@@ -39,7 +39,7 @@
     height: 2.5rem;
     position: absolute; /* Allows positioning without affecting other elements */
     top: 2rem; /* Adjust this value to move it down */
-    left: 22%; /* Center it horizontally */
+    left: 10%; /* Center it horizontally */
     transform: translateX(-50%); /* Center adjustment */
     z-index: 10; /* Ensure it appears above other content */
 }
@@ -57,7 +57,7 @@
 }
 
 .dropdown:hover {
-    border-color: #4E2603; /* Change border color on hover */
+    border-color: #4E2603;
 }
 
 .table-container {
@@ -68,7 +68,7 @@
     height: 100vh;
 }
 .tablebg{
-    width: 75%;
+    width: 90%;
     height: 45rem;
     display: flex;
     flex-direction: column;
@@ -80,10 +80,26 @@
     box-sizing: border-box;
 }
 
+.table{
+    display: table;
+    background: var(--surface-card);
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    background-color: #ffe3a8;
+    color: black;
+}
+
+.inventory-table{
+
+    height: 39rem;
+    color: black;
+}
+
 .button-container {
     position: absolute;
     display: flex;
-    gap: 2em;
+    gap: 1.5em;
     bottom: 2rem;
     right: 5%;
     transform: translateX(0%);
@@ -95,17 +111,17 @@
     align-items: center;
     justify-content: center;
     width: 10rem;
-    height: 1.5rem;
+    height: 2.5rem;
     border: none;
     font-weight: 600;
     background-color: green;
     color: white;
     border-radius: 25px;
-    transition: background-color 300ms;
+    transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 .add-button:hover{
-    transform: translateY(-3px) scale(104%);
-    cursor: pointer;
+    transform: translateY(-.5em);
+    box-shadow: 0px 4px 4px 0px rgba(40,21,6,0.9);
 }
 .add-button:active{
     transform: translateY(3px) scale(96%);
@@ -118,17 +134,17 @@
     align-items: center;
     justify-content: center;
     width: 10rem;
-    height: 1.5rem;
+    height: 2.5rem;
     border: none;
     font-weight: 600;
     background-color: red;
     color: white;
     border-radius: 25px;
-    transition: background-color 300ms;
+    transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 .remove-button:hover{
-    transform: translateY(-3px) scale(104%);
-    cursor: pointer;
+    transform: translateY(-.5em);
+    box-shadow: 0px 4px 4px 0px rgba(40,21,6,0.9); 
 }
 .remove-button:active{
     transform: translateY(3px) scale(96%);
