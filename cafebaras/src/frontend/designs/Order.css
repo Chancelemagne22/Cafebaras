@@ -19,6 +19,15 @@
     gap: 2em;
 }
 
+.menuContainer{
+    display: flex;
+    flex-wrap: wrap;
+    border: #D9D9D9 5px solid;
+    padding: 2em;
+    margin: 1em;
+    gap: 2em;
+}
+
 .orderContainer * {
     width: 10em;
 }

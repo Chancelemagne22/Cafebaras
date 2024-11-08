@@ -9,6 +9,7 @@ import '../designs/salesreport.css';
 import '../designs/transactionhistory.css'
 import '../designs/profitloss.css'
 import '../designs/Order.css';
+import '../designs/inventory.css'
 import Module from "./dashboardComponents/mainContents/module";
 import Logo from '../assets/Cafelogo.png';
 import Details from "./dashboardComponents/sidebars/details";

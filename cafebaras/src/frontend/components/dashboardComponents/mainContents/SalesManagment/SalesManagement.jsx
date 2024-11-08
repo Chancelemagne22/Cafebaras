@@ -1,10 +1,15 @@
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+import supabase from "../ReportContent/supabaseAPI";
 
 
 function SalesManagment(){
     const [orderClassName, setClassName] = useState('Order hide');
     const [change, setChange] = useState(true);
+    const [menu, setMenu] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [productID, setProductID] = useState();
+    var productarray = [];
+    let orderarray = [];
     const togglePopup =() =>{
         if(change){
             setClassName('Order show')
@@ -14,43 +19,66 @@ function SalesManagment(){
             setChange(true)
         }
     }
-
+    const getProduct = async (e)=>{
+        e.preventDefault();
+        var addorders = await e.target.value;
+        orderarray.push(addorders)
+        console.log(orderarray)
+    }
+    useEffect(() => {
+        const fetchMenu = async () => {
+          setLoading(true); // Set loading to true at the start of fetch
+          const { data, error } = await supabase
+            .from('products')
+            .select('*');
+    
+          if (error) {
+            console.error("Error fetching Products:", error);
+          } 
+          /*if (data){
+            setProductID(data.productID)
+          }*/else {
+            setProductID(data.productID);
+            setMenu(data);
+          }
+          setLoading(false); // Set loading to false after fetch
+        };
+        
+        fetchMenu();
+      }, []);
+      console.log(productarray)
+      console.log(menu);
+      const handleOrder = async (e) => {
+        e.preventDefault();
+        setError(''); // Clear error on each login attempt
+    
+        try {
+            const response = await axios.post('http://localhost:3001/api/SalesManagement', { });
+            
+            if (response.data.success) {
+                localStorage.setItem('userId', userId);
+                localStorage.setItem('isAuthenticated', 'true'); // Mark user as authenticated
+                navigate('/dashboard');
+            } else {
+                setError('Login failed. may mali sa info');
+            }
+        } catch (err) {
+            console.error("Error during login:", err);
+            setError('Login failed. Ayaw pumasok.');
+        }
+    };
     return(
         <>
             <div className="orderM">
                 <div className = "Product_Selection" id = "Options">
-                    
-                    <div className = "orderContainer">
-                        <button onClick={togglePopup} className = "circle" id = "circle1">Product</button>
-                        <button onClick={togglePopup} className = "circle" id = "circle1">Product</button>
-                        <button onClick={togglePopup} className = "circle" id = "circle1">Product</button>
-                        <button onClick={togglePopup} className = "circle" id = "circle1">Product</button>
-                        <button onClick={togglePopup} className = "circle" id = "circle1">Product</button>
-                        <button onClick={togglePopup} className = "circle" id = "circle1">Product</button>
-                        <button onClick={togglePopup} className = "circle" id = "circle1">Product</button>
-                        <button onClick={togglePopup} className = "circle" id = "circle1">Product</button>
-                        <button onClick={togglePopup} className = "circle" id = "circle1">Product</button>
-                        <button onClick={togglePopup} className = "circle" id = "circle1">Product</button>
-                        <button onClick={togglePopup} className = "circle" id = "circle1">Product</button>
-                        <button onClick={togglePopup} className = "circle" id = "circle1">Product</button>
-                        <button onClick={togglePopup} className = "circle" id = "circle1">Product</button>
-                        <button onClick={togglePopup} className = "circle" id = "circle1">Product</button>
-                        <button onClick={togglePopup} className = "circle" id = "circle1">Product</button>
-                        <button onClick={togglePopup} className = "circle" id = "circle1">Product</button>
-                        <button onClick={togglePopup} className = "circle" id = "circle1">Product</button>
-                        <button onClick={togglePopup} className = "circle" id = "circle1">Product</button>
-                        <button onClick={togglePopup} className = "circle" id = "circle1">Product</button>
-                        <button onClick={togglePopup} className = "circle" id = "circle1">Product</button>
-                        <button onClick={togglePopup} className = "circle" id = "circle1">Product</button>
-                        <button onClick={togglePopup} className = "circle" id = "circle1">Product</button>
-                        <button onClick={togglePopup} className = "circle" id = "circle1">Product</button>
-                        <button onClick={togglePopup} className = "circle" id = "circle1">Product</button>
-                        <button onClick={togglePopup} className = "circle" id = "circle1">Product</button>
-                        <button onClick={togglePopup} className = "circle" id = "circle1">Product</button>
-                        <button onClick={togglePopup} className = "circle" id = "circle1">Product</button>
-                        <button onClick={togglePopup} className = "circle" id = "circle1">Product</button>
-                        <button onClick={togglePopup} className = "circle" id = "circle1">Product</button>
-                        <button onClick={togglePopup} className = "circle" id = "circle1">Product</button>
+                    <div>
+                       {menu && (
+                        <div className = "menuContainer">
+                            {menu.map(product => (
+                                <button onClick={togglePopup}>{product.productName} </button>
+                            ))}
+                        </div>
+                       )} 
                     </div>
                 </div>
 
@@ -81,8 +109,8 @@ function SalesManagment(){
                                     </div>
                                 </div>
                                 <div className="buttons">
-                                    <button className = "purchase_button" id = "p_now">Purchase Now</button>    
-                                    <button className = "purchase_button" id = "add">Add to Cart</button>
+                                    <button className = "purchase_button" id = "p_now" onClick={handleOrder}>Purchase Now</button>    
+                                    <button className = "purchase_button" id = "add" onClick={getProduct} value={productID}>Add to Cart</button>
                                     <button className = "close_btn" onClick={togglePopup}>&times;</button>
                                 </div>
                             </div>
