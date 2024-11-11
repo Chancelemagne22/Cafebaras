@@ -1,0 +1,140 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+/* Container */
+.container {
+    display: flex;
+    height: 100vh;
+    background-color: #C67529; /* Light background */
+}
+
+/* Sidebar */
+.sidebar {
+    width: 200px; /* Fixed width */
+    background-color: #4E2603;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.nav-button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.item-management {
+    background-color: #FFE3A8;
+    color: black;
+}
+
+.stock-management {
+    background-color: #FCB025;
+    color: #FCEAC6;
+}
+
+.supplier-management {
+    background-color: #281506;
+    color: #FCEAC6;
+}
+
+.logo-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%; 
+    margin-top: auto;
+    margin-bottom: 20px;
+    box-shadow:  0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+
+.main-content {
+    flex-grow: 1;
+    background-color: #C67529;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; 
+}
+.table-container {
+    background-color: #FCB025; 
+    padding: 20px;
+    border-radius: 10px;
+    width: 750px; 
+    height: 800;
+    max-width: 800px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); 
+    margin-bottom: 20px; 
+}
+
+.stock-table {
+    width: 700px; 
+    max-width: 800px; 
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.stock-table th, .stock-table td {
+    padding: 10px;
+    border: 1px solid #4D2C19;
+}
+
+.stock-table th {
+    background-color: #4D2C19;
+    color: #fff;
+}
+
+.stock-table td {
+    background-color: #fff;
+}
+
+.low-stock {
+    background-color: #FF5A5A; /* Red background for low stock */
+    color: #fff;
+}
+.orderSection {
+    width: 200px; /* Fixed width */
+    background-color: #C67529;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+.button-container {
+    background-color: #FFE3A8;
+    padding: 15px;
+    border-radius: 10px;
+    width: 15%; 
+    max-width: 800px;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+    margin-top: 20px; 
+}
+.order-button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #4D2C19;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); ;
+}
