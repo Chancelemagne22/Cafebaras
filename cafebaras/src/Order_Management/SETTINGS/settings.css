@@ -1,0 +1,150 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+   
+body {
+    font-family: Arial, sans-serif;
+    background-color: #FCEAC6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+/* Container */
+.container {
+    display: flex;
+    width: 600px;
+    height: 480px;
+    background-color: #C67529;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-left: 100px;
+    margin-top: 30px;
+    border: 5px groove #4E2603
+}
+
+.sidebar {
+    width: 200px; /* Fixed width */
+    background-color: #C67529;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    z-index: 1;
+    border: 3px solid #4E2603;
+}
+.logo-image{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%; 
+    margin-top: 0;
+    margin-bottom: 20px;
+    box-shadow:  0 4px 10px rgba(0, 0, 0, 0.5);
+}
+.back-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #EB4109;
+    color: black;
+    font-weight: bold;
+    font-size: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);;
+    cursor: pointer;
+    margin-bottom: 20px; /* Adds space below the back button */
+    z-index: 2;
+}
+.maincontent {
+    width: 80%;
+    height: 93%;
+    padding: 30px;
+    position: relative;
+    background-color: #FCB025;
+    border: none;
+    margin-left: 60px;
+    margin-top: 15px;
+    border-radius: 20px;
+}
+h2 {
+    color: #FFFFFF;
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+    width: 100%;
+    display: inline-block;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    
+}
+label {
+    color: #281506;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"] {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #FFFFFF;
+}
+
+button[type="button"] {
+    width: 100px;
+    padding: 10px;
+    margin-top: 15px;
+    align-self: flex-end;
+    background-color: #4E2603;
+    color: #FFFFFF;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+.bg-logout {
+    width: 50px;
+    display: flex;
+}
+
+button.logout {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 200px;
+    height: 50px;
+    padding: 10px;
+    background-color: #EB4109;
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    border: 2px solid #7D2305;
+}
+
+.version {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: black;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: left;
+    z-index: 1;
+}
