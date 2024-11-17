@@ -93,7 +93,7 @@
     height: 1.6em;
     padding: 10px 1em;
     margin-bottom: 10px;
-    border-radius: 10px;
+    border-radius: 3px;
     background-color: #EECA84;
     border: none;
     box-shadow: 0px 3px 3px 3px rgba(0,0,0,0.25);
@@ -101,19 +101,7 @@
     font-weight: 600;
     font-size: 1em;    
 }
-.userID input{
-    border-radius:  10px 10px 0 0;
 
-}
-.user input{
-    border-radius: 0 ;
-
-}
-
-.password input{
-    border-radius: 0 0 10px 10px;
-
-}
 
 .newAccountBtn{
     display: flex;
