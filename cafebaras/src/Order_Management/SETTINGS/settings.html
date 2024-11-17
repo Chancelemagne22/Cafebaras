@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <link rel="stylesheet" href="settings.css">
+</head>
+<body>
+    <div class="container">    
+        <div class="sidebar">
+            <img src="logo.png" alt="Logo" class="logo-image">
+            <button class="back-button" onclick="goBack()">BACK</button>
+        </div>
+
+        <div class="maincontent">
+            <h2>Update Login Information</h2>
+            <form class="update-status">
+                <label for="old-username">Old Username:</label>
+                <input type="text" id="old-username" name="old-username" required>
+                
+                <label for="new-username">New Username:</label>
+                <input type="text" id="new-username" name="new-username" required>
+                
+                <label for="old-password">Old Password:</label>
+                <input type="password" id="old-password" name="old-password" required>
+                
+                <label for="new-password">New Password:</label>
+                <input type="password" id="new-password" name="new-password" required>
+                
+                <button type="button" onclick="updateInfo()">Update</button>
+            </form>
+        </div>
+        <p class="version">CaféBARAS©<br>Version 0.1.1</p>
+        <div class="bg-logout"></div>
+        <button class="logout">LOGOUT</button>
+    </div>
+    <script src="settings.js"></script>
+    <script>
+        function goBack() {
+            window.history.back(); // Go back to the previous page
+        }
+    </script>
+</body>
+</html>
