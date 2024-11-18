@@ -11,7 +11,7 @@ function TransactionHistory () {
     const fetchTransaction = async () => {
       setLoading(true); // Set loading to true at the start of fetch
       let { data, error } = await supabase
-        .from('inventory')
+        .from('transactions')
         .select('*');
 
       if (error) {

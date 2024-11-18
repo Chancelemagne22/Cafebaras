@@ -47,7 +47,25 @@ router.post('/login', async (req, res) => {
     // If the user is found
     res.json({ success: true, uuid: data.uuid });
 });
+router.post('/SalesManagement', async (req, res) => {
+    const { productID, productName, price } = req.body;
 
+    console.log("Received signup request:", productID, productName, price ); // Log the incoming request
 
+    // Create other info
+    const date = new Date();
+
+    // Insert the user into Supabase
+    const { error } = await supabase
+        .from('transactions')
+        .insert([{ date, productID, productName, price }]);
+
+    if (error) {
+        console.error("Error creating account:", error);
+        return res.status(400).json({ error: 'Transactions failed.', details: error.message });
+    }
+
+    res.json({ success: true });    
+});
 // Export the router
 export default router;

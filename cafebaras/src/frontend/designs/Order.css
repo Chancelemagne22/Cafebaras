@@ -10,12 +10,9 @@
     background-color: #DCA033;
     height: 100vh;
 }
-.orderContainer{
+.productContainer{
     display: flex;
     flex-wrap: wrap;
-    border: #D9D9D9 5px solid;
-    padding: 2em;
-    margin: 1em;
     gap: 2em;
 }
 
@@ -26,7 +23,14 @@
     padding: 2em;
     margin: 1em;
     gap: 2em;
+    overflow-y: auto; 
 }
+.tableContainer{
+    position:absolute;
+    width: 300px;
+    overflow-y: auto;
+}
+
 
 .orderContainer * {
     width: 10em;
