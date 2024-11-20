@@ -235,25 +235,50 @@ function SalesManagement(){
             }
             else{
                 orderarray.push(data)
-                const ordDetail = Object.values(data);
-                const ONum = ordDetail[0];
-                const ordName = ordDetail[1];
-                const ordPrice = ordDetail[3];
-                console.log(orderarray)
                 
-                
-                let table = document.getElementById("outputTable").querySelector('tbody');
-                let newRow = table.insertRow(table.rows.length);
-                const button = document.createElement('button');
-                button.innerHTML = 'Delete';
-                button.onclick = () => {
-                    let row = button.parentNode.parentNode;
-                    row.remove();
-                                        };
-                newRow.insertCell(0).innerHTML = ONum;
-                newRow.insertCell(1).innerHTML = ordName;
-                newRow.insertCell(2).innerHTML = ordPrice;
-                newRow.insertCell(3).appendChild(button);
+                const tableBody = document.getElementById("outputTable").querySelector("tbody");
+
+                // Function to render the table
+                function renderTable() {
+                // Clear the existing table content
+                tableBody.innerHTML = "";
+
+                // Populate the table with rows
+                orderarray.forEach((item, index) => {
+                // Create a new row
+                const newRow = tableBody.insertRow();
+
+                // Insert cells and set their content
+                const cell1 = newRow.insertCell(0);
+                cell1.textContent = item.pID;
+
+                const cell2 = newRow.insertCell(1);
+                cell2.textContent = item.pName;
+
+                const cell3 = newRow.insertCell(2);
+                cell3.textContent = item.price;
+
+                // Create a delete button
+                const cell4 = newRow.insertCell(3);
+                const deleteButton = document.createElement("button");
+                deleteButton.textContent = "Delete";
+
+                // Add a click event to the delete button
+                deleteButton.onclick = () => {
+                    // Remove the item from the array
+                    orderarray.splice(index, 1);
+                    console.log("An order was deleted from the table");
+                    // Re-render the table
+                    renderTable();
+                };
+
+                // Add the button to the cell
+                cell4.appendChild(deleteButton);
+            });
+        }
+
+        // Initial rendering of the table
+        renderTable();
             }
         }catch{
 

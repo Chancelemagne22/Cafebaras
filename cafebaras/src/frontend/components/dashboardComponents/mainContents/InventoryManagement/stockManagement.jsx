@@ -12,7 +12,7 @@ function StockManagement () {
       const fetchStocks = async () => {
         setLoading(true); // Set loading to true at the start of fetch
         let { data, error } = await supabase
-          .from('stocks')
+          .from('stocksV3')
           .select('*');
   
         if (error) {
