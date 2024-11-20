@@ -1,0 +1,58 @@
+.dashboardInventory {
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 2fr 6fr;
+    font-family: "Open Sans", serif;
+    font-size: 1.2em;
+    font-weight: 800;
+}
+.sidebarInventory{
+    padding-top: 3em;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
+    place-self: center;
+    gap: 1em;
+    color: white;
+    height: 100vh;
+    font-weight: 500;
+    font-size: 1em;
+}
+.mainContentInventory{
+    height: 100vh;
+    width: 100%;
+    background-color: #fbfcfa;
+    display: grid;
+    gap: 1em;
+}
+.inventoryButton{
+    padding: 1em;
+    height: 1.5em;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+
+.active{
+    transition: all cubic-bezier(0.175, 0.885, 0.32, 1.275) .5s;
+    display: flex;
+    justify-content: center;
+    background-color: #281506;   
+    
+    /* transform: scaleX(105%); */
+}
+
+.inactive{
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    background-color: #4E2603;   
+
+}
+.mainContentInventory{
+    background-color: #FFE3A8;
+}
+.activeContentInventory{
+    margin: 2em;
+}   

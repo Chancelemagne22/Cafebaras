@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+.dashboard{
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+    font-family: "Open Sans", serif;
+    font-size: 1.2em;
+    font-weight: 800;
+
+}
+/* .sidebarDash > div{
+} */
+
+
+.sidebarDash{
+    display: grid;
+    grid-template-rows: 2fr 1fr 3fr;
+    gap: 2em;
+    color: white;
+    height: 100vh;
+
+}
+
+.logo{
+    height: 12em;
+    width: 100%;
+    overflow: hidden;
+    margin: 0 auto;
+    
+
+}
+.logo *{
+    width: 100%;
+    object-fit: cover;
+}
+
+/* .mainContentDash > div{
+} */
+.mainContentDash{
+    height: 100vh;
+    width: 100%;
+
+    background-color: #fbfcfa;
+    display: grid;
+    
+    gap: 1em;
+
+}   
+
+.modules{
+    height: 14rem;
+    aspect-ratio: 1 / 1;
+    place-self: center;
+    background-color: #FCB025;
+    border-radius: 5px;
+    transition: all 500ms ease;
+    cursor: pointer;
+}
+.holder{
+    margin: 2em;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2em;
+    place-self: center;
+
+}
+
+.modules:hover{
+    transform: translateY(-3px) scale(104%);
+}
+.modules:active{
+    transform: translateY(3px) scale(96%);
+    background-color: #4E2603;
+}
+
+.submods{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+.logout{
+    background-color: red;
+    padding: .5em 1em ;
+    border-radius: 1.5em;
+}
