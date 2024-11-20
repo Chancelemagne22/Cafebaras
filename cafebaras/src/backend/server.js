@@ -1,32 +1,20 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import authRoutes from './routes/auth.js'; 
-import dotenv from 'dotenv';
-dotenv.config();
+import authRoutes from './auth.js'; 
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Middleware
 app.use(cors());
 app.use(bodyParser.json());
 
+app.use('/api', authRoutes); 
 
-// Test if the server is running
+// Test route to check if server is running
 app.get('/', (req, res) => {
-    res.send('Server is up and running!');
+    res.send('Server is running!');
 });
-
-// Routes - Make sure `authRoutes` is being correctly imported
-app.use('/api', authRoutes);
-
-// Adding a test POST route for /api/signup
-app.post('/signup', (req, res) => {
-    res.send("This is a POST request for signup!");
-});
-
-
 
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
