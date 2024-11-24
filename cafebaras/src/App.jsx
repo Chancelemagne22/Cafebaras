@@ -4,10 +4,11 @@ import SignUpPage from './frontend/Signup';
 import NotFound from './frontend/NotFound';
 import LoginPage from './frontend/Login';
 import Dashboard from './frontend/Dashboard';
-import SalesManagement from './frontend/SalesManagement';
+import OrderManagement from './frontend/OrderManagement';
 import Inventory from './frontend/Inventory';
 import { PrimeReactProvider, PrimeReactContext } from 'primereact/api';
 import ReportAnalysis from './frontend/ReportAnalysis';
+
 
 function App() {
 
@@ -18,7 +19,7 @@ function App() {
                     <Route path="/" element={<LoginPage/>} />
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/signup" element={<SignUpPage />} />
-                    <Route path="/sales" element={<SalesManagement/>}/>
+                    <Route path="/order" element={<OrderManagement/>}/>
                     <Route path='/inventory' element = {<Inventory/>}/>
                     <Route path="/report" element={<ReportAnalysis/>}/>
                     <Route path="*" element={<NotFound />} />
