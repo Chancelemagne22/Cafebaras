@@ -1,4 +1,4 @@
-export {default as OrderManagement} from './Order.jsx'
+export {default as OrderManagement} from './OrderManagement'
 
 import { createClient } from '@supabase/supabase-js';
 

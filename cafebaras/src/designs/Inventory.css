@@ -55,4 +55,30 @@
 }
 .activeContentInventory{
     margin: 2em;
-}   
+}  
+.p-datatable .p-datatable-tbody > tr.p-highlight {
+    background-color: #ffeb3b; /* Yellow background */
+    color: #000; /* Black text color */
+}
+/* Optional: Hover effect for all rows */
+.p-datatable tbody tr:hover {
+    background-color: #f0f0f0 !important; /* Light grey on hover for all rows */
+  }
+.low-stock {
+    background-color: #ffcccc !important;
+    color: #900;
+  }
+.low-stock.p-highlight {
+    background-color: #ff9999 !important; /* Slightly darker red for selected */
+    color: white !important; /* White text for contrast */
+}
+.low-stock.p-highlight:hover {
+    background-color: #ff6666 !important; /* Even darker red on hover */
+  }
+.stkMgmtLowPart{
+    display: flex;
+    border: #4E2603 5px solid;
+}
+.OrderSupplyBox{
+    align-content: last baseline;
+}

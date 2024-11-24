@@ -42,9 +42,9 @@ function Inventory(){
                 >
                     SUPPLIER MANAGEMENT
                 </div>
-                <div className="back" onClick={() => {navigate('/dashboard')}}>
-                    Back
-                </div>
+                    <div className="back" onClick={() => {navigate('/dashboard')}}>
+                        Back
+                    </div>
 
             </div>
 
