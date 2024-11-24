@@ -29,7 +29,6 @@ function ItemManagement() {
     
     fetchInventory();
   }, []); // Ensuring fetch runs only once
-  console.log(inventory);
 
   return (
     <div className="itemmanagement">
