@@ -69,6 +69,7 @@ function Transaction(){
     console.log(transaction[0])
   }, []);
 
+  
   return (
     <div className="transactionDisplay">
       <p>TRANSACTION</p>

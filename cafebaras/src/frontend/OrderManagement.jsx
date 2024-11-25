@@ -124,6 +124,7 @@ function OrderManagement () {
           const productName = orderinfo[1];
           const price = orderinfo[3];
           console.log(productID, productName);
+          
   
           try {
                 const dateObj = new Date();

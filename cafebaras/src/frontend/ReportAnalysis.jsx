@@ -22,6 +22,7 @@ function ReportAnalysis() {
     }, []);
 
 
+    
     return (
         <div className="dashboardReport">
             <div className="sidebarReport">
