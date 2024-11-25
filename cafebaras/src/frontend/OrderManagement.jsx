@@ -69,7 +69,7 @@ function OrderManagement () {
                 cell2.textContent = item.pName;
 
                 const cell3 = newRow.insertCell(2);
-                cell3.textContent = item.price;
+                cell3.textContent = "₱ " + item.price;
 
                 // Create a delete button
                 const cell4 = newRow.insertCell(3);
@@ -124,12 +124,18 @@ function OrderManagement () {
           const productName = orderinfo[1];
           const price = orderinfo[3];
           console.log(productID, productName);
+          
   
           try {
-              const date = new Date();
+                const dateObj = new Date();
+                const month   = dateObj.getUTCMonth() + 1; // months from 1-12
+                const day     = dateObj.getUTCDate();
+                const year    = dateObj.getUTCFullYear();
+
+                const date = month + "/" + day + "/" + year;
   
               // Insert transaction into Supabase
-              const { error } = await supabase
+                const { error } = await supabase
                   .from('transactions')
                   .insert([{ date, productID, productName, price }]);
   
@@ -252,12 +258,7 @@ function OrderManagement () {
           
       }
   };
-  /*useEffect(() => {
-    const isAuthenticated = localStorage.getItem('isAuthenticated');
-    if (!isAuthenticated) {
-        navigate('/');
-    } 
-  }, []);*/
+ 
   return (
     <div className="dashboardOD">
             <div className="sidebarSales">
@@ -265,22 +266,23 @@ function OrderManagement () {
                     <img src={CafeLogo} alt="cafebara logo" />
             </div>
             <div className = "tableContainer">
-                        <table id="outputTable">
-                            <thead>
-                                <tr>
-                                <th>PID</th>
-                                <th> Product Name </th>
-                                <th>Price</th>
-                                <th></th>
-                                </tr>
-                            </thead>   
-                            <tbody>
-                            </tbody> 
-                        </table>
-                    </div>
-              <div className="back" onClick={() => {navigate('/dashboard')}}>
-                Back
-              </div>
+                <table id="outputTable">
+                    <thead>
+                        <tr>
+                        <th>PID</th>
+                        <th>Product Name</th>
+                        <th>Price</th>
+                        <th>Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+            <div className="backOrder" onClick={() => {navigate('/dashboard')}}>
+            Back
+            </div>
             </div>
             <div className="mainContentSales">
               
@@ -289,15 +291,16 @@ function OrderManagement () {
                        {menu && (
                         <div className = "productContainer">
                             {menu.map(product => (
-                                <button value={product.pID}onClick={getindex}>{product.pName} </button>
+                                <button className='products' value={product.pID}onClick={getindex}>{product.pName} </button>
                             ))}
                         </div>
                        )} 
                     </div>
-                    <div  className = "menuContainer" >
+                    <div  className = "menuContainer purchaseH" >
                         <button className = "purchase_button" id = "p_now" onClick={handleOrders}>Purchase Now</button>
-                </div>
-                {error && <p className="error" style={{ color: 'red' }}>{error}</p>}
+                        {error && <p className="error" style={{ color: 'red' }}>{error}</p>}
+                    </div>
+                
                 </div>
               
             </div>

@@ -2,7 +2,7 @@
     width: 100%;
     height: 100vh;
     display: grid;
-    grid-template-columns: 25% 75%;
+    grid-template-columns: 28% 72%;
     font-family: "Open Sans", serif;
     font-size: 1.2em;
     font-weight: 800;
@@ -26,6 +26,8 @@
     height: 50vh;
     width: 95%;
     overflow-y: auto;
+    overflow-x: hidden;
+
 }
 .Product_Selection{
     display: flex;
@@ -33,36 +35,133 @@
     background-color: #DCA033;
     height: 100vh;
 }
-.productContainer{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2em;
-}
+
 
 .menuContainer{
     display: flex;
     flex-wrap: wrap;
     border: #D9D9D9 5px solid;
-    padding: 2em;
-    margin: 1em;
+    padding: 1em;
+    margin: 1em 0;
     gap: 2em;
     overflow-y: auto; 
 }
-.logoC{
-    height: 9em;
-    width: 75%;
-    overflow: hidden;
-    margin: 0 auto;
+.purchaseH{
+    overflow-y: hidden;
+    box-shadow: inset 0px 0px 10px 3px rgb(71, 46, 12, .7);
+    border-radius: 10px;
+    background-color:#FBD789;
+
     
 
 }
-.logoC *{
-    width: 75%;
-    object-fit: cover;
+.purchaseH button{
+    padding: .5em;
+    font-size: 1em;
+    border: none;
+    background-color: #4E2603;
+    color: wheat;
+    border-radius: 30px ;
+    transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
 }
-.back{
+
+.logoC{
+    height: 10em;
+    width: 100%;
+    display: grid;
+    
+}
+.logoC *{
+    width: 60%;
+    object-fit: cover;
+    place-self: center;
+
+}
+.backOrder{
+    place-self: center;
     background-color: red;
     padding: .5em 1em ;
     border-radius: 1.5em;
     width: 20%;
+    text-align: center;
+    transform: translateY(-1em);
 }
+
+.products{
+    padding: .5em;
+    font-size: 1em;
+    border: none;
+    background-color: #4E2603;
+    color: wheat;
+    border-radius: 30px ;
+    transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+
+}
+
+.products:active{
+    box-shadow: inset 0px 0px 54px 5px rgb(0, 0, 0);
+}
+.productContainer{
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    gap: 1em;
+}
+.error{
+    margin: 0;
+}
+
+.tableContainer{
+    border: #D9D9D9 5px solid;
+    height: 50vh;
+    width: 95%;
+    overflow-y: auto
+}
+#outputTable{
+    width: 100%;
+    border-collapse: collapse;
+}
+#outputTable thead th {
+    background-color: #DCA033;
+    color: white;
+    padding: 0.5em;
+    text-align: left;
+    border-bottom: 2px solid #4E2603;
+}
+#outputTable tbody tr {
+    font-size: 1em;
+    font-weight: 400;
+    border-bottom: 1px solid #D9D9D9;
+}
+
+#outputTable tbody tr:last-child {
+    border-bottom: none;
+}
+
+#outputTable tbody td {
+    padding: 0.5em;
+    text-align: left;
+}
+#outputTable tbody :hover {
+    background-color: #84521d;
+    
+}
+#outputTable button{
+    background-color: red;
+    padding: 4px .5em;
+    font-size: 1em;
+    color: white;
+    border-radius: 1.5em;
+    border: none;
+    transition: all 400ms cubic-bezier(.28,.9,1,1);
+}
+#outputTable button:active{
+    background-color: rgb(137, 30, 30);
+
+}
+#outputTable button:hover{
+    filter: drop-shadow(1px 1px 4px rgb(137, 30, 30));
+}
+
+#outputTable thead{
+    border: 1px #4E2603 solid;
+}   
