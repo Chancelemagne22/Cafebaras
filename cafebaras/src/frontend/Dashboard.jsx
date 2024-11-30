@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import CafeLogo from './assets/CafeLogo.png'
 import '../designs/Dashboard.css'
+// import { Link } from "react-router-dom";
 
 
 function Dashboard() {
@@ -38,7 +39,7 @@ function Dashboard() {
                 </div>
                 <div className="submods">
                     <div className="about">ABOUT</div>
-                    <div className="settings">SETTINGS</div>
+                    <div className="settings" onClick={() => navigate('/:id')}>SETTINGS</div>
                     <div onClick={(e) => handleLogout()} className="logout">LOGOUT</div>
                 </div>
             </div>
