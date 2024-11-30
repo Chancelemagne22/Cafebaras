@@ -32,6 +32,15 @@
     border-radius: 20px;
     cursor: pointer;
 }
+.backReport{
+    transform: translateY(-2em);
+    place-self: center;
+    background-color: red;
+    padding: .5em 1em ;
+    border-radius: 1.5em;
+    width: 20%;
+    text-align: center;
+}
 
 
 .active{
