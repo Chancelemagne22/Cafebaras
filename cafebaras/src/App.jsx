@@ -23,7 +23,7 @@ function App() {
                     <Route path="/order" element={<OrderManagement/>}/>
                     <Route path='/inventory' element = {<Inventory/>}/>
                     <Route path="/report" element={<ReportAnalysis/>}/>
-                    <Route path="/:id" element={<Settings/>}/>
+                    <Route path="/settings" element={<Settings/>}/>
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </Router>

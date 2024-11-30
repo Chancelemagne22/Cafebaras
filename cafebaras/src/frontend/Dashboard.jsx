@@ -39,7 +39,7 @@ function Dashboard() {
                 </div>
                 <div className="submods">
                     <div className="about">ABOUT</div>
-                    <div className="settings" onClick={() => navigate('/:id')}>SETTINGS</div>
+                    <div className="settings" onClick={() => navigate('/settings')}>SETTINGS</div>
                     <div onClick={(e) => handleLogout()} className="logout">LOGOUT</div>
                 </div>
             </div>

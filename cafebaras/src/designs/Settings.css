@@ -4,22 +4,20 @@
     display: grid;
     grid-template-columns: 2fr 6fr;
     font-family: "Open Sans", serif;
-    font-size: 1.2em;
-    font-weight: 800;
+    
 }
 
 .settingsSideBar {
     padding-top: 3em;
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
-    grid-template-columns: 1fr;
+    grid-template-rows: 2fr 1fr 3fr;
+    
     place-self: center;
-    gap: 1em;
     color: white;
     height: 100vh;
-    width: 25vw;
     font-weight: 500;
     font-size: 1em;
+    align-items: center;
 }
 
 .logo{
@@ -31,7 +29,12 @@
     font-family: "Open Sans", serif;
     padding: .5em 1em ;
     border-radius: 1.5em;
-    width: 20%;
+    width: 30%;
+    font-size: 1.2em;
+    font-weight: 800;
+    background-color: red;
+    margin-left: 2vw;
+    
 }
 
 .back:hover{
@@ -42,6 +45,8 @@
     background-color: #FFE3A8;
     font-family: "Open Sans", serif;
     text-indent: 2vw;
+    font-size: 1.2em;
+    font-weight: 800;
 }
 
 .newLoginContainer{
@@ -52,25 +57,34 @@
     
     justify-self: center;
     margin-top: 18vh;
-    border: solid 5px #000;
+    
 }
 
 .name{
     color: #281506;
-    place-self: center;
+    margin-left: 15vw;
+}
+
+.form-control{
+    height: 30px;
+    margin: 10px;
+    font-size: medium;
+    border-radius: 10px;
+    border: none;
+    border-bottom: solid gray;
 }
 
 .update_btn{
     background-color: #4E2603;
     border: 0;
-    border-radius: 2px;
+    border-radius: 10px;
     font-size: medium;
     font-family: "Open Sans", serif;
     font-weight: 800;
     color: white;
     place-self: center;
     padding: 2%;
-    margin: 5%;
+    margin-left: 27vw;
 }
 
 .update_btn:hover{

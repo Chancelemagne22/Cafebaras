@@ -1,4 +1,4 @@
-export { Settings } from './Set'
+export { Settings } from './Set.jsx'
 
 import { createClient } from '@supabase/supabase-js';
 
