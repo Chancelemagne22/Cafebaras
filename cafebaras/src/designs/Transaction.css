@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+.reset{
+    margin-left: 2em;
+    background-color:#FCB025 ;
+    color: #fff;
+    font-weight: 600;
+    font-family: "Open Sans", serif;
+    font-size: 1em;
+    border: 1px #FCB025;
+    padding: 4px 1em;
+    border-radius: 5px;
+}
+
+.reset:hover{
+    background-color: #84521d;
+}
+
+.reset:active{
+    background-color: #4E2603 ;
+}
