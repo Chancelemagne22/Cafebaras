@@ -4,14 +4,23 @@ import { Column } from "primereact/column";
 import supabase from "./inventory";
 
 function StockManagement() {
+  const [orderClassName, setClassName] = useState('Order hide');
+  const [change, setChange] = useState(true);
   const [stocks, setStocks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [quantity, setQuantity] = useState("");
+  const [price, setPrice] = useState("");
+  const [sname, setSname] = useState();
+  const [snumber, setSnumber] = useState();
+  const [semail, setSemail] = useState();
 
   useEffect(() => {
     const fetchStocks = async () => {
       setLoading(true);
-      let { data, error } = await supabase.from("stocksV3").select("*");
+      let { data, error } = await supabase
+      .from("inventoryV2")
+      .select("*");
 
       if (error) {
         console.error("Error fetching Stocks:", error);
@@ -19,12 +28,12 @@ function StockManagement() {
         // Sort the data so red rows appear at the top
         const sortedData = data.sort((a, b) => {
           const isALowStock =
-            (a.Category === "Packaging" && a.Stocked_Units < 500) ||
-            (a.Category !== "Packaging" && a.Stocked_Units < 2500);
+            (a.ItemCategory === "Packaging" && a.Stocked_Units < 500) ||
+            (a.ItemCategory !== "Packaging" && a.Stocked_Units < 2500);
 
           const isBLowStock =
-            (b.Category === "Packaging" && b.Stocked_Units < 500) ||
-            (b.Category !== "Packaging" && b.Stocked_Units < 2500);
+            (b.ItemCategory === "Packaging" && b.Stocked_Units < 500) ||
+            (b.ItemCategory !== "Packaging" && b.Stocked_Units < 2500);
 
           if (isALowStock && !isBLowStock) return -1; // a comes first
           if (!isALowStock && isBLowStock) return 1;  // b comes first
@@ -40,21 +49,87 @@ function StockManagement() {
 
   // Dynamically set row classes based on Stocked_Units value
   const rowClassName = (data) => {
-    if (data.Category === "Packaging" && data.Stocked_Units < 500) {
+    if (data.ItemCategory === "Packaging" && data.Stocked_Units < 500) {
       return "low-stock"; // Red for low stock
     }
-    if (data.Category !== "Packaging" && data.Stocked_Units < 2500) {
+    if (data.ItemCategory !== "Packaging" && data.Stocked_Units < 2500) {
       return "low-stock"; // Red for low stock
     }
     return ""; // Default (no class)
   };
   console.log(selectedProduct)
+
   const getRow = async () => {
-    console.log("I got clicked HAHAHAHA")
-    const stockinfo = Object.values(selectedProduct);
-    const iName = stockinfo[3];
-    console.log(iName);
-  }
+    if (selectedProduct != null){
+      togglePopup();
+      console.log("I got clicked HAHAHAHA")
+      const stockinfo = Object.values(selectedProduct);
+      const supID = stockinfo[5];
+      console.log(supID);
+    try {
+      const { data,error } = await supabase
+            .from('suppliers')
+            .select('*')
+            .eq('supplierID', supID )
+            .single();
+
+            if (error){
+                console.error("Error fetching Products:", error);
+            }
+            else{
+                console.log(data);
+            }
+            const suppinfo = Object.values(data);
+            setSname(suppinfo[1]);
+            setSnumber(suppinfo[2]);
+            setSemail(suppinfo[3]);
+      }
+    catch{
+
+        }
+      }else{
+        console.log("No selected product")
+      }
+    }
+    
+  const togglePopup = async (e) => {
+        
+    if(change){
+        setClassName('Order show') 
+        setChange(false)
+    }else{
+        setClassName('Order hide')
+        setChange(true)
+    }
+}
+const orderSupply = async() =>{
+console.log("I have been clicked")
+try{
+  const quantinput = Number(quantity);
+  const priceinput = Number(price);
+  console.log(quantinput,priceinput);
+  if (isNaN(quantinput) || isNaN(priceinput)){
+    console.log("No Order",sname);
+    }
+  if(quantinput<=0||priceinput<=0){
+    console.log("Invalid Order");
+  }else{
+      console.log(quantity,price,sname);
+    }
+    setQuantity("");
+    const inputQuantity = document.getElementById("qty");
+      inputQuantity.value = "";
+    setPrice("");
+    const inputPrice = document.getElementById("price");
+      inputPrice.value = "";
+    
+}
+catch{
+  
+}
+
+}
+
   return (
     <div className="stockmanagement">
       <div className="table-container">
@@ -70,22 +145,16 @@ function StockManagement() {
               selectionMode="single"
               selection={selectedProduct}
               onSelectionChange={(e) => setSelectedProduct(e.value)}
-              dataKey="stockID"
+              dataKey="itemID"
               metaKey="true"
               rowClassName={rowClassName} // Add rowClassName property
             >
-              <Column className="datas" field="stockID" header="Stock Code" />
               <Column className="datas" field="itemID" header="Item Code" />
-              <Column className="datas" field="Category" header="Category" />
-              <Column className="datas" field="Item_Name" header="Item Name" />
+              <Column className="datas" field="ItemCategory" header="Category" />
+              <Column className="datas" field="ItemName" header="Item Name" />
               <Column className="datas" field="Unit" header="Unit" />
-              <Column
-                className="datas"
-                field="Stocked_Units"
-                header="Stocked Units"
-              />
+              <Column className="datas" field="Stocked_Units" header="Stocked Units"/>
               <Column className="datas" field="Used_Units" header="Used Units" />
-              <Column className="datas" field="Units_Left" header="Units Left" />
             </DataTable>
           </div>
         </div>
@@ -96,8 +165,51 @@ function StockManagement() {
       </div>
       <div className="OrderSupplyBox">
         <button onClick={getRow}>Order Supply</button>
+        <button onClick={togglePopup} >Test</button>
       </div>
       </div>
+      <div className = {orderClassName} id = "ResupplyPop">
+                    <div className = "orderContent" id = "rec3">
+                        <h1 id = "orderText">Contact Supplier</h1>
+                        <div className="orderDetails">
+                          <div className="supplierDetails">
+                            <div className = "selectedOrder" id = "circle2"><p>Avatar</p></div>
+                                  <div><p>Supplier Name: {sname}</p> </div>  
+                            </div>
+                            <div className="sectionPay">
+                            <div className="SupplierInfo">
+                              <p>Supplier Number: {snumber}</p>
+                                  <p>Supplier email: {semail}</p>
+                        <div>
+                        <label>Quantity:</label>
+                        <input 
+                            type="text"
+                            id="qty"
+                            value={quantity} 
+                            autoComplete="off"
+                            onChange={(e) => setQuantity(e.target.value)}  
+                            placeholder=''/> <label>per unit</label>
+                        </div>    
+                        <div>
+                        <label>Price:</label>
+                        <input 
+                            type="text"
+                            id="price"
+                            value={price} 
+                            autoComplete="off"
+                            onChange={(e) => setPrice(e.target.value)}  
+                            placeholder=''/>
+                        </div> <label>per unit</label>
+                    </div>
+                                <div className="buttons">
+                                    <button className = "purchase_button" id = "orderSupply" onClick={orderSupply}>Order Supply</button>    
+                                    <button className = "purchase_button" id = "add" >Add to Cart</button>
+                                    <button className = "close_btn" onClick={togglePopup}>&times;</button>
+                                </div>
+                            </div>
+                        </div>                       
+                    </div>
+                </div>
     </div>
   );
 }

@@ -1,0 +1,114 @@
+.dashboardReport {
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 2fr 6fr;
+    font-family: "Open Sans", serif;
+    font-size: 1.2em;
+    font-weight: 800;
+}
+.sidebarReport{
+    padding-top: 3em;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
+    place-self: center;
+    gap: 1em;
+    color: white;
+    height: 100vh;
+    font-weight: 500;
+    font-size: 1em;
+}
+.mainContentReport{
+    height: 100vh;
+    width: 100%;
+    background-color: #fbfcfa;
+    display: grid;
+    gap: 1em;
+}
+.reportButton{
+    padding: .5em;
+    height: 1.5em;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+
+.active{
+    transition: all cubic-bezier(0.175, 0.885, 0.32, 1.275) .5s;
+    display: flex;
+    justify-content: center;
+    background-color: #281506;   
+    
+}
+
+.inactive{
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    background-color: #4E2603;   
+
+}
+.mainContentReport{
+    background-color: #FFE3A8;
+}
+.activeContentReport{
+    margin: 2em;
+}  
+
+
+
+
+
+
+/* TRANSACTIONS DESIGN */
+
+.transactionDisplay{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr 8fr;
+    height: 90vh;
+    overflow-y: hidden;
+}
+
+.transactionDisplay p{
+    place-self: start;
+
+}
+.p-dropdown {
+    background-color: #FCB025; /* Light gray background */
+    border-radius: 5px; /* Rounded corners */
+    border: 1px solid #ccc; /* Light border */
+}
+.p-dropdown-panel {
+    background-color:#FCB025; /* White background for the dropdown list */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+}
+.p-inputtext{
+    padding: .5em;
+}
+.p-datatable-thead > tr > th {
+    background-color: #4E2603; 
+    color: white; 
+    font-size: 16px; 
+    text-align: center; 
+    padding: 1em;
+}
+
+/* Add lines separating columns and rows */
+.p-datatable-tbody > tr > td {
+    border: 1px solid #4E2603;
+    font-weight: 600;
+    background-color: white;
+    text-align: center;
+}
+
+/* Add border for the header too */
+.p-datatable-thead > tr > th {
+    border: 1px solid #000000;
+}
+
+.tableHolder{
+    background-color: #FCB025;
+}
