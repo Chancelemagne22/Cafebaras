@@ -273,9 +273,9 @@ function OrderManagement () {
                 try {
                     // fetch data from Supabase
                     const { data, error } = await supabase
-                    .from('stocksV3')
+                    .from('inventoryV2')
                     .select('Stocked_Units, Used_Units')
-                    .eq('Item_Name', Item);
+                    .eq('ItemName', Item);
                 
                     if (error) {
                         console.error("Error On Fetching Stocks:", error);
@@ -292,9 +292,9 @@ function OrderManagement () {
 
                     try {
                         const { data, error } = await supabase
-                            .from('stocksV3')
+                            .from('inventoryV2')
                             .update({Stocked_Units: updated, Used_Units:updatedused})
-                            .eq('Item_Name', Item);
+                            .eq('ItemName', Item);
             
                         if (error) {
                             console.error("Error updating record:", error);

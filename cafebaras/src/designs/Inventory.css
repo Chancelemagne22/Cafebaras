@@ -10,7 +10,7 @@
 .sidebarInventory{
     padding-top: 3em;
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
     grid-template-columns: 1fr;
     place-self: center;
     gap: 1em;
@@ -22,7 +22,7 @@
 .mainContentInventory{
     height: 100vh;
     width: 100%;
-    background-color: #fbfcfa;
+    /*background-color: #fbfcfa;*/
     display: grid;
     gap: 1em;
 }
@@ -38,7 +38,7 @@
     transition: all cubic-bezier(0.175, 0.885, 0.32, 1.275) .5s;
     display: flex;
     justify-content: center;
-    background-color: #281506;   
+    /*background-color: #281506;   */
     
     /* transform: scaleX(105%); */
 }
@@ -47,18 +47,18 @@
     text-decoration: none;
     display: flex;
     justify-content: center;
-    background-color: #4E2603;   
+    /*background-color: #4E2603;   */
 
 }
 .mainContentInventory{
-    background-color: #FFE3A8;
+    background-color: #ffe3a8;
 }
 .activeContentInventory{
     margin: 2em;
 }  
 .p-datatable .p-datatable-tbody > tr.p-highlight {
     background-color: #ffeb3b; /* Yellow background */
-    color: #000; /* Black text color */
+    color: #00ffea; /* Blue text color */
 }
 /* Optional: Hover effect for all rows */
 .p-datatable tbody tr:hover {
@@ -66,14 +66,14 @@
   }
 .low-stock {
     background-color: #ffcccc !important;
-    color: #900;
+    color: rgb(255, 6, 6);
   }
 .low-stock.p-highlight {
-    background-color: #ff9999 !important; /* Slightly darker red for selected */
-    color: white !important; /* White text for contrast */
+    background-color: #ff9999; /* Slightly darker red for selected */
+    color: white; /* White text for contrast */
 }
 .low-stock.p-highlight:hover {
-    background-color: #ff6666 !important; /* Even darker red on hover */
+    background-color: #ff6666; /* Even darker red on hover */
   }
 .stkMgmtLowPart{
     display: flex;
@@ -81,4 +81,96 @@
 }
 .OrderSupplyBox{
     align-content: last baseline;
+}
+.orderContainer * {
+    width: 10em;
+}
+
+.Order{
+    position: absolute;
+    background-color: #DCA033;
+    border: #4E2603 5px solid;
+    border-radius: 10%;
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+    width: 70%;
+}
+.hide{
+    top: 100%;
+}
+.show{
+    top: 10%;
+}
+.orderDetails > *{
+    border: 1px solid blue;
+}
+.orderContent{
+    display: flex;
+    flex-direction: column;  
+}
+.orderDetails{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    place-self: center;
+    padding: 2em;
+    gap: 1em;
+}
+
+.selectedOrder{
+    display: grid;
+    height: 10em;
+    border-radius: 50%;
+    border-color: black;
+    justify-content: center;
+    align-items: center;
+}
+
+.types{
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    width: 80vh;
+    transform: translateY(-10px);
+}
+.types > div h4{
+    width: 100%;
+}
+.types > div{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+}
+.sectionPay{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    transform: translateY(-10%);
+}
+.resultDisplay {
+    position: absolute;
+    font-weight: 500;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 1em;
+    border-radius: 5px;
+    box-shadow:
+        1.9px 2.8px 2.2px rgba(0, 0, 0, 0.048),
+        4.5px 6.7px 5.3px rgba(0, 0, 0, 0.069),
+        8.4px 12.5px 10px rgba(0, 0, 0, 0.085),
+        15px 22.3px 17.9px rgba(0, 0, 0, 0.101),
+        28px 41.8px 33.4px rgba(0, 0, 0, 0.122),
+        67px 100px 80px rgba(0, 0, 0, 0.17)
+    ;
+    opacity: 0; /* Initially hidden */
+    pointer-events: none; /* Prevent interaction when hidden */
+    transition: opacity 0.3s ease, pointer-events 0.3s ease;
+}
+
+.show {
+    opacity: 1; /* Fully visible */
+    pointer-events: auto; /* Allow interaction */
 }
