@@ -15,6 +15,7 @@ function OrderManagement () {
     const [orderDisplay, setOrderDisplay] = useState([]);
     const [showOrderDisplay, setShowOrderDisplay] = useState(false); 
     const orderDisplayClass = showOrderDisplay ? 'orderDisplay show' : 'orderDisplay';
+    const [time, setTime] = useState(0);
     
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const weeks = ["W1", "W2", "W3", "W4"];
@@ -23,10 +24,12 @@ function OrderManagement () {
     
     useEffect(() => {
         if (showOrderDisplay) {
+            
             const timer = setTimeout(() => {
                 setShowOrderDisplay(false);
                 console.log("Order display hidden after 20 seconds");
-            }, 7000);
+                navigate('/dashboard')
+            }, 5000);
     
             return () => clearTimeout(timer); // Cleanup the timer
         }
@@ -116,13 +119,18 @@ function OrderManagement () {
         }catch{
 
         }
-    
-    
+
         console.log(orderarray);
+    
+    
     }
 
+
     // Function to display orders and handle the timer
-    const displayOrdersWithTimer = (orderArray) => {
+    const displayOrdersWithTimer = (orderArray) => { 
+        setTime(orderArray.length + 1);
+        console.log(orderArray.length + " lezgo")
+
         const displayOrder = orderArray.map((orders) => ({
             productName: orders.pName,
             price: orders.price,
@@ -360,7 +368,7 @@ function OrderManagement () {
                 
                 </div>
                 <div className={orderDisplayClass}>
-                    <h2>Order Summary</h2>
+                    <h2>Order List</h2>
                     <ul>
                         {orderDisplay.map((order, index) => (
                             <li key={index}>

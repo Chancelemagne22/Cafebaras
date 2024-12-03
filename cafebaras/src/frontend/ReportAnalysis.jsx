@@ -4,8 +4,8 @@ import {Inventory, ProfitLoss, SalesReport, Transaction} from './ReportAnalysis/
 import '../designs/ReportAnalysis.css'
 
 function ReportAnalysis() {
-    const [activeButton, setActiveButton] = useState('profitLoss')
-    const [activeReport, setActiveReport] = useState('profitLoss')
+    const [activeButton, setActiveButton] = useState('transaction')
+    const [activeReport, setActiveReport] = useState('transaction')
 
     const navigate = useNavigate();
     const colorButton = (buttonName) => {
