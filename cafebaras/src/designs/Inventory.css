@@ -174,3 +174,55 @@
     opacity: 1; /* Fully visible */
     pointer-events: auto; /* Allow interaction */
 }
+
+
+.button-container{
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    height: 50px;
+}
+
+.add-button {
+    background-color: green;
+    border-color: green;
+    border-radius: 25px;
+    color: white;
+    width: 150px;
+    justify-content: center;
+    font-family: "Open Sans", serif;
+}
+
+.remove-button {
+    background-color: red;
+    border-color: red;
+    border-radius: 25px;
+    color: white;    
+    width: 150px;
+    justify-content: center;
+    font-family: "Open Sans", serif;
+}
+
+.inventory-table{
+    padding-top: 20px;
+}
+
+.p-datatable .p-paginator {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    gap: 20px;
+}
+
+.p-paginator .p-paginator-pages .p-paginator-page {
+    margin: 0 20px;
+}
+
+.order-button {
+    background-color: green;
+    border-color: green;
+    border-radius: 25px;
+    color: white;
+    height: 40px;
+    width: 150px;
+    justify-content: center;
+}

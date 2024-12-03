@@ -210,7 +210,7 @@ catch{
       <p>ITEMS THAT ARE IN RED NEEDS IMMEDIATE RESTOCKING</p>
       </div>
       <div className="OrderSupplyBox">
-        <button onClick={getRow}>Order Supply</button>
+        <button className="order-button" onClick={getRow}>Order Supply</button>
       </div>
       </div>
       <div className = {orderClassName} id = "ResupplyPop">
