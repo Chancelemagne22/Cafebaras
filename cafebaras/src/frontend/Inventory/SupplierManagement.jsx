@@ -40,7 +40,7 @@ function SupplierManagement(){
                         rowsPerPageOptions={[5, 10, 25, 50]} 
                         autoLayout={true}
                     >
-                        <Column className="datas" field="supplierID" header="Supplier ID"/>
+                        <Column className="datas" field="supplierID" header="Supplier ID" />
                         <Column className="datas" field="SupplierName" header="Supplier Name"/>
                         <Column className="datas" field="ContactNumber" header="Contact Number"/>
                         <Column className="datas" field='Email' header="Email"/>
