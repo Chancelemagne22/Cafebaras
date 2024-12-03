@@ -1,7 +1,7 @@
 import React, {useState, useEffect}from 'react'
 import '../designs/Inventory.css'
 import { useNavigate } from 'react-router-dom';
-import { ItemManagement, StockManagement, SupplierManagement } from './Inventory/inventory';
+import { ItemManagement, StockManagement, SupplierManagement, ResupplyManagement } from './Inventory/inventory';
 
     
 function Inventory(){
@@ -37,6 +37,12 @@ function Inventory(){
                     STOCK MANAGEMENT
                 </div>
                 <div 
+                    className={`inventoryButton ${activeButton === 'resupplyManagement' ? 'active' : 'inactive'}`} 
+                    onClick={() => colorButton('resupplyManagement')}
+                >
+                    RESUPPLY MANAGEMENT
+                </div>
+                <div 
                     className={`inventoryButton ${activeButton === 'supplierManagement' ? 'active' : 'inactive'}`} 
                     onClick={() => colorButton('supplierManagement')}
                 >
@@ -53,6 +59,7 @@ function Inventory(){
                     {activeInventory === "itemManagement" && <ItemManagement />}
                     {activeInventory === "stockManagement" && <StockManagement />}
                     {activeInventory === "supplierManagement" && <SupplierManagement />}
+                    {activeInventory === "resupplyManagement" && <ResupplyManagement />}
                 </div>
             </div>
         </div>

@@ -11,9 +11,23 @@ function StockManagement() {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [quantity, setQuantity] = useState("");
   const [price, setPrice] = useState("");
-  const [sname, setSname] = useState();
+  const [item, setItem]= useState();
+  const [supplier, setSname] = useState();
   const [snumber, setSnumber] = useState();
   const [semail, setSemail] = useState();
+  const [resultDisplay, setResultDisplay] = useState(false); 
+  const resultDisplayClass = resultDisplay ? 'resultDisplay show' : 'resultDisplay';
+
+  useEffect(() => {
+    if (resultDisplay) {
+        const timer = setTimeout(() => {
+            setResultDisplay(false);
+            console.log("Order display hidden after 20 seconds");
+        }, 5000);
+
+        return () => clearTimeout(timer); // Cleanup the timer
+    }
+  }, [resultDisplay]);
 
   useEffect(() => {
     const fetchStocks = async () => {
@@ -47,6 +61,11 @@ function StockManagement() {
     fetchStocks();
   }, []);
 
+  const showResultDisplay = ()=>{
+    setResultDisplay(true);
+    console.log("Show Order Display state set to true");
+  }
+
   // Dynamically set row classes based on Stocked_Units value
   const rowClassName = (data) => {
     if (data.ItemCategory === "Packaging" && data.Stocked_Units < 500) {
@@ -65,6 +84,7 @@ function StockManagement() {
       console.log("I got clicked HAHAHAHA")
       const stockinfo = Object.values(selectedProduct);
       const supID = stockinfo[5];
+      setItem(stockinfo[2]);
       console.log(supID);
     try {
       const { data,error } = await supabase
@@ -104,18 +124,44 @@ function StockManagement() {
 }
 const orderSupply = async() =>{
 console.log("I have been clicked")
+showResultDisplay();
+togglePopup();
+setSelectedProduct(null);
 try{
   const quantinput = Number(quantity);
   const priceinput = Number(price);
   console.log(quantinput,priceinput);
   if (isNaN(quantinput) || isNaN(priceinput)){
-    console.log("No Order",sname);
+    console.log("No Order",supplier);
     }
   if(quantinput<=0||priceinput<=0){
     console.log("Invalid Order");
   }else{
-      console.log(quantity,price,sname);
+      console.log(quantity,price,supplier);
+      try {
+        const dateObj = new Date();
+        const month   = dateObj.getUTCMonth() + 1; // months from 1-12
+        const day     = dateObj.getUTCDate();
+        const year    = dateObj.getUTCFullYear();
+
+        const orderDate = month + "/" + day + "/" + year;
+
+        // Insert transaction into Supabase
+        const { error } = await supabase
+        .from('resupply')
+        .insert([{ orderDate, item, supplier, quantity, price }]);
+
+        if (error) {
+            console.error("Error Resupply:", error);
+            return res.status(400).json({
+                error: 'Ordering Resupply failed.',
+                details: error.message,
+            });
+        }
+    } catch (err) {
+        console.error("Unexpected error during Ordering Supply:", err);
     }
+  }
     setQuantity("");
     const inputQuantity = document.getElementById("qty");
       inputQuantity.value = "";
@@ -131,7 +177,7 @@ catch{
 }
 
   return (
-    <div className="stockmanagement">
+    <div className="resupplymanagement">
       <div className="table-container">
         <div className="tablebg">
           <div className="table">
@@ -165,7 +211,6 @@ catch{
       </div>
       <div className="OrderSupplyBox">
         <button onClick={getRow}>Order Supply</button>
-        <button onClick={togglePopup} >Test</button>
       </div>
       </div>
       <div className = {orderClassName} id = "ResupplyPop">
@@ -174,12 +219,14 @@ catch{
                         <div className="orderDetails">
                           <div className="supplierDetails">
                             <div className = "selectedOrder" id = "circle2"><p>Avatar</p></div>
-                                  <div><p>Supplier Name: {sname}</p> </div>  
+                                  <div><p>Supplier Name: {supplier}</p> </div>  
                             </div>
                             <div className="sectionPay">
                             <div className="SupplierInfo">
                               <p>Supplier Number: {snumber}</p>
                                   <p>Supplier email: {semail}</p>
+                                  <p>Order Supply for</p>
+                                  <p>{item}</p>
                         <div>
                         <label>Quantity:</label>
                         <input 
@@ -189,9 +236,10 @@ catch{
                             autoComplete="off"
                             onChange={(e) => setQuantity(e.target.value)}  
                             placeholder=''/> <label>per unit</label>
-                        </div>    
+                        </div>  
+                        <p></p> 
                         <div>
-                        <label>Price:</label>
+                        <label>Total Price:</label>
                         <input 
                             type="text"
                             id="price"
@@ -199,16 +247,18 @@ catch{
                             autoComplete="off"
                             onChange={(e) => setPrice(e.target.value)}  
                             placeholder=''/>
-                        </div> <label>per unit</label>
+                        </div>
                     </div>
                                 <div className="buttons">
                                     <button className = "purchase_button" id = "orderSupply" onClick={orderSupply}>Order Supply</button>    
-                                    <button className = "purchase_button" id = "add" >Add to Cart</button>
                                     <button className = "close_btn" onClick={togglePopup}>&times;</button>
                                 </div>
                             </div>
                         </div>                       
                     </div>
+                </div>
+                <div className = {resultDisplayClass}>
+                <h1>Order for resupply has been made</h1>
                 </div>
     </div>
   );

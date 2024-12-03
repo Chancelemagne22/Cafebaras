@@ -22,6 +22,7 @@ function ReportAnalysis() {
     }, []);
 
 
+    
     return (
         <div className="dashboardReport">
             <div className="sidebarReport">
@@ -45,13 +46,13 @@ function ReportAnalysis() {
                 >
                     INVENTORY REPORT
                 </div>
-                <div className="back" onClick={() => {navigate('/dashboard')}}>
+                <div className="backReport" onClick={() => {navigate('/dashboard')}}>
                     Back
                 </div>
             </div>
             <div className="mainContentReport">
                 <div className="activeContentReport">
-                    {activeReport === "transaction" && <Transaction/>}
+                    {activeReport === "transaction" && <Transaction />}
                     {activeReport === "salesReport" && <SalesReport/>}
                     {activeReport === "profitLoss" && <ProfitLoss/>}
                     {activeReport === "inventoryReport" && <Inventory/>}

@@ -10,6 +10,9 @@ function Transaction(){
   const [selectedMonth, setSelectedMonth] = useState(null);
   const [displayMonth, setDisplayMonth] = useState(selectedMonth);
 
+  const [selectedWeek, setSelectWeek] = useState(null)
+  const [displayWeek, setDisplayWeek] = useState(selectedWeek)
+
   const [transaction,setTransaction] = useState([])
   const [loading, setLoading] = useState(true);
 
@@ -18,20 +21,32 @@ function Transaction(){
     setSelectedMonth(e.value)
     setDisplayMonth(e.value.name)
   }
-    const month = [
-        { name: 'January', code: 'JAN' },
-        { name: 'February', code: 'FEB' },
-        { name: 'March', code: 'MAR' },
-        { name: 'April', code: 'APR' },
-        { name: 'May', code: 'MAY' },
-        { name: 'June', code: 'JUN' },
-        { name: 'July', code: 'JUL' },
-        { name: 'August', code: 'AUG' },
-        { name: 'September', code: 'SEP' },
-        { name: 'October', code: 'OCT' },
-        { name: 'November', code: 'NOV' },
-        { name: 'December', code: 'DEC' }
-    ];
+  const modifyWeek = (e) =>{
+    setSelectWeek(e.value)
+    setDisplayWeek(e.value.name)
+  }
+
+  const month = [
+      { name: 'January', code: 'JAN' },
+      { name: 'February', code: 'FEB' },
+      { name: 'March', code: 'MAR' },
+      { name: 'April', code: 'APR' },
+      { name: 'May', code: 'MAY' },
+      { name: 'June', code: 'JUN' },
+      { name: 'July', code: 'JUL' },
+      { name: 'August', code: 'AUG' },
+      { name: 'September', code: 'SEP' },
+      { name: 'October', code: 'OCT' },
+      { name: 'November', code: 'NOV' },
+      { name: 'December', code: 'DEC' }
+  ];
+
+  const week = [
+    {name: 'Week 1', code: 'W1'},
+    {name: 'Week 2', code: 'W2'},
+    {name: 'Week 3', code: 'W3'},
+    {name: 'Week 4', code: 'W4'},
+  ]
     
     
   useEffect(()=>{
@@ -41,6 +56,7 @@ function Transaction(){
       let {data, error} = await supabase
         .from('transactions')
         .select('*')
+        .order('tID',{ascending:false})
 
       if(error){
         console.error("Error fetching Transaction: ", error)
@@ -50,9 +66,10 @@ function Transaction(){
       setLoading(false)
     }
     fetchTransaction()
-    console.log(transaction)
+    console.log(transaction[0])
   }, []);
 
+  
   return (
     <div className="transactionDisplay">
       <p>TRANSACTION</p>
@@ -60,7 +77,14 @@ function Transaction(){
         <div className="card flex justify-content-center">
           <Dropdown value={selectedMonth} onChange={(e) => modifyMonth(e)} options={month} optionLabel="name" 
               editable placeholder="Select a Month" className="w-full md:w-14rem" />
+          <Dropdown value={selectedWeek} onChange={(e) => modifyWeek(e)} options={week} optionLabel="name" 
+              editable placeholder="Select a Week" className="w-full md:w-14rem" />
+          <Dropdown value={selectedMonth} onChange={(e) => modifyMonth(e)} options={month} optionLabel="name" 
+              editable placeholder="Select a Month" className="w-full md:w-14rem" />
+          <Dropdown value={selectedMonth} onChange={(e) => modifyMonth(e)} options={month} optionLabel="name" 
+              editable placeholder="Select a Month" className="w-full md:w-14rem" />
         </div>
+        
       </div>
       <p>Report for the month of {displayMonth}</p>
       <div className="tableHolder">
