@@ -70,6 +70,8 @@ function ResupplyManagement() {
       }
     } else {
       console.log("No selected data");
+      setMessage("No Selected Data");
+      showResultDisplay();
     }
   };
   const Received = async () => {
@@ -156,6 +158,8 @@ function ResupplyManagement() {
       }
     } else {
       console.log("No selected data");
+      setMessage("No Selected Data");
+      showResultDisplay();
     }
 
   };

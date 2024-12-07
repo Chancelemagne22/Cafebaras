@@ -121,3 +121,25 @@
 .tableHolder{
     background-color: #FCB025;
 }
+.salesreport{
+    display: grid;
+    border-radius: 5px; /* Rounded corners */
+    border: 1px solid #ccc; /* Light border */
+    height: 70vh;
+}
+.bestproduct{
+    display: flex;
+   
+}
+.bestcoffee{
+    border-radius: 5px; /* Rounded corners */
+    border: 1px solid #ccc; /* Light border */
+}
+.bestmilktea{
+    border-radius: 5px; /* Rounded corners */
+    border: 1px solid #ccc; /* Light border */
+}
+.bestsinker{
+    border-radius: 5px; /* Rounded corners */
+    border: 1px solid #ccc; /* Light border */
+}

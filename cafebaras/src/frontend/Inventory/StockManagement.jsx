@@ -124,9 +124,7 @@ function StockManagement() {
 }
 const orderSupply = async() =>{
 console.log("I have been clicked")
-showResultDisplay();
-togglePopup();
-setSelectedProduct(null);
+
 try{
   const quantinput = Number(quantity);
   const priceinput = Number(price);
@@ -137,6 +135,9 @@ try{
   if(quantinput<=0||priceinput<=0){
     console.log("Invalid Order");
   }else{
+    showResultDisplay();
+    togglePopup();
+    setSelectedProduct(null);
       console.log(quantity,price,supplier);
       try {
         const dateObj = new Date();

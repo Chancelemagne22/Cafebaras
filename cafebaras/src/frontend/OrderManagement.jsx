@@ -16,6 +16,9 @@ function OrderManagement () {
     const [showOrderDisplay, setShowOrderDisplay] = useState(false); 
     const orderDisplayClass = showOrderDisplay ? 'orderDisplay show' : 'orderDisplay';
     
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const weeks = ["W1", "W2", "W3", "W4"];
+    
     var orderarray = [];
     
     useEffect(() => {
@@ -166,16 +169,31 @@ function OrderManagement () {
     
             try {
                 const dateObj = new Date();
-                const month   = dateObj.getUTCMonth() + 1; // months from 1-12
+                const numOfMonth   = dateObj.getUTCMonth() + 1; // months from 1-12
                 const day     = dateObj.getUTCDate();
                 const year    = dateObj.getUTCFullYear();
+                const month = months[numOfMonth-1]
 
-                const date = month + "/" + day + "/" + year;
+                const date = numOfMonth + "/" + day + "/" + year;
+
+                const getWeek = (day) =>{
+                    if(day <= 7){
+                        return weeks[0];
+                    }else if(day > 7 && day <=14){
+                        return weeks[1];
+                    }else if(day > 14 && day <=21){
+                        return weeks[2];
+                    }else if(day > 21){
+                        return weeks[3];
+                    }
+                }
+                const week = getWeek(day)
+                
     
                 // Insert transaction into Supabase
                 const { error } = await supabase
                 .from('transactions')
-                .insert([{ date, productID, productName, price }]);
+                .insert([{ date, productID, productName, price, month, week, day}]);
     
                 if (error) {
                     console.error("Error Transaction:", error);
