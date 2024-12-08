@@ -13,7 +13,7 @@
     display: grid;
     grid-template-rows: 2fr 1fr 3fr;
     gap: 2em;
-    color: white;
+    color: rgb(245, 245, 245);
     height: 100vh;
 }
 .mainContentSales{

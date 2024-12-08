@@ -4,6 +4,7 @@ import supabase from './supabasehandler.js';
 import bodyParser from 'body-parser';
 
 const inventory = express.Router();
+console.log('Check')
 inventory.use(bodyParser.json())
 
 inventory.get('/inventory', async(req, res)=>{

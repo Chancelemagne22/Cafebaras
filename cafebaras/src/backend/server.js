@@ -5,6 +5,7 @@ import authRoutes from './auth.js';
 import transactionRoutes from './transaction.js';
 import ordersRoutes from './order.js'
 import inventoryRoutes from './inventory.js'
+console.log('Check')
 
 const app = express();
 const PORT = process.env.PORT || 3001;

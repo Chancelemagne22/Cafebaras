@@ -15,6 +15,8 @@ function Dashboard() {
         console.log("done")
         navigate('/');
     };
+    console.log('Check')
+
 
     useEffect(() => {
         const storedId = localStorage.getItem('userID');

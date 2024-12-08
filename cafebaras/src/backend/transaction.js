@@ -1,6 +1,7 @@
 import express from 'express';
 import supabase from './supabasehandler.js';
 import bodyParser from 'body-parser';
+console.log('Check')
 
 
 const transactions = express.Router();

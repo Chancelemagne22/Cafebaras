@@ -14,6 +14,9 @@ function OrderManagement () {
     const [showOrderDisplay, setShowOrderDisplay] = useState(false); 
     const orderDisplayClass = showOrderDisplay ? 'orderDisplay shows' : 'orderDisplay';
     const [time, setTime] = useState(0);
+
+    console.log('Check')
+
     
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const weeks = ["W1", "W2", "W3", "W4"];

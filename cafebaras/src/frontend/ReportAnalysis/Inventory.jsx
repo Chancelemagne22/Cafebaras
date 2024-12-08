@@ -10,6 +10,8 @@ function Inventory () {
     const [chartOptions, setChartOptions] = useState({});
     const [stockedUnits, setStockedUnits] = useState([]);
     const [loading, setLoading] = useState(false);
+    console.log('Check')
+
     
     useEffect(() => {
       const isAuthenticated = localStorage.getItem('isAuthenticated');

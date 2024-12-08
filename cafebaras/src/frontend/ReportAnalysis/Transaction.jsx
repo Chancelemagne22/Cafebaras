@@ -20,6 +20,7 @@ function Transaction(){
   const [filteredByMonth, setFilteredByMonth] = useState([]);
   const [filteredByWeek, setFilteredByWeek] = useState([]);
   const [loading, setLoading] = useState(true);
+  console.log('Check')
 
   const navigate = useNavigate();
     useEffect(() => {

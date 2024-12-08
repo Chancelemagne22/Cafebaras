@@ -8,6 +8,8 @@ function ReportAnalysis() {
     const [activeButton, setActiveButton] = useState('transaction')
     const [activeReport, setActiveReport] = useState('transaction')
 
+    console.log('Check')
+    
     const navigate = useNavigate();
     const colorButton = (buttonName) => {
         setActiveButton(buttonName);
