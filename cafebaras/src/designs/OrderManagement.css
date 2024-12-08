@@ -171,7 +171,7 @@
 .orderDisplay {
     position: absolute;
     font-weight: 500;
-    top: 50%;
+    top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #fff;
@@ -190,7 +190,7 @@
     transition: opacity 0.3s ease, pointer-events 0.3s ease;
 }
 
-.show {
+.shows {
     opacity: 1; /* Fully visible */
     pointer-events: auto; /* Allow interaction */
 }

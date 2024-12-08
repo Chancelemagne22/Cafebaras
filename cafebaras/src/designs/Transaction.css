@@ -19,3 +19,22 @@
 .reset:active{
     background-color: #4E2603 ;
 }
+
+.download-csv{
+    margin-left: 2em;
+    background-color:#FCB025 ;
+    color: #fff;
+    font-weight: 600;
+    font-family: "Open Sans", serif;
+    font-size: 1em;
+    border: 1px #FCB025;
+    padding: 4px 1em;
+    border-radius: 5px;
+}
+.download-csv:hover{
+    background-color: #84521d;
+}
+
+.download-csv:active{
+    background-color: #4E2603 ;
+}

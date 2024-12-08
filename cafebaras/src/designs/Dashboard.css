@@ -62,10 +62,10 @@
 .holder{
     margin: 2em;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 2em;
     place-self: center;
-
+    color: white;
 }
 
 .modules:hover{

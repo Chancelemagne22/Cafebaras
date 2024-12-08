@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import {Inventory, ProfitLoss, SalesReport, Transaction} from './ReportAnalysis/report';
 import '../designs/ReportAnalysis.css'
 
+
 function ReportAnalysis() {
     const [activeButton, setActiveButton] = useState('transaction')
     const [activeReport, setActiveReport] = useState('transaction')
@@ -42,7 +43,7 @@ function ReportAnalysis() {
                     PROFIT AND LOSS STATEMENT
                 </div>
                 <div className={`reportButton ${activeButton === "inventoryReport" ? 'active' : 'inactive'}`}
-                onClick={()=> colorButton('inventoryReport')}
+                onClick={()=> colorButton('inventoryReport') }
                 >
                     INVENTORY REPORT
                 </div>

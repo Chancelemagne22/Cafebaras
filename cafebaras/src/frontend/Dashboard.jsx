@@ -46,7 +46,7 @@ function Dashboard() {
                 <div className="holder">
                     <div className="modules" onClick={() => navigate('/order')}><p>ORDER MANAGEMENT</p></div>
                     <div className="modules" onClick={() => navigate('/inventory')}><p>INVENTORY</p></div>
-                    <div className="modules"onClick={() => navigate('/report')}><p>REPORT ANALYSIS</p></div>
+                    <div className="modules"onClick={() => navigate('/report')}><p>SALES REPORT</p></div>
                 </div>
             </div>
         </div>

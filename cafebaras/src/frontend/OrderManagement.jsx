@@ -7,14 +7,12 @@ import CafeLogo from './assets/CafeLogo.png'
 
 function OrderManagement () {
     const navigate = useNavigate();
-    //const [orderClassName, setClassName] = useState('Order hide');
-    //const [change, setChange] = useState(true);
     const [menu, setMenu] = useState([]);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(true);
     const [orderDisplay, setOrderDisplay] = useState([]);
     const [showOrderDisplay, setShowOrderDisplay] = useState(false); 
-    const orderDisplayClass = showOrderDisplay ? 'orderDisplay show' : 'orderDisplay';
+    const orderDisplayClass = showOrderDisplay ? 'orderDisplay shows' : 'orderDisplay';
     const [time, setTime] = useState(0);
     
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -23,12 +21,20 @@ function OrderManagement () {
     var orderarray = [];
     
     useEffect(() => {
+        const isAuthenticated = localStorage.getItem('isAuthenticated');
+        if (!isAuthenticated) {
+            navigate('/');
+        }
+    }, []);
+    
+    useEffect(() => {
         if (showOrderDisplay) {
             
             const timer = setTimeout(() => {
                 setShowOrderDisplay(false);
                 console.log("Order display hidden after 20 seconds");
                 navigate('/dashboard')
+                console.clear()
             }, 5000);
     
             return () => clearTimeout(timer); // Cleanup the timer
@@ -36,25 +42,24 @@ function OrderManagement () {
     }, [showOrderDisplay]);
     
     useEffect(() => {
-    const fetchMenu = async () => {
-        setLoading(true); // Set loading to true at the start of fetch
-        const { data, error } = await supabase
-        .from('productsV4')
-        .select('*');
+        const fetchMenu = async () => {
+            setLoading(true); // Set loading to true at the start of fetch
+            try{
+                const response = await fetch('http://localhost:3001/api/orders');
+                const data = await response.json()
+
+                setMenu(data)
+            }catch(error){
+                console.error('Error fecthing order: ', error)
+                setLoading(false)
+            }
         
-        if (error) {
-        console.error("Error fetching Products:", error);
-        } 
-        else {
-        setMenu(data);
-        }
-        setLoading(false); // Set loading to false after fetch
-    };
+        };
     
     fetchMenu();
     }, []);
 
-
+    // getIndex fetching will stay in FrontEnd
     const getindex = async(e)=>{
         var index = await e.target.value;
         e.preventDefault();
@@ -280,6 +285,7 @@ function OrderManagement () {
 
                 try {
                     // fetch data from Supabase
+                    
                     const { data, error } = await supabase
                     .from('inventoryV2')
                     .select('Stocked_Units, Used_Units')
