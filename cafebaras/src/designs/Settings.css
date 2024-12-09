@@ -1,0 +1,94 @@
+.dashboardSettings {
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 2fr 6fr;
+    font-family: "Open Sans", serif;
+    
+}
+
+.settingsSideBar {
+    padding-top: 3em;
+    display: grid;
+    grid-template-rows: 2fr 1fr 3fr;
+    
+    place-self: center;
+    color: white;
+    height: 100vh;
+    font-weight: 500;
+    font-size: 1em;
+    align-items: center;
+}
+
+.logo{
+    height: 180px;
+    width: 180px;
+}
+
+.back{
+    font-family: "Open Sans", serif;
+    padding: .5em 1em ;
+    border-radius: 1.5em;
+    width: 30%;
+    font-size: 1.2em;
+    font-weight: 800;
+    background-color: red;
+    margin-left: 2vw;
+    
+}
+
+.back:hover{
+    transform: translateY(-3px) scale(104%);
+}
+
+.SetMain {
+    background-color: #FFE3A8;
+    font-family: "Open Sans", serif;
+    text-indent: 2vw;
+    font-size: 1.2em;
+    font-weight: 800;
+}
+
+.newLoginContainer{
+    background-color: #FCB025;
+    height: 60vh;
+    width: 60vw;
+    border-radius: 10px;
+    
+    justify-self: center;
+    margin-top: 18vh;
+    
+}
+
+.name{
+    color: #281506;
+    margin-left: 15vw;
+}
+
+.form-control{
+    height: 30px;
+    margin: 10px;
+    font-size: medium;
+    border-radius: 10px;
+    border: none;
+    border-bottom: solid gray;
+}
+
+.update_btn{
+    background-color: #4E2603;
+    border: 0;
+    border-radius: 10px;
+    font-size: medium;
+    font-family: "Open Sans", serif;
+    font-weight: 800;
+    color: white;
+    place-self: center;
+    padding: 2%;
+    margin-left: 27vw;
+}
+
+.update_btn:hover{
+    background-color: #FFE3A8;
+    color: black;
+    transform: translateY(-3px) scale(104%);
+}
