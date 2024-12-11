@@ -2,7 +2,6 @@ import React,{useState, useEffect} from 'react'
 import { Button } from 'primereact/button';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import supabase from './inventory';
 
 function ItemManagement() {
   const [selectedOption, setSelectedOption] = useState("Inventory");
@@ -15,16 +14,19 @@ function ItemManagement() {
   useEffect(() => {
     const fetchInventory = async () => {
       setLoading(true); // Set loading to true at the start of fetch
-      let { data, error } = await supabase
-        .from('inventory')
-        .select('*');
+      try{
+        const response = await fetch('http://localhost:3001/api/items');
 
-      if (error) {
-        console.error("Error fetching inventory:", error);
-      } else {
-        setInventory(data);
+        const data = await response.json()
+        setInventory(data)
+        setLoading(false); // Set loading to false after fetch
+
+      }catch(error){
+        console.error('Error fetching transaction: ', error)
+        setLoading(false); // Set loading to false after fetch
+        
       }
-      setLoading(false); // Set loading to false after fetch
+     
     };
     
     fetchInventory();
