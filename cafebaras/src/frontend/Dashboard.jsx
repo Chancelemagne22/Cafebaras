@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import CafeLogo from './assets/CafeLogo.png'
+import InventoryGIF from './assets/Cafebara_Stocks.gif';
+import SalesGIF from './assets/Cafebara_OrderM1.gif'
+import ReportGIF from './assets/Cafebara_Report1.gif'
 import '../designs/Dashboard.css'
 
 
@@ -46,9 +49,20 @@ function Dashboard() {
             </div>
             <div className="mainContentDash">
                 <div className="holder">
-                    <div className="modules" onClick={() => navigate('/order')}><p>ORDER MANAGEMENT</p></div>
-                    <div className="modules" onClick={() => navigate('/inventory')}><p>INVENTORY</p></div>
-                    <div className="modules"onClick={() => navigate('/report')}><p>SALES REPORT</p></div>
+                    <div className="modules"  onClick={() => navigate('/order')}>
+                        <p >ORDER MANAGEMENT</p>
+                        <img src={SalesGIF} alt="Sales Management" />
+                    </div>
+                    <div className="modules" onClick={() => navigate('/inventory')}>
+                        <p>INVENTORY</p>
+                        <img src={InventoryGIF} alt="Inventory" />
+
+                    </div>
+                    <div className="modules"onClick={() => navigate('/report')}>
+                        <p>SALES REPORT</p>
+                        <img src={ReportGIF} alt="Report" />
+                        
+                    </div>
                 </div>
             </div>
         </div>
