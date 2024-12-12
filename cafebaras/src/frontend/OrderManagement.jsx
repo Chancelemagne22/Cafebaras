@@ -7,14 +7,16 @@ import CafeLogo from './assets/CafeLogo.png'
 
 function OrderManagement () {
     const navigate = useNavigate();
-    //const [orderClassName, setClassName] = useState('Order hide');
-    //const [change, setChange] = useState(true);
     const [menu, setMenu] = useState([]);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(true);
     const [orderDisplay, setOrderDisplay] = useState([]);
     const [showOrderDisplay, setShowOrderDisplay] = useState(false); 
-    const orderDisplayClass = showOrderDisplay ? 'orderDisplay show' : 'orderDisplay';
+    const orderDisplayClass = showOrderDisplay ? 'orderDisplay shows' : 'orderDisplay';
+    const [time, setTime] = useState(0);
+
+    console.log('Check')
+
     
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const weeks = ["W1", "W2", "W3", "W4"];
@@ -22,51 +24,69 @@ function OrderManagement () {
     var orderarray = [];
     
     useEffect(() => {
+        const isAuthenticated = localStorage.getItem('isAuthenticated');
+        if (!isAuthenticated) {
+            navigate('/');
+        }
+    }, []);
+    
+    useEffect(() => {
         if (showOrderDisplay) {
+            
             const timer = setTimeout(() => {
                 setShowOrderDisplay(false);
                 console.log("Order display hidden after 20 seconds");
-            }, 7000);
+                navigate('/dashboard')
+                console.clear()
+            }, 5000);
     
             return () => clearTimeout(timer); // Cleanup the timer
         }
     }, [showOrderDisplay]);
     
     useEffect(() => {
-    const fetchMenu = async () => {
-        setLoading(true); // Set loading to true at the start of fetch
-        const { data, error } = await supabase
-        .from('productsV4')
-        .select('*');
+        const fetchMenu = async () => {
+            setLoading(true); // Set loading to true at the start of fetch
+            try{
+                const response = await fetch('http://localhost:3001/api/orders');
+                const data = await response.json()
+
+                setMenu(data)
+            }catch(error){
+                console.error('Error fecthing order: ', error)
+                setLoading(false)
+            }
         
-        if (error) {
-        console.error("Error fetching Products:", error);
-        } 
-        else {
-        setMenu(data);
-        }
-        setLoading(false); // Set loading to false after fetch
-    };
+        };
     
     fetchMenu();
     }, []);
 
-
+    // getIndex fetching will stay in FrontEnd
     const getindex = async(e)=>{
         var index = await e.target.value;
         e.preventDefault();
         console.log(index);
         try {
-            const { data,error } = await supabase
-            .from('productsV4')
-            .select('*')
-            .eq('pID', index )
-            .single();
+            const response = await fetch('http://localhost:3001/api/orders/products',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({index})
+            });
 
+            if (!response.ok) {
+                throw new Error(`Error: ${response.statusText}`);
+            }
+            const result = await response.json();
+            const data = result.product
+          
+
+            
             if (error){
                 console.error("Error fetching Products:", error);
-            }
-            else{
+            }else{
                 orderarray.push(data)
             
                 const tableBody = document.getElementById("outputTable").querySelector("tbody");
@@ -116,13 +136,18 @@ function OrderManagement () {
         }catch{
 
         }
-    
-    
+
         console.log(orderarray);
+    
+    
     }
 
+
     // Function to display orders and handle the timer
-    const displayOrdersWithTimer = (orderArray) => {
+    const displayOrdersWithTimer = (orderArray) => { 
+        setTime(orderArray.length + 1);
+        console.log(orderArray.length + " lezgo")
+
         const displayOrder = orderArray.map((orders) => ({
             productName: orders.pName,
             price: orders.price,
@@ -188,20 +213,27 @@ function OrderManagement () {
                     }
                 }
                 const week = getWeek(day)
+
+                const dataTransaction = {date, productID, productName, price, month, week, day}
                 
     
                 // Insert transaction into Supabase
-                const { error } = await supabase
-                .from('transactions')
-                .insert([{ date, productID, productName, price, month, week, day}]);
-    
-                if (error) {
-                    console.error("Error Transaction:", error);
-                    return res.status(400).json({
-                        error: 'Transaction failed.',
-                        details: error.message,
-                    });
+                const response = await fetch('http://localhost:3001/api/transactions/details',{
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(dataTransaction)
+                })
+                
+                if(!response.ok){
+                    const errorData = await response.json();
+                    console.error('Transaction failed:', errorData);
+                    return;
                 }
+                const result = await response.json();
+                console.log('Transaction successful:', result);
+                
             } catch (err) {
                 console.error("Unexpected error during transaction:", err);
             }
@@ -272,10 +304,11 @@ function OrderManagement () {
 
                 try {
                     // fetch data from Supabase
+                    
                     const { data, error } = await supabase
-                    .from('stocksV3')
+                    .from('inventoryV2')
                     .select('Stocked_Units, Used_Units')
-                    .eq('Item_Name', Item);
+                    .eq('ItemName', Item);
                 
                     if (error) {
                         console.error("Error On Fetching Stocks:", error);
@@ -292,9 +325,9 @@ function OrderManagement () {
 
                     try {
                         const { data, error } = await supabase
-                            .from('stocksV3')
+                            .from('inventoryV2')
                             .update({Stocked_Units: updated, Used_Units:updatedused})
-                            .eq('Item_Name', Item);
+                            .eq('ItemName', Item);
             
                         if (error) {
                             console.error("Error updating record:", error);
@@ -360,7 +393,7 @@ function OrderManagement () {
                 
                 </div>
                 <div className={orderDisplayClass}>
-                    <h2>Order Summary</h2>
+                    <h2>Order List</h2>
                     <ul>
                         {orderDisplay.map((order, index) => (
                             <li key={index}>

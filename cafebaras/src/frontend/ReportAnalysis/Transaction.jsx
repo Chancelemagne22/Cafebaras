@@ -3,27 +3,32 @@ import { Dropdown } from 'primereact/dropdown';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
-import supabase from './report';
 import '../../designs/Transaction.css'
+import { useNavigate } from 'react-router-dom';
         
         
 
 function Transaction(){
   const [selectedMonth, setSelectedMonth] = useState(null);
   const [displayMonth, setDisplayMonth] = useState(selectedMonth);
+  const [fileName, setFileName] = useState('Transaction Data.csv');
 
   const [selectedWeek, setSelectWeek] = useState(null)
   const [displayWeek, setDisplayWeek] = useState(selectedWeek)
   
-
-
-
   const [transaction,setTransaction] = useState([])
   const [filteredByMonth, setFilteredByMonth] = useState([]);
   const [filteredByWeek, setFilteredByWeek] = useState([]);
   const [loading, setLoading] = useState(true);
+  console.log('Check')
 
-
+  const navigate = useNavigate();
+    useEffect(() => {
+        const isAuthenticated = localStorage.getItem('isAuthenticated');
+        if (!isAuthenticated) {
+            navigate('/');
+        }
+    }, []);
   const modifyMonth = (e) =>{
     setSelectedMonth(e.value)
     setSelectWeek(null)
@@ -32,11 +37,43 @@ function Transaction(){
   const modifyWeek = (e) =>{
     setSelectWeek(e.value)
     setDisplayWeek(e.value.name)
+
   }
   const resetDisplay = (e) =>{
     setSelectedMonth(null)
     setSelectWeek(null)
   }
+  const downloadCSV = (obj) =>{
+    if (!Array.isArray(obj) || obj.length === 0) return;
+
+    const headers = Object.keys(obj[0]).join(",");
+  
+    const rows = obj.map(objs => 
+      Object.values(objs).map(value => (value === null ? "" : value)).join(",") // Handle null values
+    ).join("\n");
+    const csvContent = `${headers.toUpperCase()}\n${rows}`;
+    const blob = new Blob([csvContent], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = fileName; 
+    link.click(); 
+    URL.revokeObjectURL(url);
+  }
+  useEffect(() => {
+    let name = "Transaction Data.csv"; 
+  
+    if (selectedMonth !== null) {
+      if (selectedWeek !== null) {
+        name = `Transaction Data:${selectedMonth.name}:${selectedWeek.name}.csv`;
+      } else {
+        name = `Transaction Data:${selectedMonth.name}.csv`;
+      }
+    }
+  
+    setFileName(name); 
+  }, [selectedMonth, selectedWeek]); 
+  
 
   
 
@@ -67,34 +104,30 @@ function Transaction(){
     const fetchTransaction = async() => {
       setLoading(true);
 
-      let {data, error} = await supabase
-        .from('transactions')
-        .select('*')
-        .order('tID',{ascending:false})
+      try{
+        const response = await fetch('http://localhost:3001/api/transactions');
+        
+        const data = await response.json();
 
-      if(error){
-        console.error("Error fetching Transaction: ", error)
-      }else{
         setTransaction(data);
         setFilteredByMonth(data);
         setFilteredByWeek(data);
+        setLoading(false);
+      }catch(error){
+        console.error('Error fetching transaction: ', error)
+        setLoading(false)
       }
-      // setLoading(false)
-    }
-    fetchTransaction()
-
+    }; 
+    
+    fetchTransaction();
   }, []);
 
   useEffect(()=>{
     if(selectedMonth){
-      console.log(selectedMonth.name)
       const filtered = transaction.filter((item) =>{
         const isMatch = item.month.toLowerCase() === selectedMonth.name.toLowerCase();
-        console.log(item.month.toLowerCase() + " check")
-        console.log(selectedMonth.name.toLowerCase() + " confirm")
         return isMatch;
       })
-      console.log(filtered)
       setFilteredByMonth(filtered)
       setFilteredByWeek(filtered);
     }else{
@@ -127,7 +160,8 @@ function Transaction(){
               editable placeholder="Select a Month" className="w-full md:w-14rem" />
           <Dropdown value={selectedWeek} onChange={(e) => modifyWeek(e)} options={week} optionLabel="name" 
               editable placeholder="Select a Week" className="w-full md:w-14rem" disabled={!selectedMonth} />
-            <Button label='Reset' onClick={(e)=>resetDisplay(e)} className='reset'/>
+          <Button label='Reset' onClick={(e)=>resetDisplay(e)} className='reset'/>
+          <Button label='Download CSV' onClick={()=> downloadCSV(filteredByWeek)} className='download-csv'/>
         </div>
         
       </div>

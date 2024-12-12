@@ -1,6 +1,7 @@
 export { default as ItemManagement } from './ItemManagement.jsx';
 export { default as StockManagement } from './StockManagement.jsx';
 export { default as SupplierManagement } from './SupplierManagement.jsx';
+export {default as ResupplyManagement} from './ResupplyManagement.jsx'
 
 import { createClient } from '@supabase/supabase-js';
 
