@@ -50,13 +50,29 @@
 
 .modules{
     height: 14rem;
+    display: grid;
     aspect-ratio: 1 / 1;
     place-self: center;
     background-color: #FCB025;
     border-radius: 5px;
     transition: all 500ms ease;
     cursor: pointer;
+    position: relative;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    overflow: hidden;
+    text-shadow: 4px 2px 3px rgba(0,0,0,0.66);
+
+}
+.modules *{
+    /* border: 1px red solid; */
+    z-index: 100;
+}
+
+.modules img{
+    position: absolute;
+    z-index: 0;
+    height: 12em;
+    top: 2%;
 }
 
 .holder{

@@ -68,16 +68,25 @@ function OrderManagement () {
         e.preventDefault();
         console.log(index);
         try {
-            const { data,error } = await supabase
-            .from('productsV4')
-            .select('*')
-            .eq('pID', index )
-            .single();
+            const response = await fetch('http://localhost:3001/api/orders/products',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({index})
+            });
 
+            if (!response.ok) {
+                throw new Error(`Error: ${response.statusText}`);
+            }
+            const result = await response.json();
+            const data = result.product
+          
+
+            
             if (error){
                 console.error("Error fetching Products:", error);
-            }
-            else{
+            }else{
                 orderarray.push(data)
             
                 const tableBody = document.getElementById("outputTable").querySelector("tbody");
@@ -204,20 +213,27 @@ function OrderManagement () {
                     }
                 }
                 const week = getWeek(day)
+
+                const dataTransaction = {date, productID, productName, price, month, week, day}
                 
     
                 // Insert transaction into Supabase
-                const { error } = await supabase
-                .from('transactions')
-                .insert([{ date, productID, productName, price, month, week, day}]);
-    
-                if (error) {
-                    console.error("Error Transaction:", error);
-                    return res.status(400).json({
-                        error: 'Transaction failed.',
-                        details: error.message,
-                    });
+                const response = await fetch('http://localhost:3001/api/transactions/details',{
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(dataTransaction)
+                })
+                
+                if(!response.ok){
+                    const errorData = await response.json();
+                    console.error('Transaction failed:', errorData);
+                    return;
                 }
+                const result = await response.json();
+                console.log('Transaction successful:', result);
+                
             } catch (err) {
                 console.error("Unexpected error during transaction:", err);
             }
