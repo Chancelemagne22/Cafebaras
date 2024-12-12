@@ -2,35 +2,57 @@ import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
+import { use } from 'react';
 
-import supabase from './report';
 
 function Inventory () {
-    const [chartData, setChartData] = useState({});
+    const [chartData, setChartData] = useState(null);
     const [chartOptions, setChartOptions] = useState({});
     const [stockedUnits, setStockedUnits] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
+    console.log('Check')
+
+    
+    useEffect(() => {
+      const isAuthenticated = localStorage.getItem('isAuthenticated');
+      if (!isAuthenticated) {
+          navigate('/');
+      }
+    }, []);
+  
 
     useEffect(() => {
+        let isMounted = true;
+
         const fetchStockedUnits = async () => {
-            setLoading(true); // Set loading to true at the start of fetch
-            let {data, error} = await supabase
-              .from('stocksV3')
-              .select('*');
-      
-            if (error) {
-              console.error("Error fetching Stocked Units:", error);
-            } else {
-              setStockedUnits(data);
+            if(!isMounted) return;
+            setLoading(true); // Set loading to true at the start of fetch\
+            try{
+                const response = await fetch('http://localhost:3001/api/inventory')
+                const data = await response.json()
+
+                setStockedUnits(data)
+
+            }catch(error){
+                console.error('Error fetching inventory: ', error)
+            }finally {
+                if (isMounted) {
+                    setLoading(false);
+                }
             }
+            
             setLoading(false); // Set loading to false after fetch
           };
     
-          fetchStockedUnits();
+          fetchStockedUnits();  
+          return () => {
+            isMounted = false; // Cleanup: prevent state updates if the component unmounts
+        };
         }, []);
-        console.log(stockedUnits);
     
-        useEffect(() => {
+    useEffect(() => {
+        if(stockedUnits.length > 0){
+
             const data = {
                 labels: stockedUnits.map(row => row.Item_Name),
                 datasets: [
@@ -45,7 +67,8 @@ function Inventory () {
                             '#EB8509',
                             '#EB8509',
                             '#EB8509'
-                        ]
+                        ],
+                    
                     }
                 ]
             }
@@ -62,7 +85,9 @@ function Inventory () {
 
             setChartData(data);
             setChartOptions(options);
-        }, []);
+        }
+
+    },[stockedUnits]);
     
     return (
         <div>Inventory Report
@@ -76,15 +101,16 @@ function Inventory () {
                         // backgroundColor: 'red'
 
                     }}>
-                        
-                        <Chart
-                            type="pie"
-                            data={chartData}
-                            value={stockedUnits}
-                            loading={loading}
-                            options={chartOptions}
-                            className="piechart">
-                        </Chart>
+                        {chartData &&(
+                            <Chart
+                                type="pie"
+                                data={chartData}
+                                value={stockedUnits}
+                                loading={loading}
+                                options={chartOptions}
+                                className="piechart">
+                            </Chart>
+                        )}
                     </div>
                 </div>
             <div className="tables" style={{padding: '30px'}}>
@@ -93,9 +119,7 @@ function Inventory () {
                         value={stockedUnits} 
                         loading={loading}
                         paginator 
-                        rows={5} 
-                        rowsPerPageOptions={[5, 10, 25, 50]} 
-                        autoLayout={true}
+                        rows={10} 
                     >
                         <Column className="datas" field="itemID" header="Item Code"/>
                         <Column className="datas" field="Item_Name" header="Item Name"/>
