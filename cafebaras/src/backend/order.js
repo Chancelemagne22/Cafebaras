@@ -4,7 +4,7 @@ import bodyParser from 'body-parser';
 
 const orders = express.Router();
 orders.use(bodyParser.json())
-console.log('Check')
+console.log('Check order')
 
 orders.get('/orders', async (req, res)=>{
     try{
