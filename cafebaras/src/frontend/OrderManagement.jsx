@@ -14,7 +14,7 @@ function OrderManagement () {
     const [showOrderDisplay, setShowOrderDisplay] = useState(false); 
     const orderDisplayClass = showOrderDisplay ? 'orderDisplay shows' : 'orderDisplay';
     const [time, setTime] = useState(0);
-
+    
     console.log('Check')
 
     
@@ -52,6 +52,8 @@ function OrderManagement () {
                 const data = await response.json()
 
                 setMenu(data)
+                
+                console.log(menu);
             }catch(error){
                 console.error('Error fecthing order: ', error)
                 setLoading(false)

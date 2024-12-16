@@ -121,25 +121,38 @@
 .tableHolder{
     background-color: #FCB025;
 }
+
+/* This is for Sales Report */
 .salesreport{
     display: grid;
+    height: 90vh;
+}
+.dateHolder{
     border-radius: 5px; /* Rounded corners */
     border: 1px solid #ccc; /* Light border */
-    height: 70vh;
+    height: 20vh;
 }
-.bestproduct{
+.mainReportTop{
     display: flex;
    
 }
-.bestcoffee{
+.mainReportBot{
+    display: flex;
+    grid-template-columns: 1fr,1fr;
+}
+.SandE{
     border-radius: 5px; /* Rounded corners */
     border: 1px solid #ccc; /* Light border */
 }
-.bestmilktea{
+.SandEGraph{
     border-radius: 5px; /* Rounded corners */
     border: 1px solid #ccc; /* Light border */
 }
-.bestsinker{
+.PandF{
+    border-radius: 5px; /* Rounded corners */
+    border: 1px solid #ccc; /* Light border */
+}
+.PandFGraph{
     border-radius: 5px; /* Rounded corners */
     border: 1px solid #ccc; /* Light border */
 }

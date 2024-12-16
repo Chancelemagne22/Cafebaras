@@ -23,7 +23,4 @@ orders.get('/orders', async (req, res)=>{
     }
 })
 
-
-
-
 export default orders;
