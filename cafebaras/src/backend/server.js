@@ -5,6 +5,8 @@ import authRoutes from './auth.js';
 import transactionRoutes from './transaction.js';
 import ordersRoutes from './order.js'
 import inventoryRoutes from './inventory.js'
+import itemsRoutes from './itemManagement.js'
+import stocksRoutes from './stock.js'
 console.log('Check')
 
 const app = express();
@@ -16,6 +18,8 @@ app.use('/api', authRoutes);
 app.use('/api', transactionRoutes);
 app.use('/api', ordersRoutes);
 app.use('/api', inventoryRoutes);
+app.use('/api', itemsRoutes)
+app.use('/api', stocksRoutes)
 
 // Test route to check if server is running
 app.get('/', (req, res) => {
