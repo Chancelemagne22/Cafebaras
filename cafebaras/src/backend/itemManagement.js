@@ -24,4 +24,21 @@ fetchInventory.get('/items', async(req, res) =>{
 
 })
 
+fetchInventory.get('/items', async (req, res) => {
+    try {
+      const { data, error } = await supabase
+        .from('products')
+        .select('*')
+  
+      if (error) {
+        return res.status(500).json({ error: 'Failed to fetch products' });
+      }
+  
+      res.json(data)
+    } catch (err) {
+      console.log(err)
+      res.status(500).json({ error: 'Internal server error' })
+    }
+})
+
 export default fetchInventory;
