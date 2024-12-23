@@ -11,6 +11,9 @@ function ResupplyManagement() {
   const [resultDisplay, setResultDisplay] = useState(false); 
   const resultDisplayClass = resultDisplay ? 'resultDisplay show' : 'resultDisplay';
   const [message,setMessage] = useState("");
+
+  const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  const weeks = ["W1", "W2", "W3", "W4"];
   
   useEffect(() => {
     if (resultDisplay) {
@@ -99,15 +102,30 @@ function ResupplyManagement() {
   
           // Generate the dateReceived field
           const dateObj = new Date();
-          const month = dateObj.getUTCMonth() + 1; // months are zero-based
-          const day = dateObj.getUTCDate();
-          const year = dateObj.getUTCFullYear();
-          const dateReceived = month + "/" + day + "/" + year;
+                const numOfMonth   = dateObj.getUTCMonth() + 1; // months from 1-12
+                const day     = dateObj.getUTCDate();
+                const year    = dateObj.getUTCFullYear();
+                const month = months[numOfMonth-1]
+
+                const dateReceived = numOfMonth + "/" + day + "/" + year;
+
+                const getWeek = (day) =>{
+                    if(day <= 7){
+                        return weeks[0];
+                    }else if(day > 7 && day <=14){
+                        return weeks[1];
+                    }else if(day > 14 && day <=21){
+                        return weeks[2];
+                    }else if(day > 21){
+                        return weeks[3];
+                    }
+                }
+                const week = getWeek(day)
   
           // Insert into itemOverhead table
           const { error: insertError } = await supabase
             .from('itemOverhead')
-            .insert([{ dateReceived, dateOrdered: orderDate, item, supplier, quantity, price }]);
+            .insert([{ dateReceived, dateOrdered: orderDate, item, supplier, quantity, price, month, week, day }]);
   
           if (insertError) {
             console.error("Error inserting data into itemOverhead:", insertError);

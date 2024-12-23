@@ -1,28 +1,22 @@
-import React, {useEffect,useState} from 'react'
+import React, { useEffect, useState } from 'react';
 import { Chart } from 'primereact/chart';
 import { Dropdown } from 'primereact/dropdown';
 import { Button } from 'primereact/button';
 import supabase from './report';
 
 const SalesReport = () => {
-
-  
-  const [totalSales, setTotalSales] = useState([]);
   const [chartSales, setChartSales] = useState(null);
   const [chartSalesOptions, setChartSalesOptions] = useState({});
-  const [totalExpense, setTotalExpense] = useState();
-  const [loading, setLoading] = useState(true);
+  const [chartProfit,setChartProfit] = useState(null);
+  const [chartProfitOptions, setChartProfitOptions] = useState({});
+  const [totalProfit,setTotalProfit] = useState(0);
+  const [totalExpense, setTotalExpense] = useState(0);
+  const [loading, setLoading] = useState(false);
 
-  //const [selectedMonth, setSelectedMonth] = useState('January');
-  const [filteredByMonth, setFilteredByMonth] = useState([]);
+  
 
-  const [selectedWeek, setSelectWeek] = useState(null);
-  const [filteredByWeek, setFilteredByWeek] = useState([]);
-
-  const [sales,setSales] = useState([]);
-
-  const dateObj = new Date();
-  const numOfMonth   = dateObj.getUTCMonth(); // months from 1-12
+  const [selectedWeek, setSelectedWeek] = useState(null);
+  const [totalSales, setTotalSales] = useState(0);
 
   const month = [
     { name: 'January', code: 'JAN' },
@@ -37,131 +31,184 @@ const SalesReport = () => {
     { name: 'October', code: 'OCT' },
     { name: 'November', code: 'NOV' },
     { name: 'December', code: 'DEC' }
-];
+  ];
+
+
+  const dateObj = new Date();
+  const numOfMonth   = dateObj.getUTCMonth(); // months from 1-12
   const currentMonth = month[numOfMonth].name;
   const [selectedMonth, setSelectedMonth] = useState(currentMonth);
 
-const week = [
-  {name: 'Week 1', code: 'W1'},
-  {name: 'Week 2', code: 'W2'},
-  {name: 'Week 3', code: 'W3'},
-  {name: 'Week 4', code: 'W4'},
-];
-  const modifyMonth = (e) =>{
-    setSelectedMonth(e.value.name)
-    setSelectWeek(null)
-    //setDisplayMonth(e.value.name)
-  }
-  const modifyWeek = (e) =>{
-    setSelectWeek(e.value.code)
-    //setDisplayWeek(e.value.name)
+  const week = [
+    { name: 'Week 1', code: 'W1' },
+    { name: 'Week 2', code: 'W2' },
+    { name: 'Week 3', code: 'W3' },
+    { name: 'Week 4', code: 'W4' }
+  ];
 
-  }
-  const resetDisplay = (e) =>{
-    setSelectedMonth(null)
-    setSelectWeek(null)
-  }
-
-useEffect(() => {
-  const getTotalExpenses = async () => {
-    const { data, error } = await supabase
-    .from('itemOverhead')
-    .select('*');
-    
-    if (error) {
-    console.error("Error fetching itemOverhead:", error);
-    } 
-    else {
-    setTotalExpense(data);
-    }
-    setLoading(false); // Set loading to false after fetch
-  };
-  getTotalExpenses();
-}, []);
-
-useEffect(() => {
-  const getTotalSales = async () => {
-    setLoading(true); // Set loading state during fetch
-    let query = supabase.from('transactions').select('*').eq('month', selectedMonth);
-
-    if (selectedWeek) {
-      // Add week filtering only if a week is selected
-      query = query.eq('week', selectedWeek);
-    }
-
-    const { data, error } = await query;
-
-    if (error) {
-      console.error('Error fetching transactions:', error);
-    } else {
-      setTotalSales(data || []); // Ensure data is set to an empty array if no results
-      setSales(data.map(row => row.price));
-    }
-    setLoading(false);
+  const handleMonthChange = (e) => {
+    setSelectedMonth(e.value.name);
+    setSelectedWeek(null); // Reset week filter when changing month
   };
 
-  getTotalSales();
-  console.log(totalSales);
-  console.log(sales)
+  const handleWeekChange = (e) => {
+    setSelectedWeek(e.value.code);
+  };
+
+  const resetFilters = () => {
+    setSelectedMonth(currentMonth);
+    setSelectedWeek(null);
+  };
+
+  useEffect(() => {
+    const fetchSandEData = async () => {
+      try {
+        setLoading(true);
   
-}, [selectedMonth, selectedWeek]);
-
-useEffect(() => {
-  if (totalSales.length > 0) {
-    const data = {
-      labels: totalSales.map(row => row.productName),
-      datasets: [
-        {
-          data: totalSales.map(row => row.payment),
-          backgroundColor: ['#FCB025', '#C67529'],
-          hoverBackgroundColor: ['#EB8509', '#EB8509'],
+        // Fetch sales data
+        let salesQuery = supabase
+          .from('transactions')
+          .select('*')
+          .eq('month', selectedMonth);
+  
+        if (selectedWeek) {
+          salesQuery = salesQuery.eq('week', selectedWeek);
         }
-      ]
-    };
-    const options = {
-      plugins: {
-        legend: {
-          position: 'left',
-          labels: {
-            usePointStyle: true,
-          }
+  
+        const { data: salesData, error: salesError } = await salesQuery;
+        if (salesError) throw salesError;
+  
+        const totalSalesAmount = (salesData || []).reduce((sum, row) => sum + row.price, 0);
+  
+        // Fetch expense data
+        let expensesQuery = supabase
+          .from('itemOverhead')
+          .select('*')
+          .eq('month', selectedMonth);
+  
+        if (selectedWeek) {
+          expensesQuery = expensesQuery.eq('week', selectedWeek);
         }
+  
+        const { data: expensesData, error: expensesError } = await expensesQuery;
+        if (expensesError) throw expensesError;
+  
+        const totalExpenseAmount = (expensesData || []).reduce((sum, item) => sum + item.price, 0);
+  
+        // Calculate profit
+        const profit = totalSalesAmount - totalExpenseAmount;
+  
+        // Update all states at once
+        setTotalSales(totalSalesAmount);
+        setTotalExpense(totalExpenseAmount);
+        setTotalProfit(profit);
+      } catch (error) {
+        console.error('Error fetching Sales and Expense data:', error);
+      } finally {
+        setLoading(false);
       }
     };
+  
+    fetchSandEData();
+  }, [selectedMonth, selectedWeek]);
 
-    setChartSales(data);
-    setChartSalesOptions(options);
-  }
-  else {
-    console.log("No data")
-  }
-}, [totalSales]);
+
+  useEffect(() => {
+    const SandE = [totalSales, totalExpense];
+
+    if (SandE.length > 0) {
+      const data = {
+        labels: ['Sales', 'Expenses'],
+        datasets: [
+          {
+            data: SandE,
+            backgroundColor: ['#FCB025', '#C67529'],
+            hoverBackgroundColor: ['#EB8509', '#EB8509']
+          }
+        ]
+      };
+
+      const options = {
+        plugins: {
+          legend: {
+            position: 'left',
+            labels: {
+              usePointStyle: true
+            }
+          }
+        }
+      };
+
+      setChartSales(data);
+      setChartSalesOptions(options);
+    } else {
+      console.log('No data');
+    }
+  }, [totalSales, totalExpense]);
+
+  useEffect(() => {
+    //const profit = totalSales - totalExpense;
+    //setTotalProfit(profit);
+    const PandL = [totalProfit,totalExpense];
+
+    if (PandL.length > 0) {
+      const data = {
+        labels: ['Profit', 'Loss'],
+        datasets: [
+          {
+            data: PandL,
+            backgroundColor: ['#FCB025', '#C67529'],
+            hoverBackgroundColor: ['#EB8509', '#EB8509']
+          }
+        ]
+      };
+
+      const options = {
+        plugins: {
+          legend: {
+            position: 'left',
+            labels: {
+              usePointStyle: true
+            }
+          }
+        }
+      };
+
+      setChartProfit(data);
+      setChartProfitOptions(options);
+    } else {
+      console.log('No data');
+    }
+  }, [totalExpense,totalProfit]);
+
   return (
     <div className='salesreport' >
-      <div className='dateHolder'> Report date 
-      <Dropdown value={selectedMonth} onChange={(e) => modifyMonth(e)} options={month} optionLabel="name" 
+      <div className='dateHolder'> Report date: 
+      <Dropdown value={selectedMonth} onChange={handleMonthChange} options={month} optionLabel="name" 
               editable placeholder="Select a Month" className="w-full md:w-14rem" />
-      <Dropdown value={selectedWeek} onChange={(e) => modifyWeek(e)} options={week} optionLabel="name" 
+      <Dropdown value={selectedWeek} onChange={handleWeekChange} options={week} optionLabel="name" 
               editable placeholder="Select a Week" className="w-full md:w-14rem" disabled={!selectedMonth} />
-      <Button label='Reset' onClick={(e)=>resetDisplay(e)} className='reset'/>
+      <Button label='Reset' onClick={resetFilters} className='reset'/>
       </div>
       <div className='mainReportTop'>
-        <div className='SandE'>This is the Sales and Expenses</div>
-        <div className='SandEGraph'>Graph for Sales and Expenses
+        <div className='SandE'>This is the Sales and Expenses
+          <p>Total Sales: PHP {totalSales.toLocaleString()} </p>
+            <p>Total Expenses: PHP {totalExpense.toLocaleString()} </p>
+              </div>
+        <div className='SandEGraph'>
         <div className="card">
                     <div className="pieContainer" 
                     style={{
-                        // height: '30vh',
+                        //height: '30vh',
                         width: '30vw',
                         position: 'left',
-                        // backgroundColor: 'red'
+                        //backgroundColor: 'red'
 
                     }}>
                         {chartSales &&(
                             <Chart
                                 type="pie"
                                 data={chartSales}
-                                value={totalSales}
                                 loading={loading}
                                 options={chartSalesOptions}
                                 className="piechart">
@@ -173,11 +220,34 @@ useEffect(() => {
         
       </div>
       <div className='mainReportBot'>
-        <div className='PandF'>This is the Profit and Loss</div>
-        <div className='PandFGraph'>Graph for Profit and Loss</div>
+        <div className='PandF'>This is the Profit and Loss
+          <p>Total Profit: PHP {totalProfit.toLocaleString()} </p>
+          <p>Total Expenses: PHP {totalExpense.toLocaleString()} </p>
+        </div>
+        <div className='PandFGraph'>
+        <div className="card">
+                    <div className="pieContainer" 
+                    style={{
+                        //height: '30vh',
+                        width: '30vw',
+                        position: 'left',
+                        //backgroundColor: 'red'
+
+                    }}>
+                        {chartProfit &&(
+                            <Chart
+                                type="pie"
+                                data={chartProfit}
+                                loading={loading}
+                                options={chartProfitOptions}
+                                className="piechart">
+                            </Chart>
+                        )}
+                    </div>
+                </div>
+        </div>
       </div>
     </div>
   )
 }
-
-export default SalesReport
+export default SalesReport;

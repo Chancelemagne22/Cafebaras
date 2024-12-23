@@ -130,7 +130,7 @@
 .dateHolder{
     border-radius: 5px; /* Rounded corners */
     border: 1px solid #ccc; /* Light border */
-    height: 20vh;
+    height: 12vh;
 }
 .mainReportTop{
     display: flex;
@@ -138,7 +138,7 @@
 }
 .mainReportBot{
     display: flex;
-    grid-template-columns: 1fr,1fr;
+    
 }
 .SandE{
     border-radius: 5px; /* Rounded corners */
@@ -147,6 +147,8 @@
 .SandEGraph{
     border-radius: 5px; /* Rounded corners */
     border: 1px solid #ccc; /* Light border */
+    
+    
 }
 .PandF{
     border-radius: 5px; /* Rounded corners */
