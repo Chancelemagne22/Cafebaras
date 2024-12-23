@@ -222,7 +222,7 @@ const SalesReport = () => {
       <div className='mainReportBot'>
         <div className='PandF'>This is the Profit and Loss
           <p>Total Profit: PHP {totalProfit.toLocaleString()} </p>
-          <p>Total Expenses: PHP {totalExpense.toLocaleString()} </p>
+          <p>Total Loss: PHP {totalExpense.toLocaleString()} </p>
         </div>
         <div className='PandFGraph'>
         <div className="card">
