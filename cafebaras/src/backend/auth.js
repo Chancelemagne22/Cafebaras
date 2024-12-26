@@ -45,6 +45,24 @@ router.post('/login', async (req, res)=>{
     
 })
 
+router.post('/settings', async (req, res)=>{
+    const {username, password} = req.body;
+
+
+    try{
+        const {error} = await supabase
+        .from('users')
+        .update([{username, password}])
+
+        if (error){
+            return res.status(400).json({ error: 'Account update failed', details: error.message });
+        }
+        return res.status(200).json({ success: true });
+    } catch (error) {
+        return res.status(500).json({ error: 'Internal server error', details: error.message });
+    }
+
+});
 
 router.use(bodyParser.json())
 console.log('check')
