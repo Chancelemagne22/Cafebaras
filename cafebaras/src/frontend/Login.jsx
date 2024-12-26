@@ -27,6 +27,8 @@ function LoginPage() {
             
             if (response.data.success) {
                 localStorage.setItem('userID', userID);
+                localStorage.setItem('username', username);
+                localStorage.setItem('password', password);
                 localStorage.setItem('isAuthenticated', 'true'); 
                 protectedRoute()
                 navigate('/dashboard');

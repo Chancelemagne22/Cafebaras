@@ -15,39 +15,11 @@ function OrderManagement () {
     const [showOrderDisplay, setShowOrderDisplay] = useState(false);
     const [orderHolder, setOrderHolder] = useState([]) 
     const orderDisplayClass = showOrderDisplay ? 'orderDisplay shows' : 'orderDisplay';
-    const [selectedPayment, setSelectedPayment] = useState(null);
-    const [totalPay, setTotalPay] = useState(0);
-
-    const typeOfPayment = [
-        {name: "Cash", code: "Cash"},
-        {name: "Gcash", code: "Online"},
-        {name: "PayMaya", code: "Online"}
-    ]
-
-    const payment =(e) =>{
-        setSelectedPayment(e.value.name)
-    }
-    const closePanel =()=>{
-        setShowOrderDisplay(false)
-        setTotalPay(0)
-    }
-    const confirmPanel = () =>{
-        setOrderHolder(orderarray)
-        displayOrdersWithTimer(orderarray)
-        setShowOrderDisplay(true)
-    }
-    const equalTotalPay = () => {
-        let calculatedTotal = 0;
-        orderHolder.forEach((order) => {
-            calculatedTotal += order.price;
-        });
-        setTotalPay(calculatedTotal);
-       
-
-    };
+  
+  // LOL DITO
 
 
-    
+    // LOL HANGGANG DITO
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const weeks = ["W1", "W2", "W3", "W4"];
     
@@ -70,6 +42,8 @@ function OrderManagement () {
                 const data = await response.json()
 
                 setMenu(data)
+                
+                console.log(menu);
             }catch(error){
                 console.error('Error fecthing order: ', error)
                 setLoading(false)

@@ -6,6 +6,7 @@ import LoginPage from './frontend/Login';
 import Dashboard from './frontend/Dashboard';
 import OrderManagement from './frontend/OrderManagement';
 import Inventory from './frontend/Inventory';
+import Settings from './frontend/Set';
 import { PrimeReactProvider, PrimeReactContext } from 'primereact/api';
 import ReportAnalysis from './frontend/ReportAnalysis';
 
@@ -22,6 +23,7 @@ function App() {
                     <Route path="/order" element={<OrderManagement/>}/>
                     <Route path='/inventory' element = {<Inventory/>}/>
                     <Route path="/report" element={<ReportAnalysis/>}/>
+                    <Route path="/settings" element={<Settings/>}/>
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </Router>
