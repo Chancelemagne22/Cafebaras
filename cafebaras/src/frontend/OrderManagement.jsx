@@ -1,9 +1,10 @@
 import React, {useEffect,useState} from 'react'
 import '../designs/OrderManagement.css';
 import { useNavigate } from 'react-router-dom';
-import supabase from './order';
+import { Dropdown } from 'primereact/dropdown';
 import CafeLogo from './assets/CafeLogo.png'
 
+// GAWIN MO YUNG LETCHENG TOTALPAY
 
 function OrderManagement () {
     const navigate = useNavigate();
@@ -11,13 +12,14 @@ function OrderManagement () {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(true);
     const [orderDisplay, setOrderDisplay] = useState([]);
-    const [showOrderDisplay, setShowOrderDisplay] = useState(false); 
+    const [showOrderDisplay, setShowOrderDisplay] = useState(false);
+    const [orderHolder, setOrderHolder] = useState([]) 
     const orderDisplayClass = showOrderDisplay ? 'orderDisplay shows' : 'orderDisplay';
-    const [time, setTime] = useState(0);
-    
-    console.log('Check')
+  
+  // LOL DITO
 
-    
+
+    // LOL HANGGANG DITO
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const weeks = ["W1", "W2", "W3", "W4"];
     
@@ -30,20 +32,8 @@ function OrderManagement () {
         }
     }, []);
     
-    useEffect(() => {
-        if (showOrderDisplay) {
-            
-            const timer = setTimeout(() => {
-                setShowOrderDisplay(false);
-                console.log("Order display hidden after 20 seconds");
-                navigate('/dashboard')
-                console.clear()
-            }, 5000);
-    
-            return () => clearTimeout(timer); // Cleanup the timer
-        }
-    }, [showOrderDisplay]);
-    
+   
+   
     useEffect(() => {
         const fetchMenu = async () => {
             setLoading(true); // Set loading to true at the start of fetch
@@ -86,8 +76,8 @@ function OrderManagement () {
           
 
             
-            if (error){
-                console.error("Error fetching Products:", error);
+            if (!response.ok){
+                console.error("Error fetching Products:", response);
             }else{
                 orderarray.push(data)
             
@@ -112,7 +102,6 @@ function OrderManagement () {
 
                         const cell3 = newRow.insertCell(2);
                         cell3.textContent = "₱ " + item.price;
-
                         // Create a delete button
                         const cell4 = newRow.insertCell(3);
                         const deleteButton = document.createElement("button");
@@ -129,6 +118,7 @@ function OrderManagement () {
 
                     // Add the button to the cell
                         cell4.appendChild(deleteButton);
+
                     });
                 }
 
@@ -141,48 +131,51 @@ function OrderManagement () {
 
         console.log(orderarray);
     
-    
     }
 
 
     // Function to display orders and handle the timer
     const displayOrdersWithTimer = (orderArray) => { 
-        setTime(orderArray.length + 1);
+        // setTime(orderArray.length + 1);
         console.log(orderArray.length + " lezgo")
+        
 
         const displayOrder = orderArray.map((orders) => ({
+            
             productName: orders.pName,
             price: orders.price,
         }));
 
-        console.log("Order array before setting state:", orderArray);
-        console.log("Order display array:", displayOrder);
+        // console.log("Order array before setting state:", orderArray);
+        // console.log("Order display array:", displayOrder);
 
         setOrderDisplay(displayOrder);
         setShowOrderDisplay(true);
-        console.log("Show Order Display state set to true");
+        // console.log("Show Order Display state set to true");
 
 
        
     };
-
+    
     const handleOrders = async () => {
+        setShowOrderDisplay(false)
+        setSelectedPayment(null)
         const table = document.getElementById('outputTable').querySelector('tbody');
         table.innerHTML = ''; // Clear all table content
         console.log("Table reset");
         setError('');
-        if (orderarray.length == 0){
+        console.log(orderHolder)
+        if (orderHolder.length == 0){
             setError("No order inputed in the system.")
             return;
         }
         
         // Reverse the array to process orders in reverse order
-        displayOrdersWithTimer(orderarray)
-        orderarray.reverse();
+        orderHolder.reverse();
   
-        while (orderarray.length > 0) {
+        while (orderHolder.length > 0) {
             // Get the last order and process it
-            const order = orderarray.pop();
+            const order = orderHolder.pop();
             console.log(order);
     
             // Extract order details
@@ -306,17 +299,20 @@ function OrderManagement () {
 
                 try {
                     // fetch data from Supabase
-                    
-                    const { data, error } = await supabase
-                    .from('inventoryV2')
-                    .select('Stocked_Units, Used_Units')
-                    .eq('ItemName', Item);
-                
-                    if (error) {
-                        console.error("Error On Fetching Stocks:", error);
-                        continue; // Skip to the next iteration
+                    const displayResponse = await fetch('http://localhost:3001/api/inventory/find',{
+                        method: 'GET',
+                        headers:{
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({Item})
+                    })
+                    if(!displayResponse.ok){
+                        const errorData = await response.json();
+                        console.error('Transaction failed:', errorData);
+                        return;
                     }
-                
+                    const data = await displayResponse.json();
+                    
                     const stockunit = data[0]?.Stocked_Units;
                     const usedunits = data[0]?.Used_Units; // Access the specific number
                     console.log("Number of used:", usedunits);
@@ -324,23 +320,21 @@ function OrderManagement () {
                     const updated = stockunit - quantity;
                     const updatedused = usedunits + quantity;
                     console.log("updated stocks",updated)
+                    const requestData = {updated, updatedused,Item}
 
-                    try {
-                        const { data, error } = await supabase
-                            .from('inventoryV2')
-                            .update({Stocked_Units: updated, Used_Units:updatedused})
-                            .eq('ItemName', Item);
-            
-                        if (error) {
-                            console.error("Error updating record:", error);
-                        } else {
-                            console.log("Updated record:", data);
-                        }
+                    const response = await fetch('http://localhost:3001/api/inventory/update',{
+                        method: 'POST',
+                        headers:{
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(requestData)
+                    })
 
-                    }catch{
-
+                    if(!response.ok){
+                        const errorData = await response.json();
+                        console.error('Transaction failed:', errorData);
+                        return;
                     }
-
                 } catch (err) {
                     console.error("Unexpected error during transaction:", err);
                 }
@@ -348,63 +342,73 @@ function OrderManagement () {
             }
                 
         }
+        navigate('/dashboard')
   };
   
  
   return (
     <div className="dashboardOD">
             <div className="sidebarSales">
-            <div className="logoC">
-                    <img src={CafeLogo} alt="cafebara logo" />
-            </div>
-            <div className = "tableContainer">
-                <table id="outputTable">
-                    <thead>
-                        <tr>
-                        <th>PID</th>
-                        <th>Product Name</th>
-                        <th>Price</th>
-                        <th>Remove</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                <div className="logoC">
+                        <img src={CafeLogo} alt="cafebara logo" />
+                </div>
+                <div className = "tableContainer">
+                    <table id="outputTable">
+                        <thead>
+                            <tr>
+                            <th>PID</th>
+                            <th>Product Name</th>
+                            <th>Price</th>
+                            <th>Remove</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-                    </tbody>
-                </table>
-            </div>
-            <div className="backOrder" onClick={() => {navigate('/dashboard')}}>
-            Back
-            </div>
+                        </tbody>
+                    </table>
+                </div>
+                <div className="backOrder" onClick={() => {navigate('/dashboard')}}>
+                    Back
+                </div>
             </div>
             <div className="mainContentSales">
               
                 <div className = "Product_Selection" id = "Options">
                 <div className = "menuContainer">
-                       {menu && (
-                        <div className = "productContainer">
-                            {menu.map(product => (
-                                <button className='products' value={product.pID}onClick={getindex}>{product.pName} </button>
-                            ))}
-                        </div>
-                       )} 
+                    {menu && (
+                    <div className = "productContainer">
+                        {menu.map(product => (
+                            <button className='products' value={product.pID} onClick={getindex}>{product.pName} </button>
+                        ))}
                     </div>
+                    )} 
+                </div>
                     <div  className = "menuContainer purchaseH" >
-                        <button className = "purchase_button" id = "p_now" onClick={handleOrders}>Purchase Now</button>
+                        <button className = "purchase_button" id = "p_now" onClick={confirmPanel}>Purchase Now</button>
+                        <Dropdown value={selectedPayment} onChange={payment} options={typeOfPayment} optionLabel='name' editable placeholder="Type of Payment" />
                         {error && <p className="error" style={{ color: 'red' }}>{error}</p>}
                     </div>
-                
                 </div>
                 <div className={orderDisplayClass}>
                     <h2>Order List</h2>
-                    <ul>
-                        {orderDisplay.map((order, index) => (
-                            <li key={index}>
-                                {order.productName} - ₱{order.price}
-                            </li>
-                        ))}
-                    </ul>
+                    <div className="orderList">
+                        <ul>
+                            {orderDisplay.map((order, index) => (
+                                <li key={index}>
+                                    
+                                    {order.productName} - ₱{order.price}
+                                </li>
+                                
+                            ))}
+                        </ul>
+                    </div>
+                    <h3>Total {totalPay}</h3>
+                    <div className="button-confirmation">
+                        <button className="confirm" onClick={handleOrders}>Confirm</button>
+                        <button className="cancel" onClick={closePanel}>Cancel</button>
+                        <p> Type of payment: {selectedPayment}</p>
+                    </div>
                 </div>
-                    
             </div>
     </div>
   )
