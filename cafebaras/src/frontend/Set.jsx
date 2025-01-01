@@ -2,6 +2,7 @@ import React, {useEffect, useState}from 'react'
 import '../designs/Settings.css'
 
 function Settings(){
+
   return (
     <div>
       <div className='dashboardSettings'>
