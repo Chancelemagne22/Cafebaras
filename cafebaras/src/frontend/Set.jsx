@@ -1,6 +1,7 @@
 import React, {useEffect, useState}from 'react'
 import '../designs/Settings.css'
 
+function Settings(){
 
   return (
     <div>
@@ -15,7 +16,7 @@ import '../designs/Settings.css'
         </div>
         <div className='SetMain'> Update Login Credentials
           <div className='newLoginContainer'>
-
+          <form >
               <div>
                 <label className='name' htmlFor='username'>New USERNAME: </label>
                 <input type="text" 

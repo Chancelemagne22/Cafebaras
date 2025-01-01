@@ -1,0 +1,295 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+.salesContent{
+    position: absolute;
+    width: 100%;
+    height: 98vh;
+    overflow: hidden
+}
+
+/* SALES MANAGEMENT */
+.salesDisplay{
+    margin: 0;
+    padding: 8px;
+    display: grid;
+    gap: 1em;
+    grid-template-columns: 2fr 4fr;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    
+
+}
+.salesDisplay *{
+    width: 100%;
+}
+.purchaseDisplay{
+    margin-top: 1em;
+    display: flex;
+    width: 100%;
+    height: 3em;
+    justify-content: center;
+}
+.purchaseDisplay button{
+    font-weight: 900;
+    font-size: 1.5em;
+    text-align: center;
+    width: 80%;
+    background-color: #34ad36;
+    color: white;
+    border: rgba(0,0,0,0.2) solid 1px;
+    transition: all 500ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+}
+.purchaseDisplay button:hover{
+    border: rgba(0,0,0,0.5) solid .5px;
+    border-radius: 4em;
+    transform: scale(102%);
+}
+.purchaseDisplay button:active{
+    background-color: hwb(106 1% 50%);
+    transform: scale(98%);
+
+}
+
+/* SIDEBARD */
+.sidebarSales{
+    background-color: aliceblue;
+    display: grid;
+    grid-template-rows: 2fr 4fr 1fr;
+    height: 100vh;
+}
+.sidebarSales *{
+    /* border: 1px blue solid; */
+}
+.sidebarSales .back-button{
+    background-color: hwb(6 22% 6%);
+    width: 50%;
+    place-self: center;
+    padding: 1em;
+    font-weight: 600;
+    font-size: 1em;
+    color: white;
+    text-align: center;
+    align-items: center;
+    transform: translateY(-50%);
+    border-radius: 4em;
+}
+.sidebarSales .back-button:hover{
+   
+    border-radius: 4px;
+    border: rgba(0,0,0,0.2) solid .5px;
+    transition: all 500ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+}
+
+.sidebarSales .back-button:active{
+    border: rgba(0,0,0,0.5) solid .5px;
+    border-radius: 0em;
+    transform: scale(90%);
+}
+.cafeLogo{
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
+.logoImg{
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+.ordersSide{
+    height: 340px;
+    width: 100%;
+    overflow-y: scroll;
+}
+.ordersSide > *{
+    box-shadow: 0px 5px 22px 0px rgba(0,0,0,0.3);
+}
+.ordersSide thead{
+    box-shadow: 0px 5px 22px 0px rgba(0,0,0,0.3);
+
+}
+.ordersSide thead th{
+    border-right:2px solid rgba(0,0,0,0.3);
+
+}
+.ordersSide tbody td{
+    border-bottom:1px solid rgba(0,0,0,0.3);
+    border-right:2px solid rgba(0,0,0,0.3);
+}
+.ordersSide tbody button{
+    font-family: "Open Sans", serif;
+    border: none;
+    background-color: hwb(6 22% 6%);
+    color: white;
+    font-weight: 700;
+}
+.ordersSide tbody button:active{
+    background-color: hwb(6 1% 50%);
+    transform: scale(95%);
+}
+.home-button{
+    border: 1px rgb(255, 0, 0) solid;
+}
+
+
+
+/* PRODUCTLIST */
+
+.productDisplay {
+    width: 100%;
+    height: 100%;
+    border: 1px solid wheat;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.product-types{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+    background-color: #FCEAC6;
+    padding: 1em;
+
+}
+.product-name{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0px 10px 16px 5px rgba(0,0,0,0.2);
+    width: 8em;
+}
+.product-details{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    padding: 5px;
+    color: wheat;
+    /* border: 1px solid #f0f0f0; */
+    border-radius: 4px;
+    background-color: #281506;
+    transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.productDisplay .error {
+    color: red;
+    text-align: center;
+}
+.product-details:hover{
+    transform: scale(120%);
+    box-shadow: 0px 10px 16px 5px rgba(0,0,0,0.2);
+
+}
+
+
+/* ORDERLIST */
+.finalOrders{
+    padding: 1em;
+    display: grid;
+    grid-template-rows: 8fr 1fr;
+    gap: 1em;
+    width: 40%;
+    position: absolute;
+    height: 80vh;
+    top: 1%;
+    left: 50%;
+    background-color: rgb(78, 38, 3);
+}
+
+.orderlistSales{
+    overflow-y: scroll;
+    background-color: #FFE3A8;
+    border-radius: 3px;
+    position: relative;
+
+}
+.orderlistSales::-webkit-scrollbar { 
+    display: none; 
+}
+.orderlistSales table tbody td{ 
+    border-bottom:1px solid rgba(0,0,0,0.3);
+}
+.orderlistSales table thead{
+    background-color: sienna;
+    color: white;
+}
+
+.orderlistSales th, .orderlistSales td{
+    border-right:1px solid rgba(0,0,0,0.3) ;
+}
+.orderlistSales thead{
+    border-bottom:1px solid rgba(0,0,0,0.3);
+}
+.checkout-section{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    background-color: #FCEAC6;
+    border-radius: 3px;
+}
+.cart-total-section{
+   grid-column-start: 1/1;
+
+}
+.payment-option-section .p-dropdown{
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+}
+.checkout-section > *{
+    /* border: red 1px solid; */
+
+}
+.payment-option-section{
+    border-left: 1px solid rgba(0,0,0,0.2);
+    padding: 1em;
+    grid-column-start: 2/2;
+}
+.decision-section{
+    overflow: hidden;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+}
+.decision-section button{
+    width: 8em;
+    height: 3em;
+    font-family: "Open Sans", serif;
+    font-size: 1em;
+    font-weight: 600;
+    color: white;
+    border-radius: 4px;
+    border: rgba(0,0,0,0.2) solid .5px;
+    transition: all 500ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+}
+.decision-section button:hover{
+    border: rgba(0,0,0,0.5) solid .5px;
+    border-radius: 4em;
+    transform: scale(110%);
+}
+.decision-section button:active{
+    border: rgba(0,0,0,0.5) solid .5px;
+    border-radius: 4em;
+    transform: scale(90%);
+}
+
+.confirm-button{
+    background-color: hwb(106 22% 6%);
+}
+.cancel-button{
+    background-color: hwb(6 22% 6%);
+}
+.confirm-button:active{
+    background-color: hwb(106 1% 50%);
+}
+.cancel-button:active{
+    background-color: hwb(6 1% 50%);
+}

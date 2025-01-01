@@ -36,13 +36,7 @@ transactions.post('/transactions/details', async(req,res)=>{
             .from('transactions')
             .insert([{ date, productID, productName, price, month, week, day }]);
     
-        if (error) {
-            console.error('Error Transaction:', error);
-            return res.status(400).json({
-                error: 'Transaction failed.',
-                details: error.message,
-            });
-        }
+        
         return res.status(201).json({ message: 'Transaction successful!' });
     } catch (err) {
         console.error('Unexpected error:', err);
