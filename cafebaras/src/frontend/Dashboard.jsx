@@ -50,7 +50,7 @@ function Dashboard() {
             </div>
             <div className="mainContentDash">
                 <div className="holder">
-                    <div className="modules"  onClick={() => navigate('/order')}>
+                    <div className="modules"  onClick={() => navigate('/sales')}>
                         <p >ORDER MANAGEMENT</p>
                         <img src={SalesGIF} alt="Sales Management" />
                     </div>

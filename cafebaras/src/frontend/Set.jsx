@@ -1,5 +1,6 @@
 import React, {useEffect, useState}from 'react'
 import '../designs/Settings.css'
+<<<<<<< HEAD
 import axios from 'axios'
 import CafeLogo from './assets/CafeLogo.png'
 import { useNavigate } from 'react-router-dom';
@@ -136,6 +137,10 @@ function Settings() {
 
 };
 
+=======
+
+function Settings(){
+>>>>>>> 007390953f31269c75702c18c02019f3cc6c66bc
 
   return (
     <div>
@@ -150,6 +155,7 @@ function Settings() {
         </div>
         <div className='SetMain'> Update Login Credentials
           <div className='newLoginContainer'>
+<<<<<<< HEAD
             <div>
             <div>
               <p>Current USER: {userID}</p>
@@ -160,16 +166,23 @@ function Settings() {
             <div>
     </div>
             <form onSubmit={handleFetch}>
+=======
+          <form >
+>>>>>>> 007390953f31269c75702c18c02019f3cc6c66bc
               <div>
                 <label className='name' htmlFor='username'>New USERNAME: </label>
                 <input type="text" 
                   name = 'username' 
                   className='form-control' 
                   placeholder='Enter Username' // dapat nakalagay yung lumang username
+<<<<<<< HEAD
                   value= {username}
                   autoComplete="off"
 
                   onChange={(e) => setUsername(e.target.value)}  
+=======
+
+>>>>>>> 007390953f31269c75702c18c02019f3cc6c66bc
                   />
               </div>
               <div>
@@ -178,6 +191,10 @@ function Settings() {
                   name = 'password' 
                   className='form-control' 
                   placeholder='Enter Password' // dapat nakalagay ang lumang password
+<<<<<<< HEAD
+=======
+
+>>>>>>> 007390953f31269c75702c18c02019f3cc6c66bc
                   value={password}
                   autoComplete="off"
                   
