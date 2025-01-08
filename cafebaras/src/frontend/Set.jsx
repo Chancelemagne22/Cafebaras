@@ -1,6 +1,7 @@
 import React, {useEffect, useState}from 'react'
 import '../designs/Settings.css'
 
+function Settings(){
 
   return (
     <div>
@@ -15,7 +16,16 @@ import '../designs/Settings.css'
         </div>
         <div className='SetMain'> Update Login Credentials
           <div className='newLoginContainer'>
-
+            <div>
+            <div>
+              <p>Current USER: {userID}</p>
+              <p>Current Username: {curUser}</p>
+              <p>Current password: {curPass}</p>
+            </div>
+            </div>
+            <div>
+    </div>
+            <form onSubmit={handleFetch}>
               <div>
                 <label className='name' htmlFor='username'>New USERNAME: </label>
                 <input type="text" 
