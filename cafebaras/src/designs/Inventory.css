@@ -280,3 +280,8 @@
     font-weight: 900;
     color: rgb(233, 58, 58);
 }
+
+#ResupplyPop {
+    z-index: 100;
+  }
+  

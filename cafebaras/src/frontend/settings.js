@@ -1,3 +1,15 @@
+<<<<<<< HEAD
+export { Settings } from './Set.jsx'
+
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL; 
+const supabaseKey = import.meta.env.VITE_SUPABASE_KEY; 
+const supabase = createClient(supabaseUrl, supabaseKey);
+
+export default supabase;
+
+=======
 import React, {useEffect, useState}from 'react'
 import '../designs/Settings.css'
 import axios from 'axios';
@@ -125,3 +137,4 @@ function Settings() {
 }
 
 export default Settings
+>>>>>>> 007390953f31269c75702c18c02019f3cc6c66bc
