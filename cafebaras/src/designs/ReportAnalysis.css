@@ -125,36 +125,55 @@
 /* This is for Sales Report */
 .salesreport{
     display: grid;
-    height: 90vh;
+    grid-template-rows: 1fr 7fr 7fr;
+   
+    
+    
 }
 .dateHolder{
     border-radius: 5px; /* Rounded corners */
     border: 1px solid #ccc; /* Light border */
-    height: 12vh;
-}
-.mainReportTop{
-    display: flex;
-   
-}
-.mainReportBot{
-    display: flex;
     
 }
-.SandE{
+.mainReportTop{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     border-radius: 5px; /* Rounded corners */
     border: 1px solid #ccc; /* Light border */
+    grid-gap: 20px;
+    align-items: center;
+    
+}
+.mainReportBot{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-radius: 5px; /* Rounded corners */
+    border: 1px solid #ccc; /* Light border */
+    grid-gap: 20px;
+    align-items: center;
+}
+.SandE{
+    
+    justify-items: right; 
+    
 }
 .SandEGraph{
     border-radius: 5px; /* Rounded corners */
     border: 1px solid #ccc; /* Light border */
     
     
+    
 }
 .PandF{
-    border-radius: 5px; /* Rounded corners */
-    border: 1px solid #ccc; /* Light border */
+   
+    justify-items: right; 
+    
 }
 .PandFGraph{
     border-radius: 5px; /* Rounded corners */
     border: 1px solid #ccc; /* Light border */
+}
+.pieContainer{
+    height: auto;
+    width: 350px;
 }

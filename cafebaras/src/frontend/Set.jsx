@@ -132,6 +132,10 @@ function Settings() {
           <div className='newLoginContainer'>
             <div>
             <div>
+              <p>Current USER: {userID}</p>
+              <p>Current Username: {curUser}</p>
+              <p>Current password: {curPass}</p>
+
             <form onSubmit={handleFetch}></form>
               <p>Current USER: {userID}</p>
               <p 
@@ -146,6 +150,32 @@ function Settings() {
             </div>
             <div>
     </div>
+            <form onSubmit={handleFetch}>
+              <div>
+                <label className='name' htmlFor='username'>New USERNAME: </label>
+                <input type="text" 
+                  name = 'username' 
+                  className='form-control' 
+                  placeholder='Enter Username' // dapat nakalagay yung lumang username
+
+                  />
+              </div>
+              <div>
+                <label className='name' htmlFor='password'>New PASSWORD: </label>
+                <input type="text" 
+                  name = 'password' 
+                  className='form-control' 
+                  placeholder='Enter Password' // dapat nakalagay ang lumang password
+
+                  value={password}
+                  autoComplete="off"
+                  
+                  onChange={(e) => setPassword(e.target.value)} 
+                  />
+              </div><br />
+              <button onClick={handleSubmit} className='update_btn'>Update</button>
+            </form>
+          </div>
             <form onSubmit={handleSubmit}>
             <div>
               <label className='name' htmlFor='username'>New USERNAME: </label>

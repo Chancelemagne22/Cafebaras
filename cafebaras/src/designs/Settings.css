@@ -91,7 +91,6 @@
     background-color: #FFE3A8;
     color: black;
     transform: translateY(-3px) scale(104%);
-<<<<<<< HEAD
 }
 
 p{
@@ -100,4 +99,7 @@ p{
 =======
 
 }
->>>>>>> 007390953f31269c75702c18c02019f3cc6c66bc
+
+p{
+    color: #281506
+}
