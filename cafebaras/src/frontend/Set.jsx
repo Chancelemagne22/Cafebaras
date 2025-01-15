@@ -1,6 +1,5 @@
 import React, {useEffect, useState}from 'react'
 import '../designs/Settings.css'
-<<<<<<< HEAD
 import axios from 'axios'
 import CafeLogo from './assets/CafeLogo.png'
 import { useNavigate } from 'react-router-dom';
@@ -11,13 +10,15 @@ function Settings() {
   const [userID, setUserID] = useState('');
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  // const [loading, setLoading] = useState(true);
   const [curPass, curPassword] = useState()
   const [curUser, curUsername] = useState()
   const [error, setError] = useState('');
-  // const [name, setName] = useState();
-  // const [pass, setPass] = useState();
-  // const [menu, setMenu] = useState();
+  const [loading, setLoading] = useState(false);
+  
+
+  const protectedRoute = () => {
+    localStorage.getItem('isAuthenticated') === 'true';
+}
 
   useEffect(() => {
     const storedPass = localStorage.getItem('password');
@@ -32,31 +33,30 @@ function Settings() {
         setUserID(storedId);
     }
     console.log(isAuthenticated);
-  }, []);
+  }, [username, password]);
 
   useEffect(() => {
     setUsername(curUser);
     setPassword(curPass);
-  },[])
+  },[setUsername, setPassword])
   
   const navigate = useNavigate()
   const setUpdate = {userID, username, password}
 
-  // Hinde nagana pag fetch
   const handleFetch = async (e) => {
     e.preventDefault();
     setError('');
-
-    // Validate input before making the request
-    // if (!name || !pass) {
-    //     setError('Username and password are required.');
-    //     return;
-    // }
+    setLoading(true); //Set loading to true at the start of fetch
 
     try {
-      const response = await axios.get('http://localhost:3001/api/settings', { userID, username, password });
+      const response = await axios.post('http://localhost:3001/api/settings', { userID, username, password });
       
       if (response.data.success) {
+
+        localStorage.setItem('username', username);
+        localStorage.setItem('password', password);
+        // const userUpdate = {...user, username: username}
+        // setUpdate(userUpdate)
 
         protectedRoute()
         navigate('/');
@@ -73,41 +73,17 @@ function Settings() {
       console.log('Error occured')
     }
 
+    setLoading(false); // Set loading to false after fetch
+
     } catch {
       console.error('Error during fetching:');
     }
   }
 
-  // useEffect(() => {
-  //         const fetchUsers = async () => {
-  //             setLoading(true); // Set loading to true at the start of fetch
-  //             try{
-  //                 const response = await fetch('http://localhost:3001/api/settings');
-  //                 const data = await response.json()
-  
-  //                 setMenu(data)
-  //                 // if (response.data.success) { 
-  //                 //         setMenu(username);
-  //                 //         console.log(menu);
-  //                 //           protectedRoute()
-  //                 //           navigate('/');
-  //                 //       } else {
-  //                 //           setError('Fetch failed. Please check your credentials.');
-  //                 //       }
-  //             }catch(error){
-  //                 console.error('Error fecthing users: ', error)
-  //                 setLoading(false)
-  //             }
-          
-  //         };
-      
-  //     fetchUsers();
-  //     }, []);
-
-
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission
     setError(''); // Clear any existing errors
+    setLoading(true); //Set loading to true at the start of fetch
 
     try {
       const response = await fetch('http://localhost:3001/api/settings/update', {
@@ -117,9 +93,6 @@ function Settings() {
         },
         body: JSON.stringify(setUpdate),
       },{username, password})
-
-    // try {
-    //   const response = await axios.put('http://localhost:3001/api/settings/update', {username, password})
       
       const result = await response.json();
 
@@ -128,8 +101,12 @@ function Settings() {
         alert('User updated successfully!');
       } else {
         console.error('Error updating user:', result);
+        console.log(setUpdate)
         alert(`Error: ${result.error}`);
       }
+
+    setLoading(false); // Set loading to false after fetch
+
     } catch (error) {
       console.error('Unexpected error:', error);
       alert('Unexpected error occurred!');
@@ -137,10 +114,8 @@ function Settings() {
 
 };
 
-=======
 
-function Settings(){
->>>>>>> 007390953f31269c75702c18c02019f3cc6c66bc
+
 
   return (
     <div>
@@ -155,55 +130,52 @@ function Settings(){
         </div>
         <div className='SetMain'> Update Login Credentials
           <div className='newLoginContainer'>
-<<<<<<< HEAD
             <div>
             <div>
+            <form onSubmit={handleFetch}></form>
               <p>Current USER: {userID}</p>
-              <p>Current Username: {curUser}</p>
-              <p>Current password: {curPass}</p>
+              <p 
+                value = {username}
+                loading ={loading}
+                onChange={(e)=> setUsername(e.target.value)}>Current Username: {username}</p>
+              <p 
+                value = {password}
+                loading ={loading}
+                onChange={(e)=> setPassword(e.target.value)}>Current password: {password}</p>
             </div>
             </div>
             <div>
     </div>
-            <form onSubmit={handleFetch}>
-=======
-          <form >
->>>>>>> 007390953f31269c75702c18c02019f3cc6c66bc
-              <div>
-                <label className='name' htmlFor='username'>New USERNAME: </label>
-                <input type="text" 
-                  name = 'username' 
-                  className='form-control' 
-                  placeholder='Enter Username' // dapat nakalagay yung lumang username
-<<<<<<< HEAD
-                  value= {username}
-                  autoComplete="off"
+            <form onSubmit={handleSubmit}>
+            <div>
+              <label className='name' htmlFor='username'>New USERNAME: </label>
+              <input type="text" 
+                name = 'username' 
+                className='form-control' 
+                placeholder='Enter Username' // dapat nakalagay yung lumang username
+                value= {username}
+                autoComplete="off"
 
-                  onChange={(e) => setUsername(e.target.value)}  
-=======
+                onChange={(e) => setUsername(e.target.value)}  
 
->>>>>>> 007390953f31269c75702c18c02019f3cc6c66bc
-                  />
-              </div>
-              <div>
-                <label className='name' htmlFor='password'>New PASSWORD: </label>
-                <input type="text" 
-                  name = 'password' 
-                  className='form-control' 
-                  placeholder='Enter Password' // dapat nakalagay ang lumang password
-<<<<<<< HEAD
-=======
+                />
+            </div>
+            <div>
+              <label className='name' htmlFor='password'>New PASSWORD: </label>
+              <input type="text" 
+                name = 'password' 
+                className='form-control' 
+                placeholder='Enter Password' // dapat nakalagay ang lumang password
 
->>>>>>> 007390953f31269c75702c18c02019f3cc6c66bc
-                  value={password}
-                  autoComplete="off"
-                  
-                  onChange={(e) => setPassword(e.target.value)} 
-                  />
-              </div><br />
-              <button onClick={handleSubmit} className='update_btn'>Update</button>
-            </form>
-          </div>
+                value={password}
+                autoComplete="off"
+                
+                onChange={(e) => setPassword(e.target.value)} 
+                />
+            </div><br />
+            <button className='update_btn'>Update</button>
+          </form>
+        </div>
           {error && <p className="error" style={{ color: 'red' }}>{error}</p>}
         </div>
       </div>
