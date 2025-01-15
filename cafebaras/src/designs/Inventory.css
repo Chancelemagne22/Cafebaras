@@ -27,11 +27,27 @@
     gap: 1em;
 }
 .inventoryButton{
+    position: relative;
     padding: 1em;
     height: 1.5em;
     border-radius: 10px;
     cursor: pointer;
+    
 }
+
+.inventoryButton .badge {
+    position: absolute;
+    top: -10px; 
+    right: -10px; 
+    padding: 0.5em;
+    border-radius: 50%;
+    background: red;
+    color: white;
+    display: none;
+  }
+.badge.show {
+    display: inline-block; 
+  }
 
 
 .active{

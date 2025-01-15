@@ -41,12 +41,12 @@ function StockManagement() {
           // Sort the data so red rows appear at the top
           const sortedData = data.sort((a, b) => {
             const isALowStock =
-              (a.ItemCategory === "Packaging" && a.Stocked_Units < 500) ||
-              (a.ItemCategory !== "Packaging" && a.Stocked_Units < 2500);
+              (a.ItemCategory === "Packaging" && a.Stocked_Units < a.lowStockQuantity) ||
+              (a.ItemCategory !== "Packaging" && a.Stocked_Units < a.lowStockQuantity);
   
             const isBLowStock =
-              (b.ItemCategory === "Packaging" && b.Stocked_Units < 500) ||
-              (b.ItemCategory !== "Packaging" && b.Stocked_Units < 2500);
+              (b.ItemCategory === "Packaging" && b.Stocked_Units < a.lowStockQuantity) ||
+              (b.ItemCategory !== "Packaging" && b.Stocked_Units < a.lowStockQuantity);
   
             if (isALowStock && !isBLowStock) return -1; // a comes first
             if (!isALowStock && isBLowStock) return 1;  // b comes first
@@ -72,7 +72,7 @@ function StockManagement() {
 
   // Dynamically set row classes based on Stocked_Units value
   const rowClassName = (data) => {
-	let numberOfStocks = (data.Stocked_Units / 30) 
+	let numberOfStocks = data.lowStockQuantity
 	console.log(data.Stocked_Units + "ito")
 	console.log(numberOfStocks.toFixed(2))
     if (data.ItemCategory === "Packaging" && data.Stocked_Units < numberOfStocks) {

@@ -21,6 +21,7 @@ function Inventory(){
         }
     }, []);
 
+
     return (
         <div className="dashboardInventory">
             <div className="sidebarInventory">
@@ -35,6 +36,7 @@ function Inventory(){
                     onClick={() => colorButton('stockManagement')}
                 >
                     STOCK MANAGEMENT
+                    <span class="badge" id="n-badge">!</span>
                 </div>
                 <div 
                     className={`inventoryButton ${activeButton === 'resupplyManagement' ? 'active' : 'inactive'}`} 
