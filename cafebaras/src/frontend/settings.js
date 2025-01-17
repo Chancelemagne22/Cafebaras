@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 export { Settings } from './Set.jsx'
 
 import { createClient } from '@supabase/supabase-js';
@@ -7,9 +6,7 @@ const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseKey = import.meta.env.VITE_SUPABASE_KEY; 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-export default supabase;
 
-=======
 import React, {useEffect, useState}from 'react'
 import '../designs/Settings.css'
 import axios from 'axios';
@@ -64,7 +61,7 @@ function Settings() {
   //   fetchUsers()
     axios.get('http://localhost:3001/api/settings' + id)
     .then(res => {
-      setValues({...values, username: res.data.username, password: res.data.password})
+      setValues({...values, password: res.data.password})
     })
     .catch(err => console.log(err))
   },[])

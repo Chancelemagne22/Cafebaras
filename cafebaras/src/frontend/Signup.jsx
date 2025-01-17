@@ -5,7 +5,7 @@ import '../designs/Signup.css'
 
 function SignUpPage() {
     const [userId, setUserID] = useState('');
-    const [username, setUsername] = useState('');
+    // const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate(); 
@@ -14,13 +14,13 @@ function SignUpPage() {
 
     const handleSignup = async (e) => {
         e.preventDefault();
-        if (!isValidInput(username) || !isValidInput(password)) {
+        if (!isValidInput(userId) || !isValidInput(password)) {
             setError('Username and password cannot be empty or just spaces.');
             return;
         }
 
         try {
-            const response = await axios.post('http://localhost:3001/api/signup', { userId, username, password });
+            const response = await axios.post('http://localhost:3001/api/signup', { userId,  password });
             if (response.data.success) {
                 navigate('/');
             } else {
@@ -52,12 +52,13 @@ function SignUpPage() {
                         id='userID'
                         value={userId}
                         autoComplete="off"
+                        placeholder='Max 6 characters'
 
                         required minLength={4} maxLength={6}
                         onChange={onlyNumber}
                     />
                 </div>
-                <div className="signUsername">
+                {/* <div className="signUsername">
                     <label htmlFor="username">Username</label>
                     <input 
                         id="username"
@@ -67,7 +68,7 @@ function SignUpPage() {
 
                         onChange={(e) => setUsername(e.target.value)}  
                     />
-                </div>
+                </div> */}
                 <div className="signPass">
                     <label htmlFor="password">Password</label>
                     <input
