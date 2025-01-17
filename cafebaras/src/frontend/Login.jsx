@@ -5,7 +5,7 @@ import '../designs/Login.css'
 
 function LoginPage() {
     const [userID, setUserID] = useState(''); 
-    const [username, setUsername] = useState('');
+    // const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
@@ -23,11 +23,11 @@ function LoginPage() {
         setError(''); 
     
         try {
-            const response = await axios.post('http://localhost:3001/api/login', { userID, username, password });
+            const response = await axios.post('http://localhost:3001/api/login', { userID,  password });
             
             if (response.data.success) {
                 localStorage.setItem('userID', userID);
-                localStorage.setItem('username', username);
+                // localStorage.setItem('username', username);
                 localStorage.setItem('password', password);
                 localStorage.setItem('isAuthenticated', 'true'); 
                 protectedRoute()
@@ -58,7 +58,7 @@ function LoginPage() {
                             onChange={(e) => setUserID(e.target.value)}  
                             placeholder=''/>
                     </div>
-                    <div className="user">
+                    {/* <div className="user">
                         <label htmlFor="username">Username</label>
                         <input
                             type="text"
@@ -68,7 +68,7 @@ function LoginPage() {
 
                             onChange={(e) => setUsername(e.target.value)}  
                             placeholder=''/>
-                    </div>
+                    </div> */}
                     <div className="password">
                         <label htmlFor="password">Password</label>
                         <input

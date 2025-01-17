@@ -13,7 +13,6 @@
 /* .sidebarDash > div{
 } */
 
-
 .sidebarDash{
     display: grid;
     grid-template-rows: 2fr 1fr 3fr;

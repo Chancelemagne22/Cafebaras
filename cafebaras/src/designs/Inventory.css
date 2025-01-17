@@ -284,4 +284,17 @@
 #ResupplyPop {
     z-index: 100;
   }
-  
+
+.backInventory{
+    background-color: hwb(6 22% 6%);
+    width: 50%;
+    place-self: center;
+    padding: 1em;
+    font-weight: 600;
+    font-size: 1em;
+    color: white;
+    text-align: center;
+    align-items: center;
+    transform: translateY(-50%);
+    border-radius: 4em;
+}
