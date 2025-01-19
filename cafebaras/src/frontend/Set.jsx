@@ -180,34 +180,3 @@ function Settings() {
 }
 
 export default Settings
-
-
-// <form onSubmit={handleSubmit}>
-// <div>
-//   <label className='name' htmlFor='username'>New USERNAME: </label>
-//   <input type="text" 
-//     name = 'username' 
-//     className='form-control' 
-//     placeholder='Enter Username' // dapat nakalagay yung lumang username
-//     value= {username}
-//     autoComplete="off"
-
-//     onChange={(e) => setUsername(e.target.value)}  
-//     />
-    
-// </div>
-// <div>
-//   <label className='name' htmlFor='password'>New PASSWORD: </label>
-//   <input type="text" 
-//     name = 'password' 
-//     className='form-control' 
-//     placeholder='Enter Password' // dapat nakalagay ang lumang password
-
-//     value={password}
-//     autoComplete="off"
-    
-//     onChange={(e) => setPassword(e.target.value)} 
-//     />
-// </div><br />
-// <button className='update_btn'>Update</button>
-// </form>

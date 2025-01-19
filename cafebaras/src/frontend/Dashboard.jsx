@@ -19,7 +19,6 @@ function Dashboard() {
         console.log("done")
         navigate('/');
     };
-    console.log('Check')
 
 
     useEffect(() => {

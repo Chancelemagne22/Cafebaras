@@ -72,21 +72,22 @@
     color: white;
     text-align: center;
     align-items: center;
-    transform: translateY(-30%);
+    transform: translateY(-50%);
     border-radius: 4em;
 }
 .sidebarSales .back-button:hover{
    
     border-radius: 4px;
     border: rgba(0,0,0,0.2) solid .5px;
-    transition: all 100ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all 500ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
 }
 
 .sidebarSales .back-button:active{
     border: rgba(0,0,0,0.5) solid .5px;
     border-radius: 0em;
-    transform: scale(98%);
+    background-color: hwb(6 1% 50%);
+
 }
 .cafeLogo{
     height: 100%;
