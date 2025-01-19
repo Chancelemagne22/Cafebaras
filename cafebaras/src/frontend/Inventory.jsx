@@ -65,9 +65,9 @@ function Inventory(){
       fetchStocks();
   
       // Periodically fetch the data (every 5 seconds in this case)
-      // const interval = setInterval(fetchStocks, 5000);
+      const interval = setInterval(fetchStocks, 5000);
   
-      // return () => clearInterval(interval); // Cleanup on unmount
+      return () => clearInterval(interval); // Cleanup on unmount
     }, []);
   
     // Function to update the badge based on the low stock count
@@ -109,7 +109,7 @@ function Inventory(){
                 >
                     SUPPLIER MANAGEMENT
                 </div>
-                    <div className="back" onClick={() => {navigate('/dashboard')}}>
+                    <div className="backInventory" onClick={() => {navigate('/dashboard')}}>
                         Back
                     </div>
 

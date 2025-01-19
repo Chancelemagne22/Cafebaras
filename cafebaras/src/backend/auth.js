@@ -5,13 +5,13 @@ import bodyParser from 'body-parser';
 const router = express.Router();
 
 router.post('/signup', async (req, res)=>{
-    const {userId,username, password} = req.body;
+    const {userId,password} = req.body;
 
 
     try{
         const {error} = await supabase
-        .from('users')
-        .insert([{userId, username, password}])
+        .from('usersV2')
+        .insert([{userId, password}])
 
         if (error){
             return res.status(400).json({ error: 'Account creation failed', details: error.message });
@@ -24,14 +24,13 @@ router.post('/signup', async (req, res)=>{
 });
 
 router.post('/login', async (req, res)=>{
-    const {userID, username, password} = req.body
+    const {userID, password} = req.body
 
     try{
         const {data, error} = await supabase
-        .from('users')
+        .from('usersV2')
         .select('*')
         .eq('userId', userID)
-        .eq('username', username)
         .eq('password', password)
         .single();
 
@@ -46,13 +45,13 @@ router.post('/login', async (req, res)=>{
 })
 
 router.post('/settings', async (req, res)=>{
-    const {username, password} = req.body;
+    const {password} = req.body;
 
 
     try{
         const {error} = await supabase
         .from('users')
-        .update([{username, password}])
+        .update([{password}])
 
         if (error){
             return res.status(400).json({ error: 'Account update failed', details: error.message });
@@ -70,13 +69,13 @@ console.log('check')
 router.get('/api/settings', async (req, res)=>{
     try{
         const {data, error} = await supabase
-        .from('users')
+        .from('usersV2')
         .select('*')
-        .eq('username', username)
+        .eq('userId', userID)
         // .eq('password', password)
         .single();
 
-        if (error) {
+        if (error){
             console.error('Error fetching users:', error);
             return res.status(500).json({ error: 'Failed to fetch users', details: error });
         }
@@ -94,18 +93,22 @@ router.get('/api/settings', async (req, res)=>{
     }
 })
 
-router.put('/settings/update', async (req, res)=>{
-    const {userID, username, password} = req.body;
+router.use(bodyParser.json())
+console.log('check')
 
-    if (!userID || !username || !password){
+
+
+router.put('/settings/update', async (req, res)=>{
+    const {userID,password} = req.body;
+
+    if (!userID || !password){
         return res.status(400).json({error: 'the data is missing'});
     }
 
     try{
         const {data, error} = await supabase
-        .from('users')
+        .from('usersV2')
         .update({
-            username,
             password
         })
         .eq('userId', userID)

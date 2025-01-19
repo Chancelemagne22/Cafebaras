@@ -260,6 +260,7 @@ function OrderManagement () {
     
             // Convert recipe info into an array of objects
             const recipelist = [];
+            console.log(recipelist)
             Object.keys(recipeinfo).forEach(key => {
                 recipelist.push({ key, value: recipeinfo[key] });
             });

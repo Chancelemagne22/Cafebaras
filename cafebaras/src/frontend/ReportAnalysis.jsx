@@ -39,11 +39,6 @@ function ReportAnalysis() {
                 >
                     SALES REPORT
                 </div>
-                <div className={`reportButton ${activeButton === "profitLoss" ? 'active' : 'inactive'}`}
-                onClick={()=> colorButton('profitLoss')}
-                >
-                    PROFIT AND LOSS STATEMENT
-                </div>
                 <div className={`reportButton ${activeButton === "inventoryReport" ? 'active' : 'inactive'}`}
                 onClick={()=> colorButton('inventoryReport') }
                 >
@@ -57,7 +52,6 @@ function ReportAnalysis() {
                 <div className="activeContentReport">
                     {activeReport === "transaction" && <Transaction />}
                     {activeReport === "salesReport" && <SalesReport/>}
-                    {activeReport === "profitLoss" && <ProfitLoss/>}
                     {activeReport === "inventoryReport" && <Inventory/>}
                 </div>
 

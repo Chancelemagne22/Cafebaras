@@ -6,10 +6,10 @@ console.log('Check Item management')
 const fetchInventory = express.Router();
 fetchInventory.use(bodyParser.json())
 
-fetchInventory.get('/items', async(req, res) =>{
+fetchInventory.get('/items/inventory', async(req, res) =>{
     try{
         const {data, error} = await supabase
-        .from('inventory')
+        .from('inventoryV2')
         .select('*')
 
         if(error){
@@ -24,7 +24,7 @@ fetchInventory.get('/items', async(req, res) =>{
 
 })
 
-fetchInventory.get('/items', async (req, res) => {
+fetchInventory.get('/items/product', async (req, res) => {
     try {
       const { data, error } = await supabase
         .from('products')

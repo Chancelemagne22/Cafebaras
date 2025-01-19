@@ -10,6 +10,7 @@ function StockManagement() {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [quantity, setQuantity] = useState("");
   const [price, setPrice] = useState("");
+  const [totalPrice,setTotalPrice] = useState("")
   const [item, setItem]= useState();
   const [supplier, setSname] = useState();
   const [snumber, setSnumber] = useState();
@@ -17,6 +18,11 @@ function StockManagement() {
   const [resultDisplay, setResultDisplay] = useState(false); 
   const resultDisplayClass = resultDisplay ? 'resultDisplay show' : 'resultDisplay';
 
+  const handleQuantityChange = (e) => {
+    const qty = e.target.value;
+    setQuantity(qty); // Update quantity
+    setTotalPrice( qty * price);
+  }
   useEffect(() => {
     if (resultDisplay) {
         const timer = setTimeout(() => {
@@ -74,7 +80,7 @@ function StockManagement() {
   const rowClassName = (data) => {
 	let numberOfStocks = data.lowStockQuantity
 	console.log(data.Stocked_Units + "ito")
-	console.log(numberOfStocks.toFixed(2))
+	//console.log(numberOfStocks.toFixed(2))
     if (data.ItemCategory === "Packaging" && data.Stocked_Units < numberOfStocks) {
       return "low-stock"; // Red for low stock
     }
@@ -94,6 +100,7 @@ function StockManagement() {
       // Change this for the supplier ID
       const supID = stockinfo[5];
       setItem(stockinfo[2]);
+      setPrice(stockinfo[4])
       console.log(supID);
       try {
         const response = await fetch('http://localhost:3001/api/stocks/supplier',{
@@ -114,6 +121,8 @@ function StockManagement() {
         setSname(suppinfo[1]);
         setSnumber(suppinfo[2]);
         setSemail(suppinfo[3]);
+        
+        
         
         
       }catch{
@@ -183,7 +192,8 @@ try{
     setPrice("");
     const inputPrice = document.getElementById("price");
       inputPrice.value = "";
-    
+    setTotalPrice(quantinput * price)
+    console.log(totalPrice);
 }
 catch{
   
@@ -248,19 +258,13 @@ catch{
 									id="qty"
 									value={quantity} 
 									autoComplete="off"
-									onChange={(e) => setQuantity(e.target.value)}  
+									onChange={handleQuantityChange}
 									placeholder=''/> <label>per unit</label>
 								</div>  
 							<p></p> 
 							<div>
 								<label>Total Price:</label>
-								<input 
-									type="text"
-									id="price"
-									value={price} 
-									autoComplete="off"
-									onChange={(e) => setPrice(e.target.value)}  
-									placeholder=''/>
+								<p>PHP {totalPrice}</p>
 							</div>
 						</div>
 						<div className="buttons">

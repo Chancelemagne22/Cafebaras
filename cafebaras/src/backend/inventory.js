@@ -10,7 +10,7 @@ inventory.use(bodyParser.json())
 inventory.get('/inventory', async(req, res)=>{
     try{
         const {data, error} = await supabase
-        .from('stocksV3')
+        .from('inventoryV2')
         .select('*')
 
         if (error){
