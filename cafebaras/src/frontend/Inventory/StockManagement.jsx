@@ -75,12 +75,13 @@ function StockManagement() {
 	let numberOfStocks = (data.Stocked_Units / 30) 
 	console.log(data.Stocked_Units + "ito")
 	console.log(numberOfStocks.toFixed(2))
-    if (data.ItemCategory === "Packaging" && data.Stocked_Units < numberOfStocks) {
-      return "low-stock"; // Red for low stock
-    }
-    if (data.ItemCategory !== "Packaging" && data.Stocked_Units < numberOfStocks) {
-      return "low-stock"; // Red for low stock
-    }
+
+  if (data.ItemCategory === "Packaging" && data.Stocked_Units < numberOfStocks) {
+    return "low-stock"; // Red for low stock
+  }
+  if (data.ItemCategory !== "Packaging" && data.Stocked_Units < numberOfStocks) {
+    return "low-stock"; // Red for low stock
+  }
     return ""; // Default (no class)
   };
 

@@ -3,17 +3,20 @@ import React from 'react';
 import { useState,  } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export default function OrderListdisplay({rowOrder ,setDisplayOrderList}) {
+export default function OrderListdisplay({rowOrder ,setDisplayOrderList ,setConfirmOrder}) {
   const [payment, setPayment] = useState(0); 
   const [selectedPayment, setSelectedPayment] = useState(null);
   const [paymentMethod, setPaymentMethod] = useState('');
+  const [dataOfRecipe, setDataOfRecipe] = useState([]);
+  
 
   const navigate = useNavigate();
   
 
   const displayList = () => {
     setDisplayOrderList((prevDisplayOrderList) => !prevDisplayOrderList);
-  };  
+  };
+
 
   const typeOfPayment = [
     {name: "Cash", code: "Cash"},
@@ -43,7 +46,7 @@ export default function OrderListdisplay({rowOrder ,setDisplayOrderList}) {
 
   // Convert grouped products to an array for rendering
   const groupedArray = Object.values(groupedProducts);
-  console.log(groupedArray)
+  // console.log(groupedArray)
 
   // Calculate the total price for all products
   const totalPrice = rowOrder.reduce((sum, row) => sum + parseFloat(row.col3 || 0), 0);
@@ -91,10 +94,10 @@ export default function OrderListdisplay({rowOrder ,setDisplayOrderList}) {
   }
   
   const transactionID = uniqueTransactionID(day, year, monthIndex + 1  * 8);
-  console.log(transactionID)
+  // console.log(transactionID)
   
   const weekIndex = getWeek(day);
-  console.log(weekIndex)
+  // console.log(weekIndex)
 
   const dataTransactions = groupedArray.map((group) => ({
     date,
@@ -106,6 +109,7 @@ export default function OrderListdisplay({rowOrder ,setDisplayOrderList}) {
     transactionID: transactionID
   }));
   
+  
   // price: group.totalPrice,
   //   paymentMethod, // Fixed issue with setting paymentMethod
   //   payment,
@@ -116,10 +120,11 @@ export default function OrderListdisplay({rowOrder ,setDisplayOrderList}) {
     payment,
     change: calculateChange(payment, totalPrice)
   }  
-
   const confirmData = async() =>{
+    setConfirmOrder((prevConfirmOrder) => !prevConfirmOrder);
     console.log(JSON.stringify(dataTransactions))
     console.log(JSON.stringify(dataReceipt))
+    console.log(JSON.stringify(dataOfRecipe))
 
     try{
       const response = await fetch('http://localhost:3001/api/products/receipt-record',{
@@ -142,29 +147,8 @@ export default function OrderListdisplay({rowOrder ,setDisplayOrderList}) {
         console.error("Unexpected error during recording:", err); 
     }
     
-
-    try{
-      const response = await fetch('http://localhost:3001/api/products/details',{
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(dataTransactions)
-      })
-      if(!response.ok){
-        const errorData = await response.json();
-        console.error('Transaction failed:', errorData);
-        return;
-      }
-      const result = await response.json();
-      console.log('Transaction successful:', result);
-    
-      } catch (err) {
-        console.error("Unexpected error during transaction:", err); 
-      }
       setDisplayOrderList((prevDisplayOrderList) => !prevDisplayOrderList);
-      navigate('/dashboard')
-      
+    navigate('/dashboard'); 
   }
 
   return (

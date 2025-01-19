@@ -86,7 +86,8 @@
 .sidebarSales .back-button:active{
     border: rgba(0,0,0,0.5) solid .5px;
     border-radius: 0em;
-    transform: scale(90%);
+    background-color: hwb(6 1% 50%);
+
 }
 .cafeLogo{
     height: 100%;

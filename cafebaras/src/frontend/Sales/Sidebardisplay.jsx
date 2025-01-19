@@ -2,14 +2,18 @@ import React, { useState } from 'react';
 import CafeLogo from '../assets/CafeLogo.png';
 import { useNavigate } from 'react-router-dom';
 
-export default function Sidebardisplay({ rowOrder, setRowOrders}) {
+export default function Sidebardisplay({ rowOrder, setRowOrders, setProductRecipeList }) {
   const navigate = useNavigate();
   
   
   const deleteRow = (index) => {
     const updatedRows = rowOrder.filter((_, i) => i !== index);
     setRowOrders(updatedRows);
+    setProductRecipeList(updatedRows)
   };
+ 
+  
+  
  
 
   return (

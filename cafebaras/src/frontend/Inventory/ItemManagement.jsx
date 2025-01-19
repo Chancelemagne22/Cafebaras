@@ -17,7 +17,7 @@ function ItemManagement() {
     const fetchInventory = async () => {
       setLoading(true); // Set loading to true at the start of fetch
       try{
-        const response = await fetch('http://localhost:3001/api/items');
+        const response = await fetch('http://localhost:3001/api/items/inventory');
 
         const data = await response.json()
         setInventory(data)
@@ -39,7 +39,7 @@ function ItemManagement() {
       if (selectedOption === "Products") {
         setLoading(true);
         try {
-          const response = await fetch('http://localhost:3001/api/items');
+          const response = await fetch('http://localhost:3001/api/items/product');
 
           const data = await response.json()
           setProducts(data)

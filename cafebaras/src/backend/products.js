@@ -9,7 +9,7 @@ console.log('Products')
 products.get('/products', async (req, res)=>{
     try{
         const {data, error} = await supabase
-        .from('productsV4')
+        .from('productsV5')
         .select('*')
 
         if(error) {
@@ -94,5 +94,98 @@ products.post('/products/receipt-record', async (req, res) => {
     }
 
 })
+products.get('/products/whyy', async (req, res) => {
+
+    try{
+        const {data, error} = await supabase
+        .from('inventoryV2')
+        .select('*')
+
+        if(error) {
+            return res.status(500).json({error: 'Failed to fetch orders'})
+        }
+        res.json(data)
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).json({error:'Internal server error'})
+    }
+})
+
+products.put('/products/update-quantities', async (req, res) => {
+    console.log('Endpoint hit');
+
+    const updates = req.body; // Expecting an object with ItemName as keys and quantities as values
+    console.log('Updates received:', updates);
+
+    // Validate the updates object
+    if (!updates || typeof updates !== 'object' || Object.keys(updates).length === 0) {
+        console.error('Invalid updates object');
+        return res.status(400).json({ error: 'Invalid or empty updates object. Please provide valid product data.' });
+    }
+
+    try {
+        const results = await Promise.all(
+            Object.entries(updates).map(async ([ItemName, decrementBy]) => {
+                const normalizedItemName = ItemName.trim();
+                console.log(`Processing item: "${normalizedItemName}", decrementBy: ${decrementBy}`);
+
+                if (!normalizedItemName || decrementBy == null) {
+                    throw new Error(`Invalid data for item: "${normalizedItemName}"`);
+                }
+
+                // Fetch current data from Supabase
+                const { data: currentData, error: fetchError } = await supabase
+                    .from('inventoryV2')
+                    .select('Stocked_Units, Used_Units')
+                    .eq('ItemName', normalizedItemName);
+
+                console.log(`Fetched data for ${normalizedItemName}:`, currentData);
+
+                if (fetchError) {
+                    console.error(`Error fetching data for "${normalizedItemName}":`, fetchError.message);
+                    throw new Error(`Supabase fetch error for "${normalizedItemName}": ${fetchError.message}`);
+                }
+
+                if (!currentData || currentData.length === 0) {
+                    throw new Error(`No data found for item: "${normalizedItemName}"`);
+                }
+
+                const currentStock = currentData[0].Stocked_Units;
+                const currentUsed = currentData[0].Used_Units;
+
+                const updatedStock = currentStock - decrementBy;
+                const updatedUsedStocks = currentUsed + decrementBy;
+
+                console.log(
+                    `Updating "${normalizedItemName}": Stocked_Units from ${currentStock} to ${updatedStock}, Used_Units to ${updatedUsedStocks}`
+                );
+
+                // Update data in Supabase
+                const { data: updatedData, error: updateError } = await supabase
+                    .from('inventoryV2')
+                    .update({
+                        Stocked_Units: updatedStock,
+                        Used_Units: updatedUsedStocks,
+                    })
+                    .ilike('ItemName', normalizedItemName);
+
+                if (updateError) {
+                    console.error(`Error updating item "${normalizedItemName}":`, updateError.message);
+                    throw new Error(`Supabase update error for "${normalizedItemName}": ${updateError.message}`);
+                }
+
+                return updatedData;
+            })
+        );
+
+        console.log('Update results:', results);
+        return res.status(200).json({ message: 'Quantities updated successfully.', results });
+    } catch (err) {
+        console.error('Error during processing:', err.message);
+        return res.status(500).json({ error: 'Internal server error', details: err.message });
+    }
+});
+
 
 export default products
