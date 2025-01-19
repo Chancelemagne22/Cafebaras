@@ -19,7 +19,6 @@ function Dashboard() {
         console.log("done")
         navigate('/');
     };
-    console.log('Check')
 
 
     useEffect(() => {
@@ -43,7 +42,7 @@ function Dashboard() {
                     <p>{userID}</p>
                 </div>
                 <div className="submods">
-                    <div className="about">ABOUT</div>
+                    {/* <div className="about">ABOUT</div> */}
                     <div className="settings" onClick={() => navigate('/settings')}>SETTINGS</div>
                     <div onClick={(e) => handleLogout()} className="logout">LOGOUT</div>
                 </div>

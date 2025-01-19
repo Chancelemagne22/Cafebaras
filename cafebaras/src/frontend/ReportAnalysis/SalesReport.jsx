@@ -129,6 +129,8 @@ const SalesReport = () => {
       };
 
       const options = {
+        responsive: true, 
+        maintainAspectRatio: false,
         plugins: {
           legend: {
             position: 'left',
@@ -164,6 +166,8 @@ const SalesReport = () => {
       };
 
       const options = {
+        responsive: true, 
+        maintainAspectRatio: false,
         plugins: {
           legend: {
             position: 'left',
@@ -182,7 +186,7 @@ const SalesReport = () => {
   }, [totalExpense,totalProfit]);
 
   return (
-    <div className='salesreport' >
+    <div className='salesreport'>
       <div className='dateHolder'> Report date: 
       <Dropdown value={selectedMonth} onChange={handleMonthChange} options={month} optionLabel="name" 
               editable placeholder="Select a Month" className="w-full md:w-14rem" />
@@ -200,7 +204,7 @@ const SalesReport = () => {
                     <div className="pieContainer" 
                     style={{
                         //height: '30vh',
-                        width: '30vw',
+                        //width: '30vw',
                         position: 'left',
                         //backgroundColor: 'red'
 
@@ -229,7 +233,7 @@ const SalesReport = () => {
                     <div className="pieContainer" 
                     style={{
                         //height: '30vh',
-                        width: '30vw',
+                        //width: '30vw',
                         position: 'left',
                         //backgroundColor: 'red'
 
