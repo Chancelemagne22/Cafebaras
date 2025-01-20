@@ -209,8 +209,8 @@ function Settings() {
         </div>
           {error && <p className="error" style={{ color: 'red' }}>{error}</p>}
         </div>
-      </div>
   )
+
 }
 
 export default Settings
