@@ -54,7 +54,7 @@ function Inventory () {
         if(stockedUnits.length > 0){
 
             const data = {
-                labels: stockedUnits.map(row => row.Item_Name),
+                labels: stockedUnits.map(row => row.ItemName),
                 datasets: [
                     {
                         data: stockedUnits.map(row => row.Stocked_Units),
@@ -122,7 +122,7 @@ function Inventory () {
                         rows={10} 
                     >
                         <Column className="datas" field="itemID" header="Item Code"/>
-                        <Column className="datas" field="Item_Name" header="Item Name"/>
+                        <Column className="datas" field="ItemName" header="Item Name"/>
                         <Column className="datas" field="Stocked_Units" header="Stocked Units"/>
 
 
