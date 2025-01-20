@@ -131,26 +131,60 @@ function Settings() {
         <div className='SetMain'> Update Login Credentials
           <div className='newLoginContainer'>
             <div>
-              <div>
+            <div>
+              <p>Current USER: {userID}</p>
+              <p>Current Username: {curUser}</p>
+              <p>Current password: {curPass}</p>
 
-              <form onSubmit={handleFetch}></form>
-                <p>Current USER: {userID}</p>
-                
-                <p 
-                  value = {password}
-                  loading ={loading}
-                  onChange={(e)=> setPassword(e.target.value)}>Current password: {password}</p>
-              </div>
+            <form onSubmit={handleFetch}></form>
+              <p>Current USER: {userID}</p>
+              <p 
+                value = {username}
+                loading ={loading}
+                onChange={(e)=> setUsername(e.target.value)}>Current Username: {username}</p>
+              <p 
+                value = {password}
+                loading ={loading}
+                onChange={(e)=> setPassword(e.target.value)}>Current password: {password}</p>
             </div>
+            </div>
+            <div>
+    </div>
             <form onSubmit={handleFetch}>
               <div>
                 <label className='name' htmlFor='username'>New User ID: </label>
                 <input type="text" 
                   name = 'username' 
                   className='form-control' 
-                  placeholder='Enter ID' // dapat nakalagay yung lumang username
-                  value={username}
+                  placeholder='Enter Username' // dapat nakalagay yung lumang username
+
+                  />
+              </div>
+              <div>
+                <label className='name' htmlFor='password'>New PASSWORD: </label>
+                <input type="text" 
+                  name = 'password' 
+                  className='form-control' 
+                  placeholder='Enter Password' // dapat nakalagay ang lumang password
+
+                  value={password}
                   autoComplete="off"
+                  
+                  onChange={(e) => setPassword(e.target.value)} 
+                  />
+              </div><br />
+              <button onClick={handleSubmit} className='update_btn'>Update</button>
+            </form>
+          </div>
+            <form onSubmit={handleSubmit}>
+            <div>
+              <label className='name' htmlFor='username'>New USERNAME: </label>
+              <input type="text" 
+                name = 'username' 
+                className='form-control' 
+                placeholder='Enter Username' // dapat nakalagay yung lumang username
+                value= {username}
+                autoComplete="off"
 
                   onChange={(e) => setUserID(e.target.value)} 
 
