@@ -63,9 +63,10 @@ function ItemManagement() {
   useEffect(() => {
     const fetchProducts = async () => {
       if (selectedOption === "Products") {
-        setLoading(true); // Set loading to true at the start of fetch
-        try{
+        setLoading(true);
+        try {
           const response = await fetch('http://localhost:3001/api/items/product');
+
           const data = await response.json()
           setProducts(data)
           setLoading(false); // Set loading to false after fetch
@@ -164,11 +165,11 @@ function ItemManagement() {
   const addProduct = async () => {
     try {
       const { error } = await supabase
-        .from('products')
+        .from('productsV4')
         .insert([
           {
-            productName,
-            recipeID,
+            pName: productName,
+            recipeID: parseFloat(recipeID),
             price: parseFloat(price),
           }
         ]);
@@ -287,12 +288,12 @@ function ItemManagement() {
                         selectionMode="single"
                         selection={selectedProduct}
                         onSelectionChange={(e) => setSelectedProduct(e.value)}
-                        dataKey="productID"
+                        dataKey="pID"
                         metakey="true"
                         autolayout="true"
                     >
-                        <Column className="datas" field="productID" header="Product ID"/>
-                        <Column className="datas" field="productName" header="Product Name"/>
+                        <Column className="datas" field="pID" header="Product ID"/>
+                        <Column className="datas" field="pName" header="Product Name"/>
                         <Column className="datas" field="recipeID" header="Recipe ID"/>
                         <Column className="datas" field='price' header="Price"/>
                     </DataTable>

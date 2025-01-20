@@ -10,6 +10,14 @@ export default function Productdisplay({ addRow, setDisplayOrderList}) {
   const displayList = () => {
     setDisplayOrderList((prevDisplayOrderList) => !prevDisplayOrderList);
   };
+  const displayShift =() =>{
+    displayList()
+    
+  }
+
+
+ 
+  
   
 
   useEffect(() => {
@@ -69,11 +77,10 @@ export default function Productdisplay({ addRow, setDisplayOrderList}) {
               {values.map((item) => (
                 <div className="product-details"
                   key={item.pID}
-
                   onClick={() => {
-                    
                     if (item) {
-                      addRow(item); // Add the product to the order list
+                      addRow(item);
+                       // Add the product to the order list
                     }
                   }}
                   style={{ cursor: "pointer" }} // Optional: makes it look clickable
@@ -88,7 +95,7 @@ export default function Productdisplay({ addRow, setDisplayOrderList}) {
         
       )}
       <div className="purchaseDisplay">
-        <button onClick={displayList}>CHECKOUT</button>
+        <button onClick={displayShift}>CHECKOUT</button>
       </div>
     </div>
   );

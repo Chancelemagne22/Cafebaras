@@ -27,7 +27,7 @@ fetchInventory.get('/items/inventory', async(req, res) =>{
 fetchInventory.get('/items/product', async (req, res) => {
     try {
       const { data, error } = await supabase
-        .from('products')
+        .from('productsV4')
         .select('*')
   
       if (error) {

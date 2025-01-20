@@ -95,7 +95,7 @@ function Inventory(){
                     onClick={() => colorButton('stockManagement')}
                 >
                     STOCK MANAGEMENT
-                    <span class="badge" id="n-badge">!</span>
+                    <span className="badge" id="n-badge">!</span>
                 </div>
                 <div 
                     className={`inventoryButton ${activeButton === 'resupplyManagement' ? 'active' : 'inactive'}`} 
